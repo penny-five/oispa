@@ -11,7 +11,7 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 export const get = (event, context, callback) => {
   dynamodb.scan({
     TableName: 'Beerstyles'
-  }).promise().then(({Items}) => {
+  }).promise().then(({ Items }) => {
     callback(null, Items);
   }).catch(err => {
     callback(err);
@@ -38,11 +38,11 @@ export const update = (event, context, callback) => {
         }
       }
     }
-  }).then(({items}) => {
+  }).then(({ items }) => {
     const operations = _.drop(items).map(item => dynamodb.put({
       TableName: 'Beerstyles',
       Item: {
-        id: parseInt(item.id),
+        id: parseInt(item.id, 10),
         name: item.name
       }
     }).promise());
