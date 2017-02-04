@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    handler: './handler.js'
+    '/handlers/beerstyles': './handlers/beerstyles.js'
   },
   target: 'node',
   output: {
@@ -10,16 +10,17 @@ module.exports = {
     path: path.join(__dirname, '.webpack'),
     filename: '[name].js'
   },
+  externals: ['aws-sdk'],
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel'],
-        options: {
-          plugins: ["transform-runtime"],
-          presets: ["es2015"]
-        }
+        loader: 'babel'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   }

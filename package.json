@@ -18,15 +18,18 @@
     "url": "https://github.com/penny-five/oispa/issues"
   },
   "homepage": "https://github.com/penny-five/oispa#readme",
+  "dependencies": {
+    "aws-sdk": "2.9.0",
+    "lodash": "4.17.4",
+    "scrape-it": "3.2.2"
+  },
   "devDependencies": {
-    "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
-    "babel-plugin-transform-runtime": "6.22.0",
-    "babel-polyfill": "6.22.0",
     "babel-preset-es2015": "6.22.0",
-    "babel-runtime": "6.22.0",
+    "json-loader": "0.5.4",
     "serverless": "1.6.1",
+    "serverless-babel-plugin": "0.1.3",
     "serverless-webpack": "1.0.0-rc.4",
-    "webpack": "1.13.1"
+    "webpack": "1.14.0"
   }
 }
