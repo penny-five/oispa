@@ -1,0 +1,4 @@
+node_modules
+.serverless
+credentials.bat
+credentials.sh
