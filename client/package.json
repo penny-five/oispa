@@ -1,0 +1,54 @@
+{
+  "name": "oispa-client",
+  "version": "1.0.0",
+  "description": "Frontend client for Oispa",
+  "private": true,
+  "main": "handler.js",
+  "scripts": {
+    "eslint": "eslint . --ignore-path .gitignore --ext js,vue",
+    "analyze": "webpack --config webpack.config.analyze.js --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "upload": "node upload.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/penny-five/oispa.git"
+  },
+  "author": "penny-five",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/penny-five/oispa/issues"
+  },
+  "homepage": "https://github.com/penny-five/oispa#readme",
+  "dependencies": {
+    "lodash": "4.17.4",
+    "vue": "2.1.10"
+  },
+  "devDependencies": {
+    "babel-core": "6.22.1",
+    "babel-loader": "6.2.10",
+    "babel-preset-es2015": "6.22.0",
+    "clean-webpack-plugin": "0.1.15",
+    "cross-env": "3.1.4",
+    "css-loader": "0.26.1",
+    "dotenv": "4.0.0",
+    "eslint": "3.15.0",
+    "eslint-import-resolver-webpack": "0.8.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-vue": "2.0.1",
+    "friendly-errors-webpack-plugin": "1.1.3",
+    "glob": "7.1.1",
+    "html-webpack-plugin": "2.28.0",
+    "node-sass": "4.5.0",
+    "s3": "4.4.0",
+    "sass-loader": "4.1.1",
+    "vue-loader": "10.3.0",
+    "vue-template-compiler": "2.1.10",
+    "webpack": "2.2.1",
+    "webpack-bundle-analyzer": "2.2.1",
+    "webpack-dev-server": "2.3.0",
+    "webpack-merge": "2.6.1"
+  }
+}

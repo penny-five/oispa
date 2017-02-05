@@ -7,6 +7,7 @@ plugins:
 
 custom:
   region: eu-west-1
+  s3BucketName: oispa
 
 provider:
   name: aws
@@ -34,7 +35,7 @@ functions:
 
 resources:
   Resources:
-    beerstylesTable:
+    BeerstylesTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: Beerstyles
@@ -51,3 +52,24 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+
+    FrontendS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.s3BucketName}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+
+    FrontendS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: FrontendS3Bucket
+        PolicyDocument:
+          Statement:
+            - Action: s3:GetObject
+              Effect: Allow
+              Resource: arn:aws:s3:::${self:custom.s3BucketName}/*
+              Principal: "*"

@@ -1,0 +1,14 @@
+{
+  "root": false,
+  "env": {
+    "node": false,
+    "browser": true
+  },
+  "rules": {
+    "no-console": ["warn"],
+    "import/extensions": "off"
+  },
+  "globals": {
+    "process": true
+  }
+}
