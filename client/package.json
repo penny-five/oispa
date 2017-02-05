@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/penny-five/oispa#readme",
   "dependencies": {
+    "axios": "0.15.3",
     "lodash": "4.17.4",
+    "url-join": "1.1.0",
     "vue": "2.1.10"
   },
   "devDependencies": {
@@ -35,6 +37,7 @@
     "css-loader": "0.26.1",
     "dotenv": "4.0.0",
     "eslint": "3.15.0",
+    "eslint-config-airbnb-base": "11.0.1",
     "eslint-import-resolver-webpack": "0.8.1",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-vue": "2.0.1",

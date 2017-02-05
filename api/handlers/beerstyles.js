@@ -2,6 +2,8 @@ import _ from 'lodash';
 import scrapeIt from 'scrape-it';
 import AWS from 'aws-sdk';
 
+import { createResponse } from './utils';
+
 const UPDATE_SCRAPE_URL = 'https://untappd.com/beer/top_rated';
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
@@ -12,10 +14,7 @@ export const get = (event, context, callback) => {
   dynamodb.scan({
     TableName: 'Beerstyles'
   }).promise().then(({ Items }) => {
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(Items)
-    });
+    callback(null, createResponse(Items));
   }).catch(err => {
     console.log(err);
     callback(err);
@@ -54,10 +53,7 @@ export const update = (event, context, callback) => {
     return Promise.all(operations);
   }).then(results => {
     console.log(`Updated ${results.length} beer types`);
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(results.length)
-    });
+    callback(null, createResponse(results.length));
   }).catch(err => {
     console.error(err);
     callback(err);

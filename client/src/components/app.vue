@@ -3,8 +3,14 @@
 </template>
 
 <script>
-export default {
+import api from '../api';
 
+export default {
+  mounted() {
+    api.beerstyles.getAll().then(beerstyles => {
+      console.log(beerstyles);
+    });
+  }
 };
 </script>
 

@@ -29,6 +29,11 @@ provider:
 functions:
   beerstylesGet:
     handler: handlers/beerstyles.get
+    events:
+      - http:
+          path: beerstyles
+          method: get
+          cors: true
   beerstylesUpdate:
     handler: handlers/beerstyles.update
     timeout: 10
