@@ -1,8 +1,13 @@
 <template>
   <multi-select
+    class="oispa-multiselect"
     :loading="beerStyles.length === 0"
     :disabled="beerStyles.length === 0"
     :options="beerStyles"
+    :placeholder="i18n('select beer style')"
+    selectLabel=""
+    selectedLabel=""
+    deselectLabel=""
     label="name"
     track-by="name"
     v-model="selected">
@@ -34,7 +39,9 @@ export default {
 </script>
 
 <style lang="scss">
-.multiselect__input, .multiselect__single, .multiselect__option {
-  font-size: 2.1rem;
+.oispa-multiselect {
+  .multiselect__input, .multiselect__single, .multiselect__option {
+    font-size: 2.1rem;
+  }
 }
 </style>

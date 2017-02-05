@@ -1,7 +1,7 @@
 <template>
   <div class="content-wrapper">
     <header>
-      <h1>Oispa</h1>
+      <h1>{{ i18n('app title' )}}</h1>
       <img class="logo" :src="logo"></img>
     </header>
     <beer-style-picker :beer-styles="beerStyles" v-model="selectedBeerStyle"></beer-style-picker>
