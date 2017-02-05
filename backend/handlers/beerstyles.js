@@ -14,7 +14,7 @@ export const get = (event, context, callback) => {
   dynamodb.scan({
     TableName: 'Beerstyles'
   }).promise().then(({ Items }) => {
-    callback(null, createResponse(Items));
+    callback(null, createResponse(_.sortBy(Items, 'name')));
   }).catch(err => {
     console.log(err);
     callback(err);
