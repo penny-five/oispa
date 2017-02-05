@@ -12,8 +12,12 @@ export const get = (event, context, callback) => {
   dynamodb.scan({
     TableName: 'Beerstyles'
   }).promise().then(({ Items }) => {
-    callback(null, Items);
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify(Items)
+    });
   }).catch(err => {
+    console.log(err);
     callback(err);
   });
 };
@@ -50,9 +54,12 @@ export const update = (event, context, callback) => {
     return Promise.all(operations);
   }).then(results => {
     console.log(`Updated ${results.length} beer types`);
-    callback(null, results.length);
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify(results.length)
+    });
   }).catch(err => {
     console.error(err);
-    callback(err, null);
+    callback(err);
   });
 };
