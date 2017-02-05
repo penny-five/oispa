@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsPlugin()
   ]
 };
