@@ -1,7 +1,7 @@
 import { get } from './utils';
 
 export default {
-  beerstyles: {
+  beerStyles: {
     getAll: get('/beerstyles')
   }
 };
