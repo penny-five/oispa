@@ -1,0 +1,11 @@
+version: '2'
+services:
+  frontend:
+    ports:
+      - "80:80"
+  backend:
+    command: [yarn, run, dev]
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./backend/src:/app/src"

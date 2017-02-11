@@ -1,17 +1,18 @@
 {
-  "name": "oispa",
-  "version": "1.0.0",
-  "description": "",
+  "name": "oispa-backend",
+  "version": "0.0.1",
+  "description": "Backend for Oispa",
   "private": true,
-  "main": "handler.js",
+  "main": "index.js",
   "scripts": {
-    "eslint": "eslint . --ignore-path .gitignore --ignore-pattern client/ --ext js",
-    "build": "webpack",
+    "start": "node .",
+    "dev": "nodemon -L .",
+    "eslint": "eslint . --ignore-path .gitignore --ext js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/penny-five/oispa.git"
+    "url": "git+https://github.com/penny-five/oispa.git",
+    "type": "git"
   },
   "author": "penny-five",
   "license": "Apache-2.0",
@@ -20,20 +21,22 @@
   },
   "homepage": "https://github.com/penny-five/oispa#readme",
   "dependencies": {
-    "aws-sdk": "2.9.0",
+    "blipp": "2.3.0",
+    "boom": "4.2.0",
+    "glue": "4.1.0",
+    "good": "7.1.0",
+    "good-console": "6.4.0",
+    "hapi": "16.1.0",
+    "hapi-alive": "1.4.0",
+    "hapi-router": "3.5.0",
+    "joi": "10.2.2",
     "lodash": "4.17.4",
     "scrape-it": "3.2.2"
   },
   "devDependencies": {
-    "babel-loader": "6.2.10",
-    "babel-preset-es2015": "6.22.0",
     "eslint": "3.15.0",
     "eslint-config-airbnb-base": "11.0.1",
-    "eslint-import-resolver-webpack": "0.8.1",
     "eslint-plugin-import": "2.2.0",
-    "json-loader": "0.5.4",
-    "serverless": "1.6.1",
-    "serverless-webpack": "1.0.0-rc.4",
-    "webpack": "1.14.0"
+    "nodemon": "1.11.0"
   }
 }

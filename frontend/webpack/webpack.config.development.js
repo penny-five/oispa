@@ -8,7 +8,10 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, '..', 'dist'),
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    proxy: {
+      '/api': 'http://localhost:80'
+    }
   },
   performance: {
     hints: false
