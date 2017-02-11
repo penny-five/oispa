@@ -26,9 +26,6 @@ export default {
     selectedBeerStyle: null
   }),
   mounted() {
-    api.echo().then(() => {
-      console.log('ping!');
-    });
     api.beerStyles.getAll().then(beerStyles => {
       this.beerStyles = beerStyles;
     });

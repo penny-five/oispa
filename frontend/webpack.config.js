@@ -6,8 +6,11 @@ const baseConfig = require('./webpack/webpack.config.base');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+let buildConfig;
 if (isProduction) {
-  module.exports = merge(baseConfig, require('./webpack/webpack.config.production'));
+  buildConfig = require('./webpack/webpack.config.production'); // eslint-disable-line global-require
 } else {
-  module.exports = merge(baseConfig, require('./webpack/webpack.config.development'));
+  buildConfig = require('./webpack/webpack.config.development'); // eslint-disable-line global-require
 }
+
+module.exports = merge(baseConfig, buildConfig);
