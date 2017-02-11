@@ -15,6 +15,9 @@ provider:
   stage: dev
   region: ${self:custom.region}
   memorySize: 256
+  environment:
+    UNTAPPD_CLIENT_ID: ${env:UNTAPPD_CLIENT_ID}
+    UNTAPPD_CLIENT_SECRET: ${env:UNTAPPD_CLIENT_SECRET}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -36,6 +39,9 @@ functions:
           cors: true
   beerstylesUpdate:
     handler: handlers/beerstyles.update
+    timeout: 10
+  checkinsUpdate:
+    handler: handlers/checkins.update
     timeout: 10
 
 resources:

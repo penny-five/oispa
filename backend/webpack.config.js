@@ -2,7 +2,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    '/handlers/beerstyles': './handlers/beerstyles.js'
+    '/handlers/beerstyles': './handlers/beerstyles.js',
+    '/handlers/checkins': './handlers/checkins.js'
   },
   target: 'node',
   output: {

@@ -2,7 +2,8 @@ import _ from 'lodash';
 import scrapeIt from 'scrape-it';
 import AWS from 'aws-sdk';
 
-import { createResponse } from './utils';
+import { createResponse } from './utils/lambda';
+
 
 const UPDATE_SCRAPE_URL = 'https://untappd.com/beer/top_rated';
 const dynamodb = new AWS.DynamoDB.DocumentClient();
