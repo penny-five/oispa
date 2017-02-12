@@ -5,8 +5,20 @@ services:
     ports:
       - "80"
     links:
-      - backend:backend
+      - backend
   backend:
     build: backend
     ports:
       - "8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - PG_CONNECTION_STRING=postgres://oispa:kaljaa@database/oispa_db
+    links:
+      - database
+  database:
+    image: postgres:9.6.2-alpine
+    environment:
+      - POSTGRES_DB=oispa_db
+      - POSTGRES_USER=oispa
+      - POSTGRESS_PASSWORD=kaljaa

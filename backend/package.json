@@ -5,8 +5,11 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon -L .",
+    "migrate:make": "knex migrate:make",
+    "migrate:latest": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback",
+    "start": "node --harmony-async-await .",
+    "dev": "nodemon -L --exec \"node --harmony-async-await\" .",
     "eslint": "eslint . --ignore-path .gitignore --ext js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,7 +33,10 @@
     "hapi-alive": "1.4.0",
     "hapi-router": "3.5.0",
     "joi": "10.2.2",
+    "knex": "0.12.6",
     "lodash": "4.17.4",
+    "pg": "6.1.2",
+    "promise-retry": "1.1.1",
     "scrape-it": "3.2.2"
   },
   "devDependencies": {

@@ -9,7 +9,8 @@ ADD yarn.lock .
 
 RUN yarn install --pure-lockfile
 
-COPY index.js .
+COPY index.js knexfile.js ./
+COPY migrations ./migrations
 COPY src ./src
 
 EXPOSE 8080

@@ -7,9 +7,6 @@
   "env": {
     "node": true
   },
-  "settings": {
-    "import/resolver": "webpack"
-  },
   "rules": {
     "comma-dangle": ["error", "never"],
     "max-len": ["warn", 120],
@@ -17,6 +14,9 @@
     "func-names": "off",
     "space-before-function-paren": ["error", "never"],
     "arrow-parens": ["error", "as-needed"],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "one-var": "off",
+    "one-var-declaration-per-line": "off",
+    "newline-per-chained-call": "off"
   }
 }
