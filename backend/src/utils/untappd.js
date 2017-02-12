@@ -24,6 +24,13 @@ const sendUntappdRequest = async opts => {
   return res.response;
 };
 
+const getBeer = async (opts = {}) => {
+  const response = await sendUntappdRequest({
+    path: `beer/info/${opts.beer_id}`
+  });
+  return response.beer;
+};
+
 const getCheckins = async (opts = {}) => {
   const response = await sendUntappdRequest({
     path: 'thepub/local',
@@ -39,5 +46,6 @@ const getCheckins = async (opts = {}) => {
 };
 
 module.exports = {
+  getBeer,
   getCheckins
 };

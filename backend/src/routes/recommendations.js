@@ -3,6 +3,7 @@ const moment = require('moment');
 
 const knex = require('../knex');
 
+
 /**
  * TODO make a generic version of this function for reuse.
  */
@@ -31,11 +32,12 @@ module.exports = {
     const checkins = await knex('checkins')
       .select('beer_id', 'venue_id')
       .count('checkins.id as sightings')
-      .max('checkin_time as latest_checkin')
+      .max('checkin_time as latest_sighting')
       .leftJoin('beers', 'checkins.beer_id', 'beers.id')
-      .where('checkin_time', '>=', oldestAcceptedCheckinDate)
-      .groupBy('beer_id', 'venue_id')
-      .orderBy('latest_checkin', 'DESC')
+      .whereNotNull('beers.rating')
+      .andWhere('checkin_time', '>=', oldestAcceptedCheckinDate)
+      .groupBy('beer_id', 'venue_id', 'beers.rating')
+      .orderBy('beers.rating', 'DESC')
       .modify(query => {
         if (request.query.beerstyle != null) {
           query.andWhere('beers.beerstyle_id', request.query.beerstyle);
