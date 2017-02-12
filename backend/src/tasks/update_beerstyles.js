@@ -21,7 +21,7 @@ const SCRAPE_SPEC = {
 
 /**
  * Scrapes beer styles from a <select> element on Untappd website and updates
- * the beer styles stored in Postgres.
+ * the beer styles stored in the database.
  */
 module.exports = async () => {
   const data = await scrapeIt({

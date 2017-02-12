@@ -13,6 +13,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=8080
+      - UNTAPPD_CLIENT_ID
+      - UNTAPPD_CLIENT_SECRET
       - PG_CONNECTION_STRING=postgres://oispa:kaljaa@database/oispa_db
     links:
       - database

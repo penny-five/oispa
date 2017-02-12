@@ -13,8 +13,8 @@ const updateCheckins = {
   method: 'PUT',
   path: '/tasks/update_checkins',
   handler(request, reply) {
-    tasks.updateCheckins();
     reply().code(202);
+    process.nextTick(() => tasks.updateCheckins());
   }
 };
 

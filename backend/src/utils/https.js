@@ -1,14 +1,13 @@
-import _ from 'lodash';
-import https from 'https';
-import qs from 'querystring';
+const _ = require('lodash');
+const https = require('https');
+const qs = require('querystring');
 
-export const get = opts => new Promise((resolve, reject) => {
+
+const get = opts => new Promise((resolve, reject) => {
   const params = {
     hostname: opts.hostname,
     path: `/${opts.path}?${qs.stringify(_.omitBy(opts.query, _.isNil))}`
   };
-
-  console.info('GET', params);
 
   https.get(params, res => {
     let body = '';
@@ -16,3 +15,7 @@ export const get = opts => new Promise((resolve, reject) => {
     res.on('end', () => resolve(JSON.parse(body)));
   }).on('error', reject);
 });
+
+module.exports = {
+  get
+};
