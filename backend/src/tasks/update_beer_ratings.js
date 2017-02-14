@@ -7,12 +7,14 @@ const fetchRating = async beer => {
   const response = await untappd.getBeer({ beer_id: beer.id });
   return {
     beer,
-    value: response.rating_score
+    avg_rating: response.rating_score,
+    rating_count: response.rating_count
   };
 };
 
-const update = async rating => knex('beers').where({ id: rating.beer.id }).update({
-  rating: rating.value,
+const toUpdate = async response => knex('beers').where({ id: response.beer.id }).update({
+  avg_rating: response.avg_rating,
+  rating_count: response.rating_count,
   updated_at: knex.raw('CURRENT_TIMESTAMP'),
   rating_updated_at: knex.raw('CURRENT_TIMESTAMP')
 });
@@ -30,10 +32,11 @@ module.exports = async () => {
     .select('id', 'rating_updated_at')
     .from('beers')
     .orderBy('rating_updated_at', 'desc')
-    .limit(3);
+    .limit(20);
 
-  const ratings = await Promise.all(beers.map(fetchRating));
-  await Promise.all(ratings.map(update));
+  const responses = await Promise.all(beers.map(fetchRating));
+  const updates = responses.map(toUpdate);
+  await Promise.all(updates);
 
-  console.log(`Updated ratings for ${ratings.length} beers.`);
+  console.log(`Updated ratings for ${responses.length} beers.`);
 };

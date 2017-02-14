@@ -21,7 +21,8 @@ exports.up = async knex => {
     table.text('brewery');
     table.text('country');
     table.float('abv');
-    table.float('rating');
+    table.float('avg_rating');
+    table.integer('rating_count');
     table.datetime('rating_updated_at');
     table.integer('beerstyle_id').references('id').inTable('beerstyles');
     table.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));

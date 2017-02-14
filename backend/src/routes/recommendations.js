@@ -34,10 +34,10 @@ module.exports = {
       .count('checkins.id as sightings')
       .max('checkin_time as latest_sighting')
       .leftJoin('beers', 'checkins.beer_id', 'beers.id')
-      .whereNotNull('beers.rating')
+      .whereNotNull('beers.avg_rating')
       .andWhere('checkin_time', '>=', oldestAcceptedCheckinDate)
-      .groupBy('beer_id', 'venue_id', 'beers.rating')
-      .orderBy('beers.rating', 'desc')
+      .groupBy('beer_id', 'venue_id', 'beers.avg_rating')
+      .orderBy('beers.avg_rating', 'desc')
       .modify(query => {
         if (request.query.beerstyle != null) {
           query.andWhere('beers.beerstyle_id', request.query.beerstyle);
