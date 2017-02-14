@@ -35,7 +35,9 @@ const getCheckins = async (opts = {}) => {
   const response = await sendUntappdRequest({
     path: 'thepub/local',
     query: {
-      min_id: opts.after,
+      max_id: opts.max,
+      min_id: opts.min,
+      limit: opts.limit,
       lat: THE_PUB_LAT,
       lng: THE_PUB_LNG,
       radius: THE_PUB_RADIUS,

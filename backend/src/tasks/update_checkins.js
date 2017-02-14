@@ -5,6 +5,8 @@ const knex = require('../knex');
 const upsert = require('../utils/knex').upsert;
 
 
+const CHECKIN_QUERY_COUNT = 25;
+
 const toCheckin = item => ({
   id: item.checkin_id,
   checkin_time: item.created_at,
@@ -30,21 +32,16 @@ const toVenue = item => ({
   lng: item.venue.location.lng
 });
 
-/**
- * Fetches new checkins from Untappd API and stores the checkins, beers and venues into the database.
- * @return {Promise} [description]
- */
-module.exports = async () => {
-  console.log('Updating checkins.');
+const updateCheckins = async (min, max) => {
+  let items = await untappd.getCheckins({
+    max,
+    limit: CHECKIN_QUERY_COUNT
+  });
 
-  const latestCheckin = await knex('checkins').orderBy('id', 'DESC').first();
-  const after = latestCheckin != null ? latestCheckin.id : null;
-
-  const items = await untappd.getCheckins({ after });
+  items = items.filter(item => item.checkin_id > min);
 
   if (items.length === 0) {
-    console.log('No new checkins.');
-    return;
+    return { max: min, numUpdates: 0 };
   }
 
   const beers = _.chain(items).map(toBeer).uniqBy('id').value();
@@ -60,5 +57,29 @@ module.exports = async () => {
   console.log(`Updated ${beers.length} beers.`);
   console.log(`Updated ${venues.length} venues.`);
   console.log(`Added ${checkins.length} new checkins.`);
+
+  return { max: _.last(checkins).id, numUpdates: checkins.length };
+};
+
+/**
+ * Fetches new checkins from Untappd API and stores the checkins, beers and venues into the database.
+ * @return {Promise} [description]
+ */
+module.exports = async () => {
+  console.log('Updating checkins.');
+
+  const latestCheckin = await knex('checkins').orderBy('id', 'desc').first();
+  const min = latestCheckin != null ? latestCheckin.id : null;
+
+  if (min == null) {
+    await updateCheckins();
+  } else {
+    let max;
+    do {
+      const results = await updateCheckins(min, max); // eslint-disable-line no-await-in-loop
+      max = results.max;
+      if (results.numUpdates < CHECKIN_QUERY_COUNT) break;
+    } while (max > min);
+  }
   console.log('Updating checkins done.');
 };

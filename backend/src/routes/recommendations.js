@@ -37,7 +37,7 @@ module.exports = {
       .whereNotNull('beers.rating')
       .andWhere('checkin_time', '>=', oldestAcceptedCheckinDate)
       .groupBy('beer_id', 'venue_id', 'beers.rating')
-      .orderBy('beers.rating', 'DESC')
+      .orderBy('beers.rating', 'desc')
       .modify(query => {
         if (request.query.beerstyle != null) {
           query.andWhere('beers.beerstyle_id', request.query.beerstyle);
