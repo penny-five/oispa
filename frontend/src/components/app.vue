@@ -8,7 +8,9 @@
         <template v-if="recommendations.length > 0">
           <h2>{{ i18n('results found' )}}</h2>
           <ul>
-            <recommendation-item v-for="recommendation in recommendations" :recommendation="recommendation" />
+            <venue-item v-for="recommendation in recommendations"
+              :venue="recommendation.venue"
+              :beers="recommendation.beers" />
           </ul>
         </template>
         <h2 v-else>{{ i18n('no search results') }}</h2>
@@ -21,7 +23,7 @@
 import api from '../api';
 import BeerStylePicker from './beer-style-picker';
 import HeaderBar from './header-bar';
-import RecommendationItem from './recommendation-item';
+import VenueItem from './venue-item';
 
 
 export default {
@@ -29,7 +31,7 @@ export default {
   components: {
     BeerStylePicker,
     HeaderBar,
-    RecommendationItem
+    VenueItem
   },
   data: () => ({
     beerStyles: [],
