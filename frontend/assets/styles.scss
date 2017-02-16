@@ -1,11 +1,33 @@
-@import url('https://fonts.googleapis.com/css?family=Caveat+Brush');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700,900');
 @import "~normalize-scss/sass/normalize/import-now";
 
+@import "./constants";
+
 html {
-  font-family: 'Caveat Brush', cursive;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 62.5%;
 }
 
 body {
   font-size: 1.5rem;
+  font-weight: $font-weight-regular;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+h2 {
+  margin: 2*$baseline;
+
+  text-transform: uppercase;
+  text-align: center;
+
+  font-size: 1.9rem;
+  font-weight: $font-weight-semibold;
+}
+
+ol, ul {
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
 }

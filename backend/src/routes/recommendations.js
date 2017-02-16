@@ -9,8 +9,8 @@ const knex = require('../knex');
  */
 const populate = async checkin => {
   const result = Object.assign({}, checkin);
-  result.beer = await knex('beers').where('id', checkin.beer_id);
-  result.venue = await knex('venues').where('id', checkin.venue_id);
+  result.beer = await knex('beers').where('id', checkin.beer_id).first();
+  result.venue = await knex('venues').where('id', checkin.venue_id).first();
   delete result.beer_id;
   delete result.venue_id;
   return result;

@@ -39,9 +39,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import "assets/constants";
+
 .oispa-multiselect {
   .multiselect__input, .multiselect__single, .multiselect__option {
-    font-size: 2.1rem;
+    font-size: 1.8rem;
+    font-weight: $font-weight-semibold;
   }
 }
 </style>

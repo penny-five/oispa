@@ -1,4 +1,7 @@
 {
   "app title": "Oispa",
-  "select beer style": "Valitse kaljalaatu"
+  "instructions": "Mitäs saisi herralle olla?",
+  "select beer style": "Valitse kaljalaatu",
+  "results found": "Ei hätää, täältä sitä saa",
+  "no search results": "No nyt ei kyllä löytynyt mitään"
 }
