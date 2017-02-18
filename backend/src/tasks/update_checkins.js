@@ -32,7 +32,7 @@ const toVenue = item => ({
   lng: item.venue.location.lng
 });
 
-const updateCheckins = async (min, max) => {
+const updateCheckins = async (logger, min, max) => {
   let items = await untappd.getCheckins({
     max,
     limit: CHECKIN_QUERY_COUNT
@@ -54,9 +54,9 @@ const updateCheckins = async (min, max) => {
     await Promise.all(checkins.map(checkin => upsert('checkins', { id: checkin.id }, checkin, trx)));
   });
 
-  console.log(`Updated ${beers.length} beers.`);
-  console.log(`Updated ${venues.length} venues.`);
-  console.log(`Added ${checkins.length} new checkins.`);
+  logger.info(`Updated ${beers.length} beers.`);
+  logger.info(`Updated ${venues.length} venues.`);
+  logger.info(`Added ${checkins.length} new checkins.`);
 
   return { max: _.last(checkins).id, numUpdates: checkins.length };
 };
@@ -65,8 +65,8 @@ const updateCheckins = async (min, max) => {
  * Fetches new checkins from Untappd API and stores the checkins, beers and venues into the database.
  * @return {Promise} [description]
  */
-module.exports = async () => {
-  console.log('Updating checkins.');
+module.exports = async logger => {
+  logger.info('Updating checkins...');
 
   const latestCheckin = await knex('checkins').orderBy('id', 'desc').first();
   const min = latestCheckin != null ? latestCheckin.id : null;
@@ -76,10 +76,10 @@ module.exports = async () => {
   } else {
     let max;
     do {
-      const results = await updateCheckins(min, max); // eslint-disable-line no-await-in-loop
+      const results = await updateCheckins(logger, min, max); // eslint-disable-line no-await-in-loop
       max = results.max;
       if (results.numUpdates < CHECKIN_QUERY_COUNT) break;
     } while (max > min);
   }
-  console.log('Updating checkins done.');
+  logger.info('Updating checkins done.');
 };

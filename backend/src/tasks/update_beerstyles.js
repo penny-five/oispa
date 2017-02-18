@@ -23,7 +23,9 @@ const SCRAPE_SPEC = {
  * Scrapes beer styles from a <select> element on Untappd website and updates
  * the beer styles stored in the database.
  */
-module.exports = async () => {
+module.exports = async logger => {
+  logger.info('Updating beer styles...');
+
   const data = await scrapeIt({
     url: SCRAPE_URL,
     encoding: 'UTF-8'
@@ -42,5 +44,6 @@ module.exports = async () => {
     fromResult = await trx.del().from('beerstyles');
     toResult = await trx.insert(items).into('beerstyles');
   });
-  console.log(`Beer styles updated (count: ${fromResult} -> ${toResult.rowCount})`);
+
+  logger.info(`Beer styles updated (count: ${fromResult} -> ${toResult.rowCount})`);
 };

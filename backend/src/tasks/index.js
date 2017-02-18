@@ -1,6 +1,11 @@
+const _ = require('lodash');
+
+const logger = require('../utils/logger').create('tasks');
+
+
 /* eslint-disable global-require */
 module.exports = {
-  updateBeerRatings: require('./update_beer_ratings'),
-  updateBeerstyles: require('./update_beerstyles'),
-  updateCheckins: require('./update_checkins')
+  updateBeerRatings: _.partial(require('./update_beer_ratings'), logger),
+  updateBeerstyles: _.partial(require('./update_beerstyles'), logger),
+  updateCheckins: _.partial(require('./update_checkins'), logger)
 };

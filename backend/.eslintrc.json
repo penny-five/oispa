@@ -10,7 +10,6 @@
   "rules": {
     "comma-dangle": ["error", "never"],
     "max-len": ["warn", 120],
-    "no-console": "off",
     "func-names": "off",
     "space-before-function-paren": ["error", "never"],
     "arrow-parens": ["error", "as-needed"],

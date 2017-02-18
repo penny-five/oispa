@@ -26,8 +26,8 @@ const toUpdate = async response => knex('beers').where({ id: response.beer.id })
  *
  * Because of API rate limiting only 20 beers are updated at a time.
  */
-module.exports = async () => {
-  console.log('Updating beer ratings');
+module.exports = async logger => {
+  logger.info('Updating beer ratings...');
 
   const beers = await knex
     .select('id', 'rating_updated_at')
@@ -42,5 +42,5 @@ module.exports = async () => {
   const updates = responses.map(toUpdate);
   await Promise.all(updates);
 
-  console.log(`Updated ratings for ${responses.length} beers.`);
+  logger.info(`Updated ratings for ${responses.length} beers.`);
 };

@@ -3,6 +3,7 @@ const Joi = require('joi');
 
 const createManifest = require('./manifest');
 const cron = require('./cron');
+const logger = require('./utils/logger').create();
 
 
 const defaults = {
@@ -20,7 +21,7 @@ function Server(opts) {
 
   const result = Joi.validate(config, serverSchema);
   if (result.error != null) {
-    console.error('Invalid configuration object');
+    logger.error('Invalid configuration object');
     throw new Error(result.error);
   }
 
@@ -31,7 +32,7 @@ function Server(opts) {
       const server = await Glue.compose(manifest, { relativeTo: __dirname });
       await server.start();
       cron.start();
-      console.log(`Oispa backend started at ${server.info.uri}`);
+      logger.info(`Oispa backend started at ${server.info.uri}`);
     }
   };
 }
