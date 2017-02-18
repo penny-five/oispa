@@ -1,5 +1,6 @@
-const knex = require('../knex');
+const moment = require('moment');
 
+const knex = require('../knex');
 const untappd = require('../utils/untappd');
 
 
@@ -31,6 +32,9 @@ module.exports = async () => {
   const beers = await knex
     .select('id', 'rating_updated_at')
     .from('beers')
+    .whereIn('id', function() {
+      this.distinct('beer_id').from('checkins').where('checkin_time', '>', moment().subtract(2, 'weeks'));
+    })
     .orderBy('rating_updated_at', 'desc')
     .limit(20);
 
