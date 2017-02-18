@@ -24,3 +24,8 @@ services:
       - POSTGRES_DB=oispa_db
       - POSTGRES_USER=oispa
       - POSTGRESS_PASSWORD=kaljaa
+    volumes:
+      - database:/var/lib/postgresql/data
+volumes:
+  database:
+    driver: local
