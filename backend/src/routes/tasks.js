@@ -32,8 +32,8 @@ const updateCheckins = {
     description: 'Runs a task that fetches more checkins from Untappd API'
   },
   handler(request, reply) {
+    tasks.updateCheckins();
     reply().code(202);
-    process.nextTick(() => tasks.updateCheckins());
   }
 };
 

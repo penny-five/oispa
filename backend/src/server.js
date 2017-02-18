@@ -2,6 +2,7 @@ const Glue = require('glue');
 const Joi = require('joi');
 
 const createManifest = require('./manifest');
+const cron = require('./cron');
 
 
 const defaults = {
@@ -29,6 +30,7 @@ function Server(opts) {
     async start() {
       const server = await Glue.compose(manifest, { relativeTo: __dirname });
       await server.start();
+      cron.start();
       console.log(`Oispa backend started at ${server.info.uri}`);
     }
   };
