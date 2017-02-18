@@ -9,6 +9,9 @@ const createManifest = opts => ({
       plugin: 'blipp'
     },
     {
+      plugin: 'hapijs-status-monitor'
+    },
+    {
       plugin: {
         register: 'hapi-alive',
         options: {
@@ -26,13 +29,14 @@ const createManifest = opts => ({
         register: 'good',
         options: {
           ops: {
-            interval: 1000
+            interval: 1000 * 60 * 5 // report every 5 minutes
           },
           reporters: {
             console: [
               {
                 module: 'good-console'
-              }
+              },
+              'stdout'
             ]
           }
         }

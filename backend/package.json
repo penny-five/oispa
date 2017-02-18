@@ -32,6 +32,7 @@
     "hapi": "16.1.0",
     "hapi-alive": "1.4.0",
     "hapi-router": "3.5.0",
+    "hapijs-status-monitor": "0.5.0",
     "joi": "10.2.2",
     "knex": "0.12.6",
     "lodash": "4.17.4",
