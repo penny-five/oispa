@@ -5,6 +5,12 @@ const moment = require('moment');
 const knex = require('../knex');
 
 
+const VALID_VENUE_TYPES = [
+  'Arts & Entertainment',
+  'Nightlife Spot',
+  'Food'
+];
+
 const populateBeer = async checkin => {
   const beer = await knex('beers').where('id', checkin.beer_id).first();
   const beerstyle = await knex.select('name').from('beerstyles').where('id', beer.beerstyle_id).first();
@@ -48,7 +54,9 @@ module.exports = {
       .count('checkins.id as sightings')
       .max('checkin_time as latest_sighting')
       .leftJoin('beers', 'checkins.beer_id', 'beers.id')
+      .leftJoin('venues', 'checkins.venue_id', 'venues.id')
       .whereNotNull('beers.avg_rating')
+      .whereIn('venues.category', VALID_VENUE_TYPES)
       .andWhere('checkin_time', '>=', oldestAcceptedCheckinDate)
       .groupBy('beer_id', 'venue_id', 'beers.avg_rating')
       .orderBy('beers.avg_rating', 'desc')
