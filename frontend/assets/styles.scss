@@ -4,18 +4,23 @@
 @import "./constants";
 
 html {
+  box-sizing: border-box;
   font-family: 'Titillium Web', sans-serif;
   font-size: 62.5%;
 }
 
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
-  font-size: 1.5rem;
+  font-size: $font-size-medium;
   font-weight: $font-weight-regular;
-    -webkit-font-smoothing: antialiased !important;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 h2 {
-  margin: 2*$baseline;
+  margin: 2*$baseline 2*$baseline 3*$baseline;
 
   text-transform: uppercase;
   text-align: center;
@@ -48,4 +53,15 @@ a {
 
 .clearfix:after {
   clear: both;
+}
+
+.separator {
+  display: block;
+
+  margin: 4*$baseline;
+  padding: 0 2*$baseline;
+
+  min-height: 5px;
+
+  border-top: 1px solid $color-separator-light;
 }

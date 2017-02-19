@@ -1,9 +1,9 @@
 {
   "app_title": "Oispa",
-  "recommendations_instructions": "Mitäs saisi herralle olla?",
+  "recommendations_instructions": "Millaista kaljaa saisi herralle olla?",
   "recommendations_beer_style_picker_placeholder": "Valitse kaljalaatu",
-  "recommendations_results_found": "Ei hätää, täältä sitä saa",
   "recommendations_results_not_found": "No nyt ei kyllä löytynyt mitään",
+  "last-seen": "Viimeksi nähty",
   "category.anything": "Mitä vaan mikä nousee päähän",
   "category.barleywine": "Barleywineä",
   "category.belgian": "Belgiä",

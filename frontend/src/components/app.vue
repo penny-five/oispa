@@ -4,7 +4,10 @@
     <div class="content-wrapper">
       <h2>{{ i18n('recommendations_instructions') }}</h2>
       <beer-style-picker :categories="beerStyleCategories" v-model="selectedBeerStyleCategory" />
-      <recommendations-list v-if="recommendations != null" :recommendations="recommendations" />
+      <template v-if="recommendations != null">
+        <span class="separator"></span>
+        <recommendations-list :recommendations="recommendations" />
+      </template>
   </div>
 </template>
 

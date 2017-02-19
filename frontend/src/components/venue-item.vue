@@ -4,6 +4,7 @@
     <a :href="googleMapsLink" target="_blank" v-if="hasAddress">
       <span class="venue__address">{{ venue.address }}</span>
     </a>
+    <span class="venue__beer-last-seen">{{ i18n('last-seen') }}</span>
     <ul>
       <beer-item v-for="beer in beers" :beer="beer"/>
     </ul>
@@ -59,8 +60,14 @@ export default {
     margin-left: 1ch;
   }
 
+  .venue__beer-last-seen {
+    float: right;
+    font-size: $font-size-small;
+    font-weight: $font-weight-semibold;
+  }
+
   + .venue {
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid $color-separator-light;
   }
 }
 </style>

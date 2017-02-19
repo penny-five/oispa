@@ -59,7 +59,7 @@ export default {
 
 .oispa-multiselect {
   .multiselect__input, .multiselect__single, .multiselect__option {
-    font-size: 1.8rem;
+    font-size: $font-size-large;
     font-weight: $font-weight-semibold;
   }
 }
