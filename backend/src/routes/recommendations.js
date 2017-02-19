@@ -38,10 +38,10 @@ const groupByVenue = checkins => _.groupBy(checkins, checkin => checkin.venue_id
  */
 const sort = venues => _.sortBy(venues, venue => {
   /*
-    Rating for a venue is the sum of beer ratings, where each added beer adds less to the
-    rating than the one before. This should produce results where few but excellent beers are preferred
+    Rating for a venue is the sum of beer ratings, where each added beer adds less to the rating than
+    the one before. This should produce results where venues with few but excellent beers are preferred
     to ones with a large selection of mediocre beers. Beer ratings are also scaled so that truly excellent
-    beers have more impact than the ones that are just good.
+    beers have more impact than the ones that are "only" very good.
    */
   const venueRating = venue.beers.reduce((sum, beer, index) => {
     const adjustedBeerRating = BEER_RATING_EASING_FN(beer.avg_rating / 5) * 5;

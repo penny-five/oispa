@@ -1,3 +1,8 @@
+/**
+ * Groups beer styles provided by Untappd to more sane top level categories.
+ *
+ * Every beer style is required to have an category. If no other category matches, exotic will be used.
+ */
 const CATEGORIES = {
   barleywine: ({ name }) => name.startsWith('Barleywine'),
   belgian: ({ id }) => [

@@ -17,6 +17,9 @@ export default {
     }
   },
   computed: {
+    /**
+     * 90% of beers are rated between 3.0 and 4.0. Use eased values to generate more interesting looking rating bars.
+     */
     scaledRating() {
       return EASING_FN(this.rating / 5);
     }

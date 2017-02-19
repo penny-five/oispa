@@ -40,7 +40,7 @@ export default {
       }));
       /* Leave exotic category as last, otherwise sort by name */
       options = _.sortBy(options, category => (category.id === 'exotic' ? null : category.name));
-      /* First dropdown option is a special option for selecting all categories */
+      /* First dropdown option should be a special option for selecting all categories */
       options = [{ id: -1, name: this.i18n('category.anything') }, ...options];
       return options;
     }
