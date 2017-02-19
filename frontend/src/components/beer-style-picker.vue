@@ -4,7 +4,7 @@
     :loading="categories.length === 0"
     :disabled="categories.length === 0"
     :options="options"
-    :placeholder="i18n('select beer style')"
+    :placeholder="i18n('recommendations_beer_style_picker_placeholder')"
     track-by="id"
     label="name"
     selectLabel=""

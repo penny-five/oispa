@@ -1,7 +1,7 @@
 <template>
   <header>
     <img class="logo" :src="logo"></img>
-    <h1>{{ i18n('app title' )}}</h1>
+    <h1>{{ i18n('app_title' )}}</h1>
   </header>
 </template>
 
@@ -35,7 +35,8 @@ h1 {
   vertical-align: top;
 
   font-size: 2.8rem;
-  letter-spacing: 5px;
+  font-weight: $font-weight-regular;
+  letter-spacing: 6px;
   line-height: $logo-height;
 
   text-transform: uppercase;
@@ -46,6 +47,6 @@ h1 {
 .logo {
   display: inline-block;
   max-height: $logo-height;
-  margin-right: 3*$baseline;
+  margin-right: 2*$baseline;
 }
 </style>

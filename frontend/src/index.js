@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-import i18nFI from './i18n/finnish.json';
+import langFinnish from './i18n/finnish.json';
 import App from './components/app';
 
 
@@ -10,7 +10,7 @@ if (process.env.API_URL === '') {
 
 Vue.mixin({
   methods: {
-    i18n: key => i18nFI[key]
+    i18n: key => langFinnish[key] || `{ ${key} }`
   }
 });
 
