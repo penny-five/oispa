@@ -1,11 +1,11 @@
 <template>
-  <div class="beer clearfix">
+  <li class="beer clearfix">
     <span class="beer__last-seen">{{ lastSeen }}</span>
     <rating-bar class="beer__rating" :rating="beer.avg_rating"/>
     <span class="beer__name">{{ beer.name }}</span>
     <span class="beer__brewery">{{ beer.brewery }}</span>
-    <span class="beer__style">{{ beer.beerstyle_name }}</span>
-  </div>
+    <span class="beer__style"><span class="beer__abv">{{ beer.abv }} %</span>{{ beer.beerstyle_name }}</span>
+  </li>
 </template>
 
 <script>
@@ -41,6 +41,7 @@ export default {
   .beer__last-seen {
     float: right;
     font-size: $font-size-small;
+    font-weight: $font-weight-regular;
     line-height: $font-size-medium;
   }
 
@@ -55,14 +56,22 @@ export default {
     font-weight: $font-weight-semibold;
   }
 
+  .beer__abv {
+    margin-right: 1ch;
+    font-size: $font-size-small;
+    font-weight: $font-weight-semibold;
+  }
+
   .beer__brewery {
     display: block;
     font-size: $font-size-small;
+    font-weight: $font-weight-regular;
   }
 
   .beer__style {
     display: block;
     font-size: $font-size-small;
+    font-weight: $font-weight-regular;
   }
 }
 </style>

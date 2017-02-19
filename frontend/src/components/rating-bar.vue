@@ -70,7 +70,7 @@ $rating-bar-size: 50px;
   position: relative;
   width: $rating-bar-size;
   height: $rating-bar-size;
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-semibold;
 
   .rating-bar__text {
     position: absolute;
