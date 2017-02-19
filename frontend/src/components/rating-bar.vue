@@ -4,7 +4,10 @@
 
 <script>
 import ProgressBar from 'progressbar.js';
+import BezierEasing from 'bezier-easing';
 
+
+const EASING_FN = BezierEasing(0.75, 0.00, 0.76, 1.00);
 
 export default {
   props: {
@@ -13,7 +16,13 @@ export default {
       required: true
     }
   },
+  computed: {
+    scaledRating() {
+      return EASING_FN(this.rating / 5);
+    }
+  },
   mounted() {
+    const el = this;
     this.bar = new ProgressBar.Circle(this.$el, {
       trailColor: '#e8e8e8',
       strokeWidth: 6,
@@ -24,12 +33,12 @@ export default {
         className: 'rating-bar__text',
         style: null
       },
-      from: { color: '#ff0000', width: 6 },
-      to: { color: '#00ff00', width: 6 },
+      from: { color: '#ff3333', width: 6 },
+      to: { color: '#16e086', width: 6 },
       step(state, circle) {
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
-        const value = (circle.value() * 5.0).toFixed(2);
+        const value = ((circle.value() / el.scaledRating) * el.rating).toFixed(2);
         if (value === 0) {
           circle.setText('');
         } else {
@@ -37,12 +46,12 @@ export default {
         }
       }
     });
-    this.bar.animate(this.rating / 5.0);
+    this.bar.animate(this.scaledRating);
   },
   watch: {
     rating() {
       this.bar.set(0);
-      this.bar.animate(this.rating / 5.0);
+      this.bar.animate(this.scaledRating);
     }
   }
 };
