@@ -7,8 +7,8 @@ const UNTAPPD_API_VERSION = 'v4';
 /* Coordinates for Hämeensilta, Tampere, Finland */
 const THE_PUB_LAT = 61.497993;
 const THE_PUB_LNG = 23.763627;
-/* Fetch only for central Tampere. Sorry, Hervanta. */
-const THE_PUB_RADIUS = 3;
+/* Fetch for most parts of Tampere, including Hervanta. */
+const THE_PUB_RADIUS = 12;
 const THE_PUB_RADIUS_FORMAT = 'km';
 
 const sendUntappdRequest = async opts => {
