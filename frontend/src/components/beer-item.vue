@@ -2,9 +2,11 @@
   <li class="beer clearfix">
     <span class="beer__last-seen">{{ lastSeen }}</span>
     <rating-bar class="beer__rating" :rating="beer.avg_rating"/>
-    <span class="beer__name">{{ beer.name }}</span>
-    <span class="beer__brewery">{{ beer.brewery }}</span>
-    <span class="beer__style"><span class="beer__abv">{{ beer.abv }} %</span>{{ beer.beerstyle_name }}</span>
+    <div class="beer__info">
+      <span class="beer__name">{{ beer.name }}</span>
+      <span class="beer__brewery">{{ beer.brewery }}</span>
+      <span class="beer__style"><span class="beer__abv">{{ beer.abv }} %</span>{{ beer.beerstyle_name }}</span>
+    </div>
   </li>
 </template>
 
@@ -50,6 +52,10 @@ export default {
     margin-right: $baseline;
   }
 
+  .beer__info {
+    overflow: hidden;
+  }
+
   .beer__name {
     display: block;
     font-size: $font-size-large;
@@ -72,6 +78,10 @@ export default {
     display: block;
     font-size: $font-size-small;
     font-weight: $font-weight-regular;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
   }
 }
 </style>

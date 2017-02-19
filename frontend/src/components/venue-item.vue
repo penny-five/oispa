@@ -1,10 +1,12 @@
 <template>
   <li class="venue clearfix">
-    <span class="venue__name">{{ venue.name }}</span>
-    <a :href="googleMapsLink" target="_blank" v-if="hasAddress">
-      <span class="venue__address">{{ venue.address }}</span>
-    </a>
     <span class="venue__beer-last-seen">{{ i18n('last-seen') }}</span>
+    <span class="venue__info truncate">
+      <span class="venue__name">{{ venue.name }}</span>
+      <a :href="googleMapsLink" target="_blank" v-if="hasAddress">
+        <span class="venue__address">{{ venue.address }}</span>
+      </a>
+    </span>
     <ul>
       <beer-item v-for="beer in beers" :beer="beer"/>
     </ul>
@@ -48,7 +50,14 @@ export default {
 @import "assets/constants";
 
 .venue {
-  padding: 1.5*$baseline 0;
+  padding: 0 0 2*$baseline;
+
+  .venue__info {
+    padding-right: $baseline;
+
+    font-size: $font-size-small;
+    font-weight: $font-weight-regular;
+  }
 
   .venue__name {
     font-size: $font-size-medium;
@@ -56,7 +65,6 @@ export default {
   }
 
   .venue__address {
-    font-size: $font-size-small;
     margin-left: 1ch;
   }
 
@@ -67,6 +75,7 @@ export default {
   }
 
   + .venue {
+    padding: 2*$baseline 0;
     border-top: 1px solid $color-separator-light;
   }
 }
