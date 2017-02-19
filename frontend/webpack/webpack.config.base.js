@@ -23,7 +23,8 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
-      }, {
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -49,9 +50,9 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
-      'process.env.API_URL': `"${process.env.API_URL || ''}"`
+      'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
     }),
+    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(fi)$/),
     new HtmlPlugin({
       title: 'Oispa',
       template: 'assets/index.ejs',

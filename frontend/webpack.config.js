@@ -13,4 +13,4 @@ if (isProduction) {
   buildConfig = require('./webpack/webpack.config.development'); // eslint-disable-line global-require
 }
 
-module.exports = merge(baseConfig, buildConfig);
+module.exports = merge.smart(baseConfig, buildConfig);

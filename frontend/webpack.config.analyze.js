@@ -5,7 +5,7 @@ const baseConfig = require('./webpack/webpack.config.base');
 const productionConfig = require('./webpack/webpack.config.production');
 
 
-const config = merge(baseConfig, productionConfig, {
+const config = merge.smart(baseConfig, productionConfig, {
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
