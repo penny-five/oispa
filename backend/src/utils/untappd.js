@@ -1,5 +1,5 @@
 const https = require('./https');
-
+const logger = require('./logger').create('untappd');
 
 const UNTAPPD_API_HOST = 'api.untappd.com';
 const UNTAPPD_API_VERSION = 'v4';
@@ -20,8 +20,14 @@ const sendUntappdRequest = async opts => {
       client_secret: process.env.UNTAPPD_CLIENT_SECRET
     })
   });
-  if (res.meta.code > 299) throw new Error(JSON.stringify(res));
-  return res.response;
+  const requestsRemaining = res.headers['x-ratelimit-remaining'];
+  if (requestsRemaining < 20) {
+    logger.warn(`Reaching hourly Untapped API limit soon, only ${requestsRemaining} API requests remaining`);
+  }
+  if (res.body.meta.code > 299) {
+    throw new Error(JSON.stringify(res));
+  }
+  return res.body.response;
 };
 
 const getBeer = async (opts = {}) => {

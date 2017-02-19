@@ -12,7 +12,10 @@ const get = opts => new Promise((resolve, reject) => {
   https.get(params, res => {
     let body = '';
     res.on('data', data => { body += data; });
-    res.on('end', () => resolve(JSON.parse(body)));
+    res.on('end', () => resolve({
+      headers: res.headers,
+      body: JSON.parse(body)
+    }));
   }).on('error', reject);
 });
 
