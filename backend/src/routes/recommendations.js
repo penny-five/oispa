@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const Joi = require('joi');
 const moment = require('moment');
+const BezierEasing = require('bezier-easing');
 
 const knex = require('../knex');
 
@@ -10,6 +11,8 @@ const VALID_VENUE_TYPES = [
   'Nightlife Spot',
   'Food'
 ];
+
+const BEER_RATING_EASING_FN = BezierEasing(0.75, 0.00, 0.76, 1.00);
 
 const populateBeer = async checkin => {
   const beer = await knex('beers').where('id', checkin.beer_id).first();
@@ -31,10 +34,21 @@ const populateVenue = async ([venueId, checkins]) => {
 const groupByVenue = checkins => _.groupBy(checkins, checkin => checkin.venue_id);
 
 /**
- *  TODO implement proper sorting algorithm. Venues that have few high ranked beers should be ranked higher
- *  than venues that have tons of average beers.
+ *  TODO User location should be calculated and taken into account. Venues that are nearby should be preferred.
  */
-const sort = venues => venues;
+const sort = venues => _.sortBy(venues, venue => {
+  /*
+    Rating for a venue is the sum of beer ratings, where each added beer adds less to the
+    rating than the one before. This should produce results where few but excellent beers are preferred
+    to ones with a large selection of mediocre beers. Beer ratings are also scaled so that truly excellent
+    beers have more impact than the ones that are just good.
+   */
+  const venueRating = venue.beers.reduce((sum, beer, index) => {
+    const adjustedBeerRating = BEER_RATING_EASING_FN(beer.avg_rating / 5) * 5;
+    return sum + (adjustedBeerRating * (0.20 + (0.80 / (index + 1))));
+  }, 0);
+  return -venueRating;
+});
 
 module.exports = {
   method: 'GET',

@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/penny-five/oispa#readme",
   "dependencies": {
+    "bezier-easing": "2.0.3",
     "blipp": "2.3.0",
     "boom": "4.2.0",
     "bucker": "1.1.1",
