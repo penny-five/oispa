@@ -14,6 +14,7 @@ html {
 }
 
 body {
+  overflow-y: scroll;
   font-size: $font-size-medium;
   font-weight: $font-weight-regular;
   -webkit-font-smoothing: antialiased !important;
