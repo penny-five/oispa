@@ -1,4 +1,4 @@
-from node:7.5.0-alpine
+FROM node:7.5.0-alpine
 
 RUN npm install -g yarn@0.19.1
 
