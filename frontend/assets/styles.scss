@@ -32,6 +32,14 @@ li {
   list-style: none;
 }
 
+a {
+  color: $color-text-dark;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .clearfix:before,
 .clearfix:after {
   content: " ";
