@@ -21,6 +21,7 @@ const toBeer = item => ({
   brewery: item.brewery.brewery_name,
   country: item.brewery.country_name,
   abv: item.beer.beer_abv,
+  label_url: item.beer.beer_label,
   beerstyle_id: item.beer.beer_style_id
 });
 
@@ -28,6 +29,7 @@ const toVenue = item => ({
   id: item.venue.venue_id,
   name: item.venue.venue_name,
   address: item.venue.location.venue_address,
+  category: item.venue.primary_category,
   lat: item.venue.location.lat,
   lng: item.venue.location.lng
 });

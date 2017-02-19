@@ -11,6 +11,7 @@ exports.up = async knex => {
     table.integer('id').primary();
     table.text('name').notNullable();
     table.text('address');
+    table.text('category');
     table.float('lat');
     table.float('lng');
     table.dateTime('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
@@ -22,6 +23,7 @@ exports.up = async knex => {
     table.text('description');
     table.text('brewery');
     table.text('country');
+    table.text('label_url');
     table.float('abv');
     table.float('avg_rating');
     table.integer('rating_count');
