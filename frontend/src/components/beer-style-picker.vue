@@ -1,20 +1,21 @@
 <template>
   <multi-select
     class="oispa-multiselect"
-    :loading="beerStyles.length === 0"
-    :disabled="beerStyles.length === 0"
-    :options="beerStyles"
+    :loading="categories.length === 0"
+    :disabled="categories.length === 0"
+    :options="options"
     :placeholder="i18n('select beer style')"
+    track-by="id"
+    label="name"
     selectLabel=""
     selectedLabel=""
     deselectLabel=""
-    label="name"
-    track-by="name"
     v-model="selected">
   </multi-select>
 </template>
 
 <script>
+import _ from 'lodash';
 import MultiSelect from 'vue-multiselect';
 
 
@@ -24,14 +25,29 @@ export default {
   },
   props: {
     value: {},
-    beerStyles: Array
+    categories: Array
   },
   data: () => ({
     selected: null
   }),
+  computed: {
+    options() {
+      if (this.categories == null) return null;
+
+      let options = this.categories.map(category => ({
+        id: category,
+        name: this.i18n(`category.${category}`) || category
+      }));
+      /* Leave exotic category as last, otherwise sort by name */
+      options = _.sortBy(options, category => (category.id === 'exotic' ? null : category.name));
+      /* First dropdown option is a special option for selecting all categories */
+      options = [{ id: -1, name: this.i18n('category.anything') }, ...options];
+      return options;
+    }
+  },
   watch: {
-    selected() {
-      this.$emit('input', this.selected);
+    selected(selected) {
+      this.$emit('input', selected.id === -1 ? null : selected.id);
     }
   }
 };

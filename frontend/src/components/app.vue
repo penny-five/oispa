@@ -3,7 +3,7 @@
     <header-bar/>
     <div class="content-wrapper">
       <h2>{{ i18n('instructions') }}</h2>
-      <beer-style-picker :beer-styles="beerStyles" v-model="selectedBeerStyle" />
+      <beer-style-picker :categories="beerStyleCategories" v-model="selectedBeerStyleCategory" />
       <template v-if="recommendations != null">
         <template v-if="recommendations.length > 0">
           <h2>{{ i18n('results found' )}}</h2>
@@ -34,20 +34,22 @@ export default {
     VenueItem
   },
   data: () => ({
-    beerStyles: [],
-    selectedBeerStyle: null,
+    beerStyleCategories: [],
+    selectedBeerStyleCategory: null,
     recommendations: null
   }),
   watch: {
-    selectedBeerStyle() {
-      api.recommendations.getForBeerStyle(this.selectedBeerStyle.id).then(recommendations => {
+    selectedBeerStyleCategory() {
+      api.recommendations.get({
+        category: this.selectedBeerStyleCategory
+      }).then(recommendations => {
         this.recommendations = recommendations;
       });
     }
   },
   mounted() {
-    api.beerStyles.getAll().then(beerStyles => {
-      this.beerStyles = beerStyles;
+    api.beerStyleCategories.getAll().then(beerStyleCategories => {
+      this.beerStyleCategories = beerStyleCategories;
     });
   }
 };

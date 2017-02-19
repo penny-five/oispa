@@ -4,11 +4,14 @@ const moment = require('moment');
 
 const knex = require('../knex');
 
+
 const populateBeer = async checkin => {
   const beer = await knex('beers').where('id', checkin.beer_id).first();
+  const beerstyle = await knex.select('name').from('beerstyles').where('id', beer.beerstyle_id).first();
   return Object.assign({
     sightings: checkin.sightings,
-    latest_sighting: checkin.latest_sighting
+    latest_sighting: checkin.latest_sighting,
+    beerstyle_name: beerstyle.name
   }, beer);
 };
 
@@ -31,10 +34,10 @@ module.exports = {
   method: 'GET',
   path: '/recommendations',
   config: {
-    description: 'Retrieves beer recommendations, optionally filtered by beer style',
+    description: 'Retrieves beer recommendations, optionally filtered by beer category',
     validate: {
       query: {
-        beerstyle: Joi.number().integer().min(1)
+        category: Joi.string()
       }
     }
   },
@@ -51,8 +54,10 @@ module.exports = {
       .orderBy('beers.avg_rating', 'desc')
       .limit(50)
       .modify(query => {
-        if (request.query.beerstyle != null) {
-          query.andWhere('beers.beerstyle_id', request.query.beerstyle);
+        if (request.query.category != null) {
+          query.whereIn('beers.beerstyle_id', function() {
+            this.select('id').from('beerstyles').where('category', request.query.category);
+          });
         }
       });
 

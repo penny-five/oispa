@@ -2,10 +2,10 @@ import { get } from './utils';
 
 export default {
   echo: get('/echo'),
-  beerStyles: {
-    getAll: get('/beerstyles')
+  beerStyleCategories: {
+    getAll: get('/beerstyles/categories')
   },
   recommendations: {
-    getForBeerStyle: beerStyle => get('/recommendations', { beerstyle: beerStyle })()
+    get: opts => get('/recommendations', opts)()
   }
 };

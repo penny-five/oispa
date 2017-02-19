@@ -2,6 +2,8 @@ const _ = require('lodash');
 const scrapeIt = require('scrape-it');
 
 const knex = require('../knex');
+const upsert = require('../utils/knex').upsert;
+const findCategoryForBeerStyle = require('../utils/beerstyle_categories').findCategoryForBeerStyle;
 
 
 const SCRAPE_URL = 'https://untappd.com/beer/top_rated';
@@ -36,14 +38,20 @@ module.exports = async logger => {
 
   items = items.map(item => ({
     id: parseInt(item.id, 10),
-    name: item.name
+    name: item.name,
+    category: findCategoryForBeerStyle(item)
   }));
 
-  let fromResult, toResult;
-  await knex.transaction(async trx => {
-    fromResult = await trx.del().from('beerstyles');
-    toResult = await trx.insert(items).into('beerstyles');
+  /* Used by Untappd, but not returned from scraping, so has to be added manually */
+  items = items.concat({
+    id: 0,
+    name: 'Other',
+    category: 'exotic'
   });
 
-  logger.info(`Beer styles updated (count: ${fromResult} -> ${toResult.rowCount})`);
+  await knex.transaction(async trx => {
+    await Promise.all(items.map(item => upsert('beerstyles', { id: item.id }, item, trx)));
+  });
+
+  logger.info('Beer styles updated');
 };

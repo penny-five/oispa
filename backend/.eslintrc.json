@@ -16,6 +16,7 @@
     "import/prefer-default-export": "off",
     "one-var": "off",
     "one-var-declaration-per-line": "off",
-    "newline-per-chained-call": "off"
+    "newline-per-chained-call": "off",
+    "arrow-body-style": "off"
   }
 }
