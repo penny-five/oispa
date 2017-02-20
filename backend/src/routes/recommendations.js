@@ -52,7 +52,7 @@ const sort = venues => _.sortBy(venues, venue => {
 
 module.exports = {
   method: 'GET',
-  path: '/recommendations',
+  path: '/api/recommendations',
   config: {
     description: 'Retrieves beer recommendations, optionally filtered by beer category',
     validate: {
@@ -62,7 +62,6 @@ module.exports = {
     }
   },
   async handler(request, reply) {
-    const oldestAcceptedCheckinDate = moment().subtract(2, 'weeks');
     const results = await knex('checkins')
       .select('beer_id', 'venue_id')
       .count('checkins.id as sightings')
@@ -71,7 +70,7 @@ module.exports = {
       .leftJoin('venues', 'checkins.venue_id', 'venues.id')
       .whereNotNull('beers.avg_rating')
       .whereIn('venues.category', VALID_VENUE_TYPES)
-      .andWhere('checkin_time', '>=', oldestAcceptedCheckinDate)
+      .andWhere('checkin_time', '>=', moment().subtract(2, 'weeks'))
       .groupBy('beer_id', 'venue_id', 'beers.avg_rating')
       .orderBy('beers.avg_rating', 'desc')
       .limit(50)

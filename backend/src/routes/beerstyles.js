@@ -3,7 +3,7 @@ const knex = require('../knex');
 
 module.exports = {
   method: 'GET',
-  path: '/beerstyles/categories',
+  path: '/api/beerstyles/categories',
   config: {
     description: 'Retrieves all beer style categories'
   },

@@ -1,7 +1,7 @@
 module.exports = {
   method: 'GET',
-  path: '/',
+  path: '/api',
   handler(request, reply) {
-    reply('<h1>Oispa backend</h1>');
+    reply('<h1>Oispa API</h1>');
   }
 };

@@ -9,7 +9,12 @@ const createManifest = opts => ({
       plugin: 'blipp'
     },
     {
-      plugin: 'hapijs-status-monitor'
+      plugin: {
+        register: 'hapijs-status-monitor',
+        options: {
+          path: '/api/status'
+        }
+      }
     },
     {
       plugin: {
