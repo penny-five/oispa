@@ -1,6 +1,6 @@
 FROM node:7.5.0-alpine
 
-RUN npm install -g yarn@0.19.1
+RUN npm install -g yarn@0.21.2
 
 WORKDIR /app
 

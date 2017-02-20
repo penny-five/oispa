@@ -3,7 +3,7 @@ services:
   frontend:
     build: frontend
     ports:
-      - "80"
+      - "80:8185"
     links:
       - backend
   backend:
