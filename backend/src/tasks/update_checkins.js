@@ -3,6 +3,7 @@ const _ = require('lodash');
 const untappd = require('../utils/untappd');
 const knex = require('../knex');
 const upsert = require('../utils/knex').upsert;
+const updateBeerStyles = require('./update_beerstyles');
 
 
 const CHECKIN_QUERY_COUNT = 25;
@@ -73,10 +74,17 @@ module.exports = async logger => {
   const latestCheckin = await knex('checkins').orderBy('id', 'desc').first();
   const min = latestCheckin != null ? latestCheckin.id : null;
 
+  let max;
   if (min == null) {
-    await updateCheckins();
+    logger.info('No previous checkins found. Updating beer styles and fetching up to 250 latest checkins');
+    await updateBeerStyles(logger);
+    let queryCount = 0;
+    do {
+      const results = await updateCheckins(logger, min, max); // eslint-disable-line no-await-in-loop
+      max = results.max;
+      queryCount += 1;
+    } while (queryCount < 10);
   } else {
-    let max;
     do {
       const results = await updateCheckins(logger, min, max); // eslint-disable-line no-await-in-loop
       max = results.max;
