@@ -5,6 +5,13 @@ const logger = require('./src/utils/logger').create();
 const Server = require('./src/server');
 
 
+if (process.env.UNTAPPD_CLIENT_ID == null) {
+  throw new Error('Environment variable UNTAPPD_CLIENT_ID not set');
+}
+if (process.env.UNTAPPD_CLIENT_SECRET == null) {
+  throw new Error('Environment variable UNTAPPD_CLIENT_SECRET not set');
+}
+
 const opts = {
   port: process.env.PORT,
   logLevel: 'info'
