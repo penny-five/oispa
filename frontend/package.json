@@ -1,6 +1,6 @@
 {
   "name": "oispa-frontend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Frontend client for Oispa",
   "private": true,
   "main": "handler.js",
