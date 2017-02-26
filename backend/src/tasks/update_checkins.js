@@ -35,7 +35,7 @@ const toVenue = item => ({
   lng: item.venue.location.lng
 });
 
-const updateCheckins = async (logger, min, max) => {
+const fetchCheckins = async (min, max) => {
   let items = await untappd.getCheckins({
     max,
     limit: CHECKIN_QUERY_COUNT
@@ -44,24 +44,32 @@ const updateCheckins = async (logger, min, max) => {
   items = items.filter(item => item.checkin_id > min);
 
   if (items.length === 0) {
-    return { max: min, numUpdates: 0 };
+    return {
+      data: { beers: [], venues: [], checkins: [] },
+      max: min,
+      numUpdates: 0
+    };
   }
 
   const beers = _.chain(items).map(toBeer).uniqBy('id').value();
   const venues = _.chain(items).map(toVenue).uniqBy('id').value();
   const checkins = items.map(toCheckin);
 
-  await knex.transaction(async trx => {
-    await Promise.all(beers.map(beer => upsert('beers', { id: beer.id }, beer, trx)));
-    await Promise.all(venues.map(venue => upsert('venues', { id: venue.id }, venue, trx)));
-    await Promise.all(checkins.map(checkin => upsert('checkins', { id: checkin.id }, checkin, trx)));
-  });
+  return {
+    data: { beers, venues, checkins },
+    max: _.last(checkins).id,
+    numUpdates: checkins.length
+  };
+};
 
-  logger.info(`Updated ${beers.length} beers.`);
-  logger.info(`Updated ${venues.length} venues.`);
-  logger.info(`Added ${checkins.length} new checkins.`);
-
-  return { max: _.last(checkins).id, numUpdates: checkins.length };
+const combineResultsData = (a, b) => {
+  if (b == null) return a;
+  if (a == null) return b;
+  return {
+    beers: a.beers.concat(b.beers),
+    venues: a.venues.concat(b.venues),
+    checkins: a.checkins.concat(b.checkins)
+  };
 };
 
 /**
@@ -74,22 +82,37 @@ module.exports = async logger => {
   const latestCheckin = await knex('checkins').orderBy('id', 'desc').first();
   const min = latestCheckin != null ? latestCheckin.id : null;
 
+  let data;
   let max;
+
   if (min == null) {
     logger.info('No previous checkins found. Updating beer styles and fetching up to 250 latest checkins');
     await updateBeerStyles(logger);
     let queryCount = 0;
     do {
-      const results = await updateCheckins(logger, min, max); // eslint-disable-line no-await-in-loop
+      const results = await fetchCheckins(min, max); // eslint-disable-line no-await-in-loop
+      data = combineResultsData(data, results.data);
       max = results.max;
       queryCount += 1;
     } while (queryCount < 10);
   } else {
     do {
-      const results = await updateCheckins(logger, min, max); // eslint-disable-line no-await-in-loop
+      const results = await fetchCheckins(min, max); // eslint-disable-line no-await-in-loop
+      data = combineResultsData(data, results.data);
       max = results.max;
       if (results.numUpdates < CHECKIN_QUERY_COUNT) break;
     } while (max > min);
   }
+
+  await knex.transaction(async trx => {
+    await Promise.all(data.beers.map(beer => upsert('beers', { id: beer.id }, beer, trx)));
+    await Promise.all(data.venues.map(venue => upsert('venues', { id: venue.id }, venue, trx)));
+    await Promise.all(data.checkins.map(checkin => upsert('checkins', { id: checkin.id }, checkin, trx)));
+  });
+
+  logger.info(`Updated ${data.beers.length} beers.`);
+  logger.info(`Updated ${data.venues.length} venues.`);
+  logger.info(`Added ${data.checkins.length} new checkins.`);
+
   logger.info('Updating checkins done.');
 };
