@@ -1,4 +1,5 @@
 const moment = require('moment');
+const each = require('promise-each');
 
 const knex = require('../knex');
 const untappd = require('../utils/untappd');
@@ -7,15 +8,14 @@ const untappd = require('../utils/untappd');
 const fetchRating = async beer => {
   const response = await untappd.getBeer({ beer_id: beer.id });
   return {
-    beer,
     avg_rating: response.rating_score,
     rating_count: response.rating_count
   };
 };
 
-const toUpdate = async response => knex('beers').where({ id: response.beer.id }).update({
-  avg_rating: response.avg_rating,
-  rating_count: response.rating_count,
+const update = async (id, rating, count) => knex('beers').where({ id }).update({
+  avg_rating: rating,
+  rating_count: count,
   updated_at: knex.raw('CURRENT_TIMESTAMP'),
   rating_updated_at: knex.raw('CURRENT_TIMESTAMP')
 });
@@ -38,9 +38,10 @@ module.exports = async logger => {
     .orderBy('rating_updated_at', 'desc')
     .limit(20);
 
-  const responses = await Promise.all(beers.map(fetchRating));
-  const updates = responses.map(toUpdate);
-  await Promise.all(updates);
+  await each(async beer => {
+    const response = await fetchRating(beer);
+    await update(beer.id, response.avg_rating, response.rating_count);
+  })(beers);
 
-  logger.info(`Updated ratings for ${responses.length} beers.`);
+  logger.info(`Updated ratings for ${beers.length} beers.`);
 };
