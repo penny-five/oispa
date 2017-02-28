@@ -31,7 +31,9 @@ function Server(opts) {
     async start() {
       const server = await Glue.compose(manifest, { relativeTo: __dirname });
       await server.start();
-      cron.start();
+      if (process.env.NODE_ENV === 'production') {
+        cron.start();
+      }
       logger.info(`Oispa backend started at ${server.info.uri}`);
     }
   };

@@ -68,7 +68,7 @@ module.exports = {
       .max('checkin_time as latest_sighting')
       .leftJoin('beers', 'checkins.beer_id', 'beers.id')
       .leftJoin('venues', 'checkins.venue_id', 'venues.id')
-      .whereNotNull('beers.avg_rating')
+      .where('beers.avg_rating', '>', 0)
       .whereIn('venues.category', VALID_VENUE_TYPES)
       .andWhere('checkin_time', '>=', moment().subtract(2, 'weeks'))
       .groupBy('beer_id', 'venue_id', 'beers.avg_rating')

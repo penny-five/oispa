@@ -41,13 +41,13 @@ export default {
       /* Leave exotic category as last, otherwise sort by name */
       options = _.sortBy(options, category => (category.id === 'exotic' ? null : category.name));
       /* First dropdown option should be a special option for selecting all categories */
-      options = [{ id: -1, name: this.i18n('category.anything') }, ...options];
+      options = [{ id: 'all', name: this.i18n('category.anything') }, ...options];
       return options;
     }
   },
   watch: {
     selected(selected) {
-      this.$emit('input', selected.id === -1 ? null : selected.id);
+      this.$emit('input', selected != null ? selected.id : null);
     }
   }
 };

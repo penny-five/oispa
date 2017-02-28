@@ -1,8 +1,8 @@
 const _ = require('lodash');
 const bucker = require('bucker').createLogger({ console: true });
 
-function log(buckerFn, tag, message) {
-  buckerFn.call(bucker, `[${tag.toUpperCase()}] ${message}`);
+function log(buckerFn, tag, ...message) {
+  buckerFn.call(bucker, `[${tag.toUpperCase()}] ${message.join(' ')}`);
 }
 
 module.exports = {

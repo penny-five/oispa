@@ -1,6 +1,6 @@
 {
   "name": "oispa-frontend",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Frontend client for Oispa",
   "private": true,
   "main": "handler.js",
@@ -47,6 +47,7 @@
     "vue": "2.1.10",
     "vue-loader": "10.3.0",
     "vue-multiselect": "2.0.0-beta.13",
+    "vue-router": "2.3.0",
     "vue-template-compiler": "2.1.10",
     "webpack": "2.2.1",
     "webpack-merge": "2.6.1"

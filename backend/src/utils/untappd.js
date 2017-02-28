@@ -12,6 +12,7 @@ const THE_PUB_RADIUS = 12;
 const THE_PUB_RADIUS_FORMAT = 'km';
 
 const sendUntappdRequest = async opts => {
+  logger.info(`call ${opts.path} with`, JSON.stringify(opts.query));
   const res = await https.get({
     hostname: UNTAPPD_API_HOST,
     path: `${UNTAPPD_API_VERSION}/${opts.path}`,
