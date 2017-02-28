@@ -2,7 +2,7 @@ const _ = require('lodash');
 
 const untappd = require('../utils/untappd');
 const knex = require('../knex');
-const upsert = require('../utils/knex').upsert;
+const batchUpsert = require('../utils/knex').batchUpsert;
 const updateBeerStyles = require('./update_beerstyles');
 
 
@@ -105,9 +105,24 @@ module.exports = async logger => {
   }
 
   await knex.transaction(async trx => {
-    await Promise.all(data.beers.map(beer => upsert('beers', { id: beer.id }, beer, trx)));
-    await Promise.all(data.venues.map(venue => upsert('venues', { id: venue.id }, venue, trx)));
-    await Promise.all(data.checkins.map(checkin => upsert('checkins', { id: checkin.id }, checkin, trx)));
+    await batchUpsert(data.beers.map(beer => ({
+      table: 'beers',
+      where: { id: beer.id },
+      values: beer,
+      transaction: trx
+    })));
+    await batchUpsert(data.venues.map(venue => ({
+      table: 'venues',
+      where: { id: venue.id },
+      values: venue,
+      transaction: trx
+    })));
+    await batchUpsert(data.checkins.map(checkin => ({
+      table: 'checkins',
+      where: { id: checkin.id },
+      values: checkin,
+      transaction: trx
+    })));
   });
 
   logger.info(`Updated ${data.beers.length} beers.`);
