@@ -3,8 +3,8 @@
     <header-bar/>
     <div class="content-wrapper">
       <h2>{{ i18n('recommendations_instructions') }}</h2>
-      <beer-style-picker :categories="beerStyleCategories" v-model="selectedBeerStyleCategory" />
-      <template v-if="recommendations != null">
+      <beer-style-picker :categories="beerStyleCategories" v-model="selectedCategory" />
+      <template v-if="selectedCategory != null && recommendations != null">
         <span class="separator"></span>
         <recommendations-list :recommendations="recommendations" />
       </template>
@@ -27,14 +27,15 @@ export default {
   },
   data: () => ({
     beerStyleCategories: [],
-    selectedBeerStyleCategory: null,
+    selectedCategory: null,
     recommendations: null
   }),
   watch: {
-    async selectedBeerStyleCategory() {
-      this.recommendations = await api.recommendations.get({
-        category: this.selectedBeerStyleCategory
-      });
+    async selectedCategory() {
+      if (this.selectedCategory != null) {
+        const category = this.selectedCategory !== 'all' ? this.selectedCategory : null;
+        this.recommendations = await api.recommendations.get({ category });
+      }
     }
   },
   async mounted() {
