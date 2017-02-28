@@ -10,7 +10,7 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     proxy: {
-      '/api': 'http://localhost:80'
+      '/api': 'http://localhost:8085'
     }
   },
   performance: {
