@@ -1,27 +1,21 @@
 <template>
-  <multi-select
-    class="oispa-multiselect"
-    :loading="categories.length === 0"
-    :disabled="categories.length === 0"
-    :options="options"
-    :placeholder="i18n('recommendations_beer_style_picker_placeholder')"
+  <dropdown
+    :items="items"
+    :placeholder="i18n('recommendations.dropdown_placeholder')"
     track-by="id"
     label="name"
-    selectLabel=""
-    selectedLabel=""
-    deselectLabel=""
     v-model="selected">
-  </multi-select>
+  </dropdown>
 </template>
 
 <script>
 import _ from 'lodash';
-import MultiSelect from 'vue-multiselect';
+import Dropdown from './dropdown';
 
 
 export default {
   components: {
-    MultiSelect
+    Dropdown
   },
   props: {
     value: {},
@@ -31,7 +25,7 @@ export default {
     selected: null
   }),
   computed: {
-    options() {
+    items() {
       if (this.categories == null) return null;
 
       let options = this.categories.map(category => ({
@@ -47,20 +41,9 @@ export default {
   },
   watch: {
     selected(selected) {
-      this.$emit('input', selected != null ? selected.id : null);
+      this.$emit('input', selected);
     }
   }
 };
 
 </script>
-
-<style lang="scss">
-@import "assets/constants";
-
-.oispa-multiselect {
-  .multiselect__input, .multiselect__single, .multiselect__option {
-    font-size: $font-size-large;
-    font-weight: $font-weight-semibold;
-  }
-}
-</style>
