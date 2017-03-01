@@ -33,7 +33,7 @@ export default {
   watch: {
     async selectedVenue() {
       if (this.selectedVenue != null) {
-        this.recommendedBeers = [];
+        this.recommendedBeers = null;
         this.recommendedBeers = await api.venues.getBeers(this.selectedVenue.id)();
       }
     }
