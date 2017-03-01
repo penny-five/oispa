@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ i18n('recommendations_instructions') }}</h2>
+    <h2>{{ i18n('recommendations.instructions') }}</h2>
     <beer-style-picker :categories="beerStyleCategories" v-model="selectedCategory" />
     <template v-if="selectedCategory != null && recommendations != null">
       <span class="separator"></span>
@@ -14,6 +14,7 @@ import BeerStylePicker from './beer-style-picker';
 import RecommendationsList from './recommendations-list';
 
 export default {
+  name: 'recommendations',
   components: {
     BeerStylePicker,
     RecommendationsList
@@ -26,7 +27,8 @@ export default {
   watch: {
     async selectedCategory() {
       if (this.selectedCategory != null) {
-        const category = this.selectedCategory !== 'all' ? this.selectedCategory : null;
+        const category = this.selectedCategory.id !== 'all' ? this.selectedCategory.id : null;
+        this.recommendations = null;
         this.recommendations = await api.recommendations.get({ category });
       }
     }

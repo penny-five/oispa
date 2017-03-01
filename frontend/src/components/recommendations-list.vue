@@ -5,7 +5,7 @@
         :venue="recommendation.venue"
         :beers="recommendation.beers" />
     </ul>
-    <h2 v-else>{{ i18n('recommendations_results_not_found') }}</h2>
+    <h2 v-else>{{ i18n('results_not_found') }}</h2>
   </div>
 </template>
 

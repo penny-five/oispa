@@ -11,6 +11,12 @@ const THE_PUB_LNG = 23.763627;
 const THE_PUB_RADIUS = 12;
 const THE_PUB_RADIUS_FORMAT = 'km';
 
+const VALID_VENUE_TYPES = [
+  'Arts & Entertainment',
+  'Nightlife Spot',
+  'Food'
+];
+
 const sendUntappdRequest = async opts => {
   logger.info(`call ${opts.path} with`, JSON.stringify(opts.query));
   const res = await https.get({
@@ -56,5 +62,6 @@ const getCheckins = async (opts = {}) => {
 
 module.exports = {
   getBeer,
-  getCheckins
+  getCheckins,
+  VALID_VENUE_TYPES
 };

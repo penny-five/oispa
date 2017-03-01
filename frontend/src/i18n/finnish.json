@@ -1,8 +1,10 @@
 {
   "app_title": "Oispa",
-  "recommendations_instructions": "Millaista kaljaa saisi herralle olla?",
-  "recommendations_beer_style_picker_placeholder": "Valitse kaljalaatu",
-  "recommendations_results_not_found": "No nyt ei kyllä löytynyt mitään",
+  "venues.instructions": "Mihinkäs herra on tänään matkalla?",
+  "venues.dropdown_placeholder": "Valitse ravinteli",
+  "recommendations.instructions": "Millaista kaljaa saisi herralle olla?",
+  "recommendations.dropdown_placeholder": "Valitse kaljalaatu",
+  "results_not_found": "No nyt ei kyllä löytynyt mitään",
   "last-seen": "Viimeksi nähty",
   "category.anything": "Mitä vaan mikä nousee päähän",
   "category.barleywine": "Barleywineä",
