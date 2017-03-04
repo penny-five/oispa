@@ -1,4 +1,5 @@
-!/bin/sh
+#!/bin/sh
+
 if [[ $(git diff) ]]; then
   echo "You have uncommitted files. Commit all changes and try again."
   exit 0;
