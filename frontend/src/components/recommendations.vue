@@ -2,15 +2,20 @@
   <div>
     <h2>{{ i18n('recommendations.instructions') }}</h2>
     <dropdown
-      :items="items"
-      :value="selectedItem"
+      :items="categories"
+      :value="selected"
       :placeholder="i18n('recommendations.dropdown_placeholder')"
       track-by="id"
       label="name"
       @input="onItemSelected"/>
     <template v-if="recommendations != null">
       <span class="separator"></span>
-      <recommendations-list :recommendations="recommendations" />
+      <ul v-if="recommendations.length > 0">
+        <venue-item v-for="recommendation in recommendations"
+          :venue="recommendation.venue"
+          :beers="recommendation.beers" />
+      </ul>
+      <h2 v-else>{{ i18n('results_not_found') }}</h2>
     </template>
   </div>
 </template>
@@ -20,18 +25,18 @@ import _ from 'lodash';
 import { mapState } from 'vuex';
 
 import Dropdown from './dropdown';
-import RecommendationsList from './recommendations-list';
+import VenueItem from './venue-item';
 
 
 export default {
   name: 'recommendations',
   components: {
     Dropdown,
-    RecommendationsList
+    VenueItem
   },
   computed: {
     ...mapState({
-      items({ beerStyleCategories }) {
+      categories({ beerStyleCategories }) {
         if (beerStyleCategories == null) return null;
 
         return _.chain(beerStyleCategories).map(category => ({
@@ -43,9 +48,9 @@ export default {
           return category.name;
         }).value();
       },
-      selectedItem({ selectedCategory }) {
+      selected({ selectedCategory }) {
         if (selectedCategory == null) return null;
-        return this.items.find(item => item.id === selectedCategory);
+        return this.categories.find(item => item.id === selectedCategory);
       },
       recommendations: state => state.selectedCategoryRecommendations
     })

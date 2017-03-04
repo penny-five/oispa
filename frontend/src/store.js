@@ -81,13 +81,13 @@ const store = new Vuex.Store({
     },
     async updateVenues({ state, commit }) {
       commit('setVenues', null);
-      const venues = await api.areas.getVenues(state.selectedArea.id)();
+      const venues = await api.areas.getVenues(state.selectedArea.id);
       commit('setVenues', venues);
     },
     async setSelectedVenue({ state, commit }, venue) {
       commit('setSelectedVenue', venue);
       if (venue != null) {
-        const recommendations = await api.venues.getRecommendations(venue.id)();
+        const recommendations = await api.venues.getRecommendations(venue.id);
         commit('setSelectedVenueRecommendations', recommendations);
       }
     }

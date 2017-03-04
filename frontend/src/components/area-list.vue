@@ -27,7 +27,7 @@ export default {
       };
     },
     onSelect(area) {
-      this.$emit('select', area);
+      if (area !== this.selectedArea) this.$emit('select', area);
     }
   }
 };
