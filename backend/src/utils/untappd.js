@@ -1,5 +1,9 @@
+const _ = require('lodash');
 const https = require('./https');
+const url = require('url');
+
 const logger = require('./logger').create('untappd');
+
 
 const UNTAPPD_API_HOST = 'api.untappd.com';
 const UNTAPPD_API_VERSION = 'v4';
@@ -12,20 +16,34 @@ const VALID_VENUE_TYPES = [
   'Food'
 ];
 
+const logRequest = req => logger.info(url.format({
+  hostname: `${req.hostname}/${req.path}`,
+  query: _.omit(req.query, 'client_id', 'client_secret')
+}).toString());
+
+const checkRateLimit = res => {
+  const requestsRemaining = res.headers['x-ratelimit-remaining'];
+  if (requestsRemaining < 20) {
+    logger.warn(`Reaching hourly Untapped API limit soon, only ${requestsRemaining} API requests remaining`);
+  }
+};
+
 const sendUntappdRequest = async opts => {
-  logger.info(`call ${opts.path} with`, opts.query != null ? JSON.stringify(opts.query) : '{}');
-  const res = await https.get({
+  const req = {
     hostname: UNTAPPD_API_HOST,
     path: `${UNTAPPD_API_VERSION}/${opts.path}`,
     query: Object.assign({}, opts.query, {
       client_id: process.env.UNTAPPD_CLIENT_ID,
       client_secret: process.env.UNTAPPD_CLIENT_SECRET
     })
-  });
-  const requestsRemaining = res.headers['x-ratelimit-remaining'];
-  if (requestsRemaining < 20) {
-    logger.warn(`Reaching hourly Untapped API limit soon, only ${requestsRemaining} API requests remaining`);
-  }
+  };
+
+  logRequest(req);
+
+  const res = await https.get(req);
+
+  checkRateLimit(res);
+
   if (res.body.meta.code > 299) {
     throw new Error(JSON.stringify(res));
   }
