@@ -38,7 +38,7 @@ export default {
       return !_.isEmpty(this.venue.address);
     },
     googleMapsLink() {
-      const encodedAddress = encodeURI(`${this.venue.address}, Tampere, Finland`);
+      const encodedAddress = encodeURI(`${this.venue.address}, ${this.venue.city}, Finland`);
       return (`https://www.google.com/maps/place/${encodedAddress}`);
     }
   }
