@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import Dropdown from './dropdown';
 import BeerItem from './beer-item';
@@ -42,8 +42,11 @@ export default {
     })
   },
   methods: {
+    ...mapActions([
+      'setSelectedVenue'
+    ]),
     onSelectVenue(venue) {
-      this.$store.dispatch('setSelectedVenue', venue);
+      this.setSelectedVenue(venue);
     }
   }
 };

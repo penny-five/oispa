@@ -1,5 +1,10 @@
+const VALID_VENUE_TYPES = [
+  'Arts & Entertainment',
+  'Nightlife Spot',
+  'Food'
+];
 
-const areas = {
+const AREAS = {
   tre: {
     id: 'tre',
     abbr: 'TRE',
@@ -38,4 +43,4 @@ const areas = {
   }
 };
 
-module.exports = { areas };
+module.exports = { VALID_VENUE_TYPES, AREAS };

@@ -148,7 +148,7 @@ module.exports = async logger => {
     await updateBeerStyles(logger);
   }
 
-  await each(updateAreaCheckins(logger))(_.values(config.areas));
+  await each(updateAreaCheckins(logger))(_.values(config.AREAS));
 
   logger.info('Updating checkins done');
 };

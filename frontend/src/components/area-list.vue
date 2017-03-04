@@ -52,7 +52,7 @@ export default {
   }
 
   &.area-item--selected {
-    font-weight: bold;
+    font-weight: $font-weight-bold;
 
     &:hover {
       cursor: auto;

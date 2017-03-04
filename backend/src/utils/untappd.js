@@ -13,7 +13,7 @@ const VALID_VENUE_TYPES = [
 ];
 
 const sendUntappdRequest = async opts => {
-  logger.info(`call ${opts.path} with`, JSON.stringify(opts.query));
+  logger.info(`call ${opts.path} with`, opts.query != null ? JSON.stringify(opts.query) : '{}');
   const res = await https.get({
     hostname: UNTAPPD_API_HOST,
     path: `${UNTAPPD_API_VERSION}/${opts.path}`,

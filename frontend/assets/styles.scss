@@ -17,6 +17,8 @@ html {
 }
 
 body {
+  padding-bottom: 2*$baseline;
+
   overflow-y: scroll;
   font-size: $font-size-medium;
   font-weight: $font-weight-regular;

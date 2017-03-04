@@ -13,7 +13,7 @@ const getAllAreas = {
     description: 'Returns all areas supported by Oispa'
   },
   handler(request, reply) {
-    reply(_.values(config.areas).map(area => ({
+    reply(_.values(config.AREAS).map(area => ({
       id: area.id,
       abbr: area.abbr,
       name: area.name
@@ -28,7 +28,7 @@ const getAreaVenues = {
     description: 'Retrieves all venues for an area',
     validate: {
       params: {
-        id: Joi.any().valid(_.values(config.areas).map(area => area.id))
+        id: Joi.any().valid(_.values(config.AREAS).map(area => area.id))
       }
     }
   },

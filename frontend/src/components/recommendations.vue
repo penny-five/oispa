@@ -22,7 +22,7 @@
 
 <script>
 import _ from 'lodash';
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import Dropdown from './dropdown';
 import VenueItem from './venue-item';
@@ -56,8 +56,11 @@ export default {
     })
   },
   methods: {
+    ...mapActions([
+      'setSelectedCategory'
+    ]),
     onItemSelected(item) {
-      this.$store.dispatch('setSelectedCategory', item != null ? item.id : null);
+      this.setSelectedCategory(item != null ? item.id : null);
     }
   }
 };

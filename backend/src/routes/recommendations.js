@@ -58,7 +58,7 @@ module.exports = {
     description: 'Retrieves beer recommendations for an area, optionally filtered by beer category',
     validate: {
       params: {
-        id: Joi.any().valid(_.values(config.areas).map(area => area.id))
+        id: Joi.any().valid(_.values(config.AREAS).map(area => area.id))
       },
       query: {
         category: Joi.string()

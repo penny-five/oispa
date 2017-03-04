@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import HeaderBar from './header-bar';
 import AreaList from './area-list';
@@ -40,8 +40,11 @@ export default {
     hasFetchedAreas: state => state.areas != null
   }),
   methods: {
+    ...mapActions([
+      'updateSelectedArea'
+    ]),
     onSelectArea(area) {
-      this.$store.dispatch('updateSelectedArea', area);
+      this.updateSelectedArea(area);
     }
   }
 };
