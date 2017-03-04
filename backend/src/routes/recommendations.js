@@ -4,6 +4,7 @@ const moment = require('moment');
 const BezierEasing = require('bezier-easing');
 
 const knex = require('../knex');
+const config = require('../config');
 
 
 const VALID_VENUE_TYPES = [
@@ -52,10 +53,13 @@ const sort = venues => _.sortBy(venues, venue => {
 
 module.exports = {
   method: 'GET',
-  path: '/api/recommendations',
+  path: '/api/areas/{id}/recommendations',
   config: {
-    description: 'Retrieves beer recommendations, optionally filtered by beer category',
+    description: 'Retrieves beer recommendations for an area, optionally filtered by beer category',
     validate: {
+      params: {
+        id: Joi.any().valid(_.values(config.areas).map(area => area.id))
+      },
       query: {
         category: Joi.string()
       }
@@ -63,19 +67,20 @@ module.exports = {
   },
   async handler(request, reply) {
     const results = await knex('checkins')
-      .select('beer_id', 'venue_id')
+      .select('checkins.beer_id', 'checkins.venue_id')
       .count('checkins.id as sightings')
-      .max('checkin_time as latest_sighting')
+      .max('checkins.checkin_time as latest_sighting')
       .leftJoin('beers', 'checkins.beer_id', 'beers.id')
       .leftJoin('venues', 'checkins.venue_id', 'venues.id')
-      .where('beers.avg_rating', '>', 0)
       .whereIn('venues.category', VALID_VENUE_TYPES)
-      .andWhere('checkin_time', '>=', moment().subtract(2, 'weeks'))
-      .groupBy('beer_id', 'venue_id', 'beers.avg_rating')
+      .andWhere('beers.avg_rating', '>', 0)
+      .andWhere('checkins.oispa_area', request.params.id)
+      .andWhere('checkins.checkin_time', '>=', moment().subtract(2, 'weeks'))
+      .groupBy('checkins.beer_id', 'checkins.venue_id', 'beers.avg_rating')
       .orderBy('beers.avg_rating', 'desc')
       .limit(50)
       .modify(query => {
-        if (request.query.category != null) {
+        if (request.query.category != null && request.query.category !== 'all') {
           query.whereIn('beers.beerstyle_id', function() {
             this.select('id').from('beerstyles').where('category', request.query.category);
           });

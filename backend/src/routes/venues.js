@@ -1,18 +1,7 @@
 const moment = require('moment');
+
 const knex = require('../knex');
-const untappd = require('../utils/untappd');
 
-
-const getVenues = {
-  method: 'GET',
-  path: '/api/venues',
-  config: {
-    description: 'Retrieves all venues'
-  },
-  handler(request, reply) {
-    reply(knex.select('id', 'name').from('venues').whereIn('category', untappd.VALID_VENUE_TYPES).orderBy('name'));
-  }
-};
 
 const populateBeer = async checkin => {
   const beer = await knex('beers').where('id', checkin.beer_id).first();
@@ -24,11 +13,11 @@ const populateBeer = async checkin => {
   }, beer);
 };
 
-const getVenueBeers = {
+const getVenueRecommendations = {
   method: 'GET',
-  path: '/api/venues/{id}/beers',
+  path: '/api/venues/{id}/recommendations',
   config: {
-    description: 'Retrieves recommended beers for a venue'
+    description: 'Retrieves beer recommendations for a venue'
   },
   async handler(request, reply) {
     const results = await knex('checkins')
@@ -48,4 +37,4 @@ const getVenueBeers = {
   }
 };
 
-module.exports = [getVenues, getVenueBeers];
+module.exports = [getVenueRecommendations];

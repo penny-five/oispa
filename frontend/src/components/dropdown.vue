@@ -4,6 +4,7 @@
     :loading="!hasItems"
     :disabled="!hasItems"
     :options="items || []"
+    :value="value"
     :placeholder="placeholder"
     :track-by="trackBy"
     :label="label"
@@ -23,7 +24,7 @@ export default {
     MultiSelect
   },
   props: {
-    value: {},
+    value: Object,
     items: Array,
     trackBy: {
       type: String,
@@ -46,9 +47,6 @@ export default {
   watch: {
     selected(selected) {
       this.$emit('input', selected);
-      if (selected == null) {
-        this.$emit('clear');
-      }
     }
   }
 };

@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const knex = require('../knex');
 
 
@@ -7,7 +9,13 @@ module.exports = {
   config: {
     description: 'Retrieves all beer style categories'
   },
-  handler(request, reply) {
-    reply(knex.distinct('category').from('beerstyles').whereNotNull('category').orderBy('category').pluck('category'));
+  async handler(request, reply) {
+    const categories = await knex.distinct('category')
+      .from('beerstyles')
+      .whereNotNull('category')
+      .orderBy('category')
+      .pluck('category');
+
+    reply(['all', ...categories]);
   }
 };

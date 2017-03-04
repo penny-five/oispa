@@ -2,14 +2,16 @@ import { get } from './utils';
 
 export default {
   echo: get('/echo'),
+  areas: {
+    getAll: get('/areas'),
+    getVenues: id => get(`/areas/${id}/venues`),
+    getRecommendations: (id, params) => get(`/areas/${id}/recommendations`, params)()
+  },
   beerStyleCategories: {
     getAll: get('/beerstyles/categories')
   },
-  recommendations: {
-    get: opts => get('/recommendations', opts)()
-  },
   venues: {
     getAll: get('/venues'),
-    getBeers: venueId => get(`/venues/${venueId}/beers`)
+    getRecommendations: id => get(`/venues/${id}/recommendations`)
   }
 };

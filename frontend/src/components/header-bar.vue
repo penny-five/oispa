@@ -1,52 +1,62 @@
 <template>
   <header>
-    <img class="logo" :src="logo"></img>
-    <h1>{{ i18n('app_title' )}}</h1>
+    <div class="wrapper">
+      <img class="logo" src="../../assets/logo.png"></img>
+      <h1>{{ i18n('app_title' )}}</h1>
+      <div class="slot">
+        <slot></slot>
+      </div>
+    </div>
   </header>
 </template>
-
-<script>
-import logo from '../../assets/logo.png';
-
-export default {
-  data: () => ({
-    logo
-  })
-};
-
-</script>
 
 <style lang="scss" scoped>
 @import "assets/constants";
 
 header {
-  background-color: $color-background-light;
-  padding: $baseline;
-
   width: 100%;
 
-  text-align: center;
+  background-color: $color-background-light;
+
+  .wrapper {
+    position: relative;
+
+    margin: auto;
+    padding: $baseline;
+
+    width: 100%;
+    max-width: $content-max-width;
+
+    text-align: center;
+  }
+
+  h1 {
+    display: inline-block;
+    margin: 0;
+
+    vertical-align: top;
+
+    font-size: 2.8rem;
+    font-weight: $font-weight-regular;
+    letter-spacing: 6px;
+    line-height: $logo-height;
+
+    text-transform: uppercase;
+
+    color: $color-text-dark;
+  }
+
+  .logo {
+    display: inline-block;
+    max-height: $logo-height;
+    margin-right: 2*$baseline;
+  }
+
+  .slot {
+    position: absolute;
+    top: 0; right: 0;
+  }
 }
 
-h1 {
-  display: inline-block;
-  margin: 0;
 
-  vertical-align: top;
-
-  font-size: 2.8rem;
-  font-weight: $font-weight-regular;
-  letter-spacing: 6px;
-  line-height: $logo-height;
-
-  text-transform: uppercase;
-
-  color: $color-text-dark;
-}
-
-.logo {
-  display: inline-block;
-  max-height: $logo-height;
-  margin-right: 2*$baseline;
-}
 </style>

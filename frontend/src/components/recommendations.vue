@@ -1,40 +1,59 @@
 <template>
   <div>
     <h2>{{ i18n('recommendations.instructions') }}</h2>
-    <beer-style-picker :categories="beerStyleCategories" v-model="selectedCategory" />
-    <template v-if="selectedCategory != null && recommendations != null">
+    <dropdown
+      :items="items"
+      :value="selectedItem"
+      :placeholder="i18n('recommendations.dropdown_placeholder')"
+      track-by="id"
+      label="name"
+      @input="onItemSelected"/>
+    <template v-if="recommendations != null">
       <span class="separator"></span>
       <recommendations-list :recommendations="recommendations" />
+    </template>
   </div>
 </template>
 
 <script>
-import api from '../api';
-import BeerStylePicker from './beer-style-picker';
+import _ from 'lodash';
+import { mapState } from 'vuex';
+
+import Dropdown from './dropdown';
 import RecommendationsList from './recommendations-list';
+
 
 export default {
   name: 'recommendations',
   components: {
-    BeerStylePicker,
+    Dropdown,
     RecommendationsList
   },
-  data: () => ({
-    beerStyleCategories: [],
-    selectedCategory: null,
-    recommendations: null
-  }),
-  watch: {
-    async selectedCategory() {
-      if (this.selectedCategory != null) {
-        const category = this.selectedCategory.id !== 'all' ? this.selectedCategory.id : null;
-        this.recommendations = null;
-        this.recommendations = await api.recommendations.get({ category });
-      }
-    }
+  computed: {
+    ...mapState({
+      items({ beerStyleCategories }) {
+        if (beerStyleCategories == null) return null;
+
+        return _.chain(beerStyleCategories).map(category => ({
+          id: category,
+          name: this.i18n(`category.${category}`) || category
+        })).sortBy(category => {
+          if (category.id === 'all') return 1;
+          if (category.id === 'exotic') return null;
+          return category.name;
+        }).value();
+      },
+      selectedItem({ selectedCategory }) {
+        if (selectedCategory == null) return null;
+        return this.items.find(item => item.id === selectedCategory);
+      },
+      recommendations: state => state.selectedCategoryRecommendations
+    })
   },
-  async mounted() {
-    this.beerStyleCategories = await api.beerStyleCategories.getAll();
+  methods: {
+    onItemSelected(item) {
+      this.$store.dispatch('setSelectedCategory', item != null ? item.id : null);
+    }
   }
 };
 

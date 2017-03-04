@@ -1,6 +1,11 @@
 const knex = require('../knex');
 const each = require('promise-each');
 
+const isEmpty = async table => {
+  const results = await knex(table).count().first();
+  return parseInt(results.count, 10) === 0;
+};
+
 /* TODO: use options object */
 const upsert = async (tableName, where = [], values, trx) => {
   const rows = await knex(tableName).transacting(trx).where(where);
@@ -19,6 +24,7 @@ const batchUpsert = async batch => {
 };
 
 module.exports = {
+  isEmpty,
   upsert,
   batchUpsert
 };

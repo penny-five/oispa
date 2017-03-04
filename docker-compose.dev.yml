@@ -12,6 +12,7 @@ services:
     volumes:
       - "./backend/index.js:/app/index.js"
       - "./backend/src:/app/src"
+      - "./backend/migrations:/app/migrations"
   database:
     ports:
       - "5432:5432"

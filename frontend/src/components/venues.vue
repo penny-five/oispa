@@ -3,21 +3,24 @@
     <h2>{{ i18n('venues.instructions') }}</h2>
     <dropdown
       :items="venues"
+      :value="selectedVenue"
       :placeholder="i18n('venues.dropdown_placeholder')"
       track-by="id"
       label="name"
-      v-model="selectedVenue"/>
-    <template v-if="selectedVenue != null && recommendedBeers != null">
+      @input="onSelectVenue"/>
+    <template v-if="selectedVenueRecommendations != null">
       <span class="separator"></span>
-      <beers-list :beers="recommendedBeers" />
+      <beers-list :beers="selectedVenueRecommendations" />
     </template>
   </div>
 </template>
 
 <script>
-import api from '../api';
+import { mapState } from 'vuex';
+
 import BeersList from './beers-list';
 import Dropdown from './dropdown';
+
 
 export default {
   name: 'venues',
@@ -25,21 +28,17 @@ export default {
     BeersList,
     Dropdown
   },
-  data: () => ({
-    selectedVenue: null,
-    venues: null,
-    recommendedBeers: null
-  }),
-  watch: {
-    async selectedVenue() {
-      if (this.selectedVenue != null) {
-        this.recommendedBeers = null;
-        this.recommendedBeers = await api.venues.getBeers(this.selectedVenue.id)();
-      }
-    }
+  computed: {
+    ...mapState({
+      venues: state => state.venues,
+      selectedVenue: state => state.selectedVenue,
+      selectedVenueRecommendations: state => state.selectedVenueRecommendations
+    })
   },
-  async mounted() {
-    this.venues = await api.venues.getAll();
+  methods: {
+    onSelectVenue(venue) {
+      this.$store.dispatch('setSelectedVenue', venue);
+    }
   }
 };
 

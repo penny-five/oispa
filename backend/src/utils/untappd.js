@@ -4,11 +4,6 @@ const logger = require('./logger').create('untappd');
 const UNTAPPD_API_HOST = 'api.untappd.com';
 const UNTAPPD_API_VERSION = 'v4';
 
-/* Coordinates for Hämeensilta, Tampere, Finland */
-const THE_PUB_LAT = 61.497993;
-const THE_PUB_LNG = 23.763627;
-/* Fetch for most parts of Tampere, including Hervanta. */
-const THE_PUB_RADIUS = 12;
 const THE_PUB_RADIUS_FORMAT = 'km';
 
 const VALID_VENUE_TYPES = [
@@ -51,9 +46,9 @@ const getCheckins = async (opts = {}) => {
       max_id: opts.max,
       min_id: opts.min,
       limit: opts.limit,
-      lat: THE_PUB_LAT,
-      lng: THE_PUB_LNG,
-      radius: THE_PUB_RADIUS,
+      lat: opts.area.coords.lat,
+      lng: opts.area.coords.lng,
+      radius: opts.area.coords.radius,
       dist_pref: THE_PUB_RADIUS_FORMAT
     }
   });

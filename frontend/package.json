@@ -25,6 +25,7 @@
     "axios": "0.15.3",
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
+    "babel-plugin-transform-object-rest-spread": "6.23.0",
     "babel-preset-babili": "0.0.11",
     "babel-preset-es2017": "6.22.0",
     "babili-webpack-plugin": "0.0.10",
@@ -50,6 +51,7 @@
     "vue-multiselect": "2.0.0-beta.13",
     "vue-router": "2.3.0",
     "vue-template-compiler": "2.1.10",
+    "vuex": "2.2.1",
     "webpack": "2.2.1",
     "webpack-merge": "2.6.1"
   },
