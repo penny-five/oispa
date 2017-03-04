@@ -1,11 +1,9 @@
-FROM node:7.5.0-alpine
-
-RUN npm install -g yarn@0.21.2
+FROM node:7.7.1-alpine
 
 WORKDIR /app
 
-ADD package.json .
-ADD yarn.lock .
+COPY package.json .
+COPY yarn.lock .
 
 RUN yarn install --pure-lockfile
 
