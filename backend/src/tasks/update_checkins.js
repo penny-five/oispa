@@ -29,7 +29,7 @@ const toBeer = item => ({
   beerstyle_id: item.beer.beer_style_id
 });
 
-const toVenue = item => ({
+const toVenue = item => (_.isPlainObject(item.venue) ? ({
   id: item.venue.venue_id,
   name: item.venue.venue_name,
   address: item.venue.location.venue_address || null,
@@ -37,7 +37,7 @@ const toVenue = item => ({
   category: item.venue.primary_category,
   lat: item.venue.location.lat,
   lng: item.venue.location.lng
-});
+}) : null);
 
 const fetchCheckins = async (area, min, max) => {
   let items = await untappd.getCheckins({
@@ -57,7 +57,7 @@ const fetchCheckins = async (area, min, max) => {
   }
 
   const beers = _.chain(items).map(toBeer).uniqBy('id').value();
-  const venues = _.chain(items).map(toVenue).uniqBy('id').value();
+  const venues = _.chain(items).map(toVenue).compact().uniqBy('id').value();
   const checkins = items.map(_.partial(toCheckin, area));
 
   return {
