@@ -21,6 +21,7 @@ const toCheckin = (area, item) => ({
 const toBeer = item => ({
   id: item.beer.bid,
   name: item.beer.beer_name,
+  slug: item.beer.beer_slug,
   description: item.beer.beer_description,
   brewery: item.brewery.brewery_name,
   country: item.brewery.country_name,
