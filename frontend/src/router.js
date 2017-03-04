@@ -9,12 +9,16 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/recommendations',
+    path: '/',
+    redirect: '/kaljat'
+  },
+  {
+    path: '/kaljat',
     alias: '/',
     name: 'recommendations',
     component: Recommendations
   }, {
-    path: '/venues',
+    path: '/ravintelit',
     name: 'venues',
     component: Venues
   }
@@ -23,7 +27,5 @@ const routes = [
 const router = new VueRouter({
   routes
 });
-
-router.replace('/recommendations');
 
 export default router;

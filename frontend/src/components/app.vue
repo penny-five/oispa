@@ -9,8 +9,8 @@
     </header-bar>
     <template v-if="hasFetchedAreas">
       <nav>
-        <nav-button to="recommendations" icon="beer" label="Kaljat"/>
-        <nav-button to="venues" icon="cutlery" label="Ravintelit"/>
+        <nav-button to="kaljat" icon="beer" label="Kaljat"/>
+        <nav-button to="ravintelit" icon="cutlery" label="Ravintelit"/>
       </nav>
       <div class="content-wrapper">
         <router-view></router-view>
