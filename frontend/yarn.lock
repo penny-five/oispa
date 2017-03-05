@@ -2303,6 +2303,10 @@ in-publish@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/in-publish/-/in-publish-2.0.0.tgz#e20ff5e3a2afc2690320b6dc552682a9c7fadf51"
 
+in-viewport@3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/in-viewport/-/in-viewport-3.4.2.tgz#400b1c759b4b305ef19249429b7f202cdc6b7427"
+
 indent-string@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-2.1.0.tgz#8e2d48348742121b4a8218b7a137e9a52049dc80"

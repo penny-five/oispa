@@ -5,6 +5,7 @@
 <script>
 import ProgressBar from 'progressbar.js';
 import BezierEasing from 'bezier-easing';
+import inViewport from 'in-viewport';
 
 
 const EASING_FN = BezierEasing(0.75, 0.00, 0.76, 1.00);
@@ -49,12 +50,21 @@ export default {
         }
       }
     });
-    this.bar.animate(this.scaledRating);
+    this.updateRating();
   },
   watch: {
     rating() {
-      this.bar.set(0);
-      this.bar.animate(this.scaledRating);
+      this.updateRating();
+    }
+  },
+  methods: {
+    updateRating() {
+      if (inViewport(this.$el)) {
+        this.bar.set(0);
+        this.bar.animate(this.scaledRating);
+      } else {
+        this.bar.set(this.scaledRating);
+      }
     }
   }
 };
