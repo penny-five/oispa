@@ -3,7 +3,14 @@
     <span class="beer__last-seen">{{ lastSeen }}</span>
     <rating-bar class="beer__rating" :rating="beer.avg_rating"/>
     <div class="beer__info">
-      <span class="beer__name">{{ beer.name }}</span>
+      <span class="beer__name">
+        <a :href="beer.untappd_url" target="_blank" v-if="beer.untappd_url != null">
+          {{ beer.name }}
+        </a>
+        <template v-else>
+          {{ beer.name }}
+        </template>
+      <span class="beer__name" v-else>{{ beer.name }}</span>
       <span class="beer__brewery">{{ beer.brewery }}</span>
       <span class="beer__style"><span class="beer__abv">{{ beer.abv }} %</span>{{ beer.beerstyle_name }}</span>
     </div>

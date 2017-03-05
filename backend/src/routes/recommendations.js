@@ -21,7 +21,8 @@ const populateBeer = async checkin => {
   return Object.assign({
     sightings: checkin.sightings,
     latest_sighting: checkin.latest_sighting,
-    beerstyle_name: beerstyle.name
+    beerstyle_name: beerstyle.name,
+    untappd_url: beer.slug != null ? `https://untappd.com/b/${beer.slug}/${beer.id}` : null
   }, beer);
 };
 
