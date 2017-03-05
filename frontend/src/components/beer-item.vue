@@ -21,6 +21,7 @@
 import moment from 'moment';
 
 import RatingBar from './rating-bar';
+import { formatPastDate } from '../utils/date';
 
 
 export default {
@@ -35,7 +36,7 @@ export default {
   },
   computed: {
     lastSeen() {
-      return moment(this.beer.latest_sighting).fromNow();
+      return formatPastDate(this.i18n, moment(this.beer.latest_sighting));
     }
   }
 };

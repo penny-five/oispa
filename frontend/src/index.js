@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import moment from 'moment';
 
-import locale from './i18n/finnish.json';
+import mixins from './mixins';
 import router from './router';
 import store from './store';
 import App from './components/app';
@@ -9,13 +9,7 @@ import App from './components/app';
 
 moment.locale('fi');
 
-Vue.mixin({
-  methods: {
-    i18n: key => locale[key] || `{ ${key} }`
-  }
-});
-
-store.dispatch('init');
+mixins.forEach(mixin => Vue.mixin(mixin));
 
 export default new Vue({
   el: '#root',
@@ -23,3 +17,5 @@ export default new Vue({
   store,
   render: h => h(App)
 });
+
+store.dispatch('init');

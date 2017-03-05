@@ -23,5 +23,9 @@
   "category.sour": "Hapanta",
   "category.stout": "Stoutia",
   "category.strong_ale": "Strong Alea",
-  "category.wheat": "Vehnää"
+  "category.wheat": "Vehnää",
+  "date.minutes_ago": "${ minutes }m sitten",
+  "date.hours_ago": "${ hours }h sitten",
+  "date.yesterday": "eilen",
+  "date.days_ago": "${ days }pv sitten"
 }
