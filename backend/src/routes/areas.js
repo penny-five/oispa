@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const Joi = require('joi');
+const moment = require('moment');
 
 const config = require('../config');
 const untappd = require('../utils/untappd');
@@ -36,8 +37,11 @@ const getAreaVenues = {
     const venues = await knex('checkins')
       .distinct('venues.id', 'venues.name', 'venues.address', 'venues.city')
       .leftJoin('venues', 'checkins.venue_id', 'venues.id')
-      .where('checkins.oispa_area', request.params.id)
+      .leftJoin('beers', 'checkins.beer_id', 'beers.id')
       .whereIn('venues.category', untappd.VALID_VENUE_TYPES)
+      .andWhere('beers.avg_rating', '>', 0)
+      .andWhere('checkins.checkin_time', '>=', moment().subtract(2, 'weeks'))
+      .andWhere('checkins.oispa_area', request.params.id)
       .orderBy('venues.name');
 
     reply(venues);
