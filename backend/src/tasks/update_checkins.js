@@ -5,6 +5,7 @@ const untappd = require('../utils/untappd');
 const knex = require('../knex');
 const config = require('../config');
 const knexUtils = require('../utils/knex');
+const urlUtils = require('../utils/url');
 const updateBeerStyles = require('./update_beerstyles');
 
 
@@ -26,7 +27,7 @@ const toBeer = ({ beer, brewery }) => ({
   brewery: brewery.brewery_name,
   country: brewery.country_name,
   abv: beer.beer_abv,
-  label_url: beer.beer_label,
+  label_url: urlUtils.sanitizeExternalUrl(beer.beer_label),
   beerstyle_id: beer.beer_style_id
 });
 
@@ -35,7 +36,7 @@ const toVenue = ({ venue }) => (_.isPlainObject(venue) ? ({
   name: venue.venue_name,
   address: venue.location.venue_address || null,
   city: venue.location.venue_city || null,
-  website_url: _.isEmpty(venue.contact.venue_url) ? null : venue.contact.venue_url,
+  website_url: urlUtils.sanitizeExternalUrl(venue.contact.venue_url),
   category: venue.primary_category,
   lat: venue.location.lat,
   lng: venue.location.lng
