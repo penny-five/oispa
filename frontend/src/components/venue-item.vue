@@ -2,7 +2,11 @@
   <li class="venue clearfix">
     <span class="venue__beer-last-seen">{{ i18n('last-seen') }}</span>
     <span class="venue__info truncate">
-      <span class="venue__name">{{ venue.name }}</span>
+      <span class="venue__name">
+        <link-wrapper :href="venue.website_url" target="blank">
+          {{ venue.name }}
+        </link-wrapper>
+      </span>
       <a :href="googleMapsLink" target="_blank" v-if="hasAddress">
         <span class="venue__address">{{ venue.address }}</span>
       </a>
@@ -17,11 +21,13 @@
 import _ from 'lodash';
 
 import BeerItem from './beer-item';
+import LinkWrapper from './link-wrapper';
 
 
 export default {
   components: {
-    BeerItem
+    BeerItem,
+    LinkWrapper
   },
   props: {
     venue: {

@@ -4,13 +4,10 @@
     <rating-bar class="beer__rating" :rating="beer.avg_rating"/>
     <div class="beer__info">
       <span class="beer__name">
-        <a :href="beer.untappd_url" target="_blank" v-if="beer.untappd_url != null">
+        <link-wrapper :href="beer.untappd_url" target="_blank">
           {{ beer.name }}
-        </a>
-        <template v-else>
-          {{ beer.name }}
-        </template>
-      <span class="beer__name" v-else>{{ beer.name }}</span>
+        </link-wrapper>
+      </span>
       <span class="beer__brewery">{{ beer.brewery }}</span>
       <span class="beer__style"><span class="beer__abv">{{ beer.abv }} %</span>{{ beer.beerstyle_name }}</span>
     </div>
@@ -21,12 +18,14 @@
 import moment from 'moment';
 
 import RatingBar from './rating-bar';
+import LinkWrapper from './link-wrapper';
 import { formatPastDate } from '../utils/date';
 
 
 export default {
   components: {
-    RatingBar
+    RatingBar,
+    LinkWrapper
   },
   props: {
     beer: {

@@ -18,26 +18,27 @@ const toCheckin = (area, item) => ({
   oispa_area: area.id
 });
 
-const toBeer = item => ({
-  id: item.beer.bid,
-  name: item.beer.beer_name,
-  slug: item.beer.beer_slug,
-  description: item.beer.beer_description,
-  brewery: item.brewery.brewery_name,
-  country: item.brewery.country_name,
-  abv: item.beer.beer_abv,
-  label_url: item.beer.beer_label,
-  beerstyle_id: item.beer.beer_style_id
+const toBeer = ({ beer, brewery }) => ({
+  id: beer.bid,
+  name: beer.beer_name,
+  slug: beer.beer_slug,
+  description: beer.beer_description,
+  brewery: brewery.brewery_name,
+  country: brewery.country_name,
+  abv: beer.beer_abv,
+  label_url: beer.beer_label,
+  beerstyle_id: beer.beer_style_id
 });
 
-const toVenue = item => (_.isPlainObject(item.venue) ? ({
-  id: item.venue.venue_id,
-  name: item.venue.venue_name,
-  address: item.venue.location.venue_address || null,
-  city: item.venue.location.venue_city || null,
-  category: item.venue.primary_category,
-  lat: item.venue.location.lat,
-  lng: item.venue.location.lng
+const toVenue = ({ venue }) => (_.isPlainObject(venue) ? ({
+  id: venue.venue_id,
+  name: venue.venue_name,
+  address: venue.location.venue_address || null,
+  city: venue.location.venue_city || null,
+  website_url: _.isEmpty(venue.contact.venue_url) ? null : venue.contact.venue_url,
+  category: venue.primary_category,
+  lat: venue.location.lat,
+  lng: venue.location.lng
 }) : null);
 
 const fetchCheckins = async (area, min, max) => {
