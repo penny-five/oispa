@@ -4,17 +4,17 @@
     :loading="!hasItems"
     :disabled="!hasItems"
     :options="items || []"
-    :value="value"
+    :value="value || undefined"
     :placeholder="placeholder"
     :track-by="trackBy"
     :label="label"
     selectLabel=""
     selectedLabel=""
     deselectLabel=""
-    v-model="selected">
+    @input="onInput">
       <template slot="noResult">
         <span>{{ i18n('results_not_found') }}</span>
-      </template
+      </template>
   </multi-select>
 </template>
 
@@ -39,17 +39,14 @@ export default {
     },
     placeholder: String
   },
-  data: () => ({
-    selected: null
-  }),
   computed: {
     hasItems() {
       return this.items != null && this.items.length > 0;
     }
   },
-  watch: {
-    selected(selected) {
-      this.$emit('input', selected);
+  methods: {
+    onInput(item) {
+      this.$emit('input', item);
     }
   }
 };
@@ -60,6 +57,9 @@ export default {
 @import "assets/constants";
 
 .oispa-multiselect {
+  &.multiselect--disabled .multiselect__select {
+    background: none;
+  }
   .multiselect__input, .multiselect__single, .multiselect__option {
     font-size: $font-size-large;
     font-weight: $font-weight-semibold;

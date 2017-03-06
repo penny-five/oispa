@@ -1,7 +1,7 @@
 <template>
   <ul class="area-list">
     <li v-for="area in areas" :class="itemClasses(area)">
-      <span @click="onSelect(area)">{{ area.abbr }}</li>
+      <span @click="onSelect(area)">{{ area.abbr }}</span>
     </li>
   </ul>
 </template>

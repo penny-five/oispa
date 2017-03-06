@@ -12,7 +12,7 @@
       </a>
     </span>
     <ul>
-      <beer-item v-for="beer in beers" :beer="beer"/>
+      <beer-item v-for="beer in beers" :key="beer.id" :beer="beer"/>
     </ul>
   </li>
 </template>

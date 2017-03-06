@@ -11,7 +11,9 @@
     <template v-if="recommendations != null">
       <span class="separator"></span>
       <ul v-if="recommendations.length > 0">
-        <venue-item v-for="recommendation in recommendations"
+        <venue-item
+          v-for="recommendation in recommendations"
+          :key="recommendation.venue.id"
           :venue="recommendation.venue"
           :beers="recommendation.beers" />
       </ul>

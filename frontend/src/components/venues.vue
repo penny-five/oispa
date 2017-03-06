@@ -13,7 +13,7 @@
       <div>
         <ul v-if="selectedRecommendations.length > 0">
           <span class="venues__beer-last-seen">{{ i18n('last-seen') }}</span>
-          <beer-item v-for="beer in selectedRecommendations" :beer="beer" />
+          <beer-item v-for="beer in selectedRecommendations" :key="beer.id" :beer="beer" />
         </ul>
         <h2 v-else>{{ i18n('results_not_found') }}</h2>
       </div>
