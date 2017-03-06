@@ -12,6 +12,9 @@
     selectedLabel=""
     deselectLabel=""
     v-model="selected">
+      <template slot="noResult">
+        <span>{{ i18n('results_not_found') }}</span>
+      </template
   </multi-select>
 </template>
 
