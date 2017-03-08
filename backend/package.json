@@ -1,6 +1,6 @@
 {
   "name": "oispa-backend",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Backend for Oispa",
   "private": true,
   "main": "index.js",
