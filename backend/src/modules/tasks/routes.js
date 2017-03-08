@@ -1,4 +1,4 @@
-const tasks = require('../tasks');
+const tasks = require('./');
 
 
 const updateBeerRatings = {

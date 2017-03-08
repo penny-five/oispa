@@ -10,12 +10,6 @@ const UNTAPPD_API_VERSION = 'v4';
 
 const THE_PUB_RADIUS_FORMAT = 'km';
 
-const VALID_VENUE_TYPES = [
-  'Arts & Entertainment',
-  'Nightlife Spot',
-  'Food'
-];
-
 const logRequest = req => logger.info(url.format({
   hostname: `${req.hostname}/${req.path}`,
   query: _.omit(req.query, 'client_id', 'client_secret')
@@ -75,6 +69,5 @@ const getCheckins = async (opts = {}) => {
 
 module.exports = {
   getBeer,
-  getCheckins,
-  VALID_VENUE_TYPES
+  getCheckins
 };

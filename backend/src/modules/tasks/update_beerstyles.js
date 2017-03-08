@@ -1,9 +1,9 @@
 const _ = require('lodash');
 const scrapeIt = require('scrape-it');
 
-const knex = require('../knex');
-const upsert = require('../utils/knex').upsert;
-const findCategoryForBeerStyle = require('../utils/beerstyle_categories').findCategoryForBeerStyle;
+const knex = require('../../knex');
+const upsert = require('../../utils/knex').upsert;
+const findCategoryForBeerStyle = require('../../config').findCategoryForBeerStyle;
 
 
 const SCRAPE_URL = 'https://untappd.com/beer/top_rated';

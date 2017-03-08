@@ -1,6 +1,7 @@
 const CronJob = require('cron').CronJob;
 
-const tasks = require('./tasks');
+const tasks = require('./modules/tasks');
+
 
 const jobs = [
   /* runs at every 30th minute */

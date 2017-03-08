@@ -52,7 +52,7 @@ const createManifest = opts => ({
         register: 'hapi-router',
         options: {
           cwd: __dirname,
-          routes: 'routes/**/*.js'
+          routes: 'modules/**/routes.js'
         }
       }
     }

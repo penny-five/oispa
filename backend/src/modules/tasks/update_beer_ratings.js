@@ -1,8 +1,8 @@
 const moment = require('moment');
 const each = require('promise-each');
 
-const knex = require('../knex');
-const untappd = require('../utils/untappd');
+const knex = require('../../knex');
+const untappd = require('../../utils/untappd');
 
 
 const fetchRating = async beer => {

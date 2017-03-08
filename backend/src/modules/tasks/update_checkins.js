@@ -1,11 +1,11 @@
 const _ = require('lodash');
 const each = require('promise-each');
 
-const untappd = require('../utils/untappd');
-const knex = require('../knex');
-const config = require('../config');
-const knexUtils = require('../utils/knex');
-const urlUtils = require('../utils/url');
+const untappd = require('../../utils/untappd');
+const knex = require('../../knex');
+const config = require('../../config');
+const knexUtils = require('../../utils/knex');
+const urlUtils = require('../../utils/url');
 const updateBeerStyles = require('./update_beerstyles');
 
 

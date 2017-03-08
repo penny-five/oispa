@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-const logger = require('../utils/logger').create('tasks');
+const logger = require('../../utils/logger').create('tasks');
 
 
 /* eslint-disable global-require */

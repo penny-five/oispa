@@ -1,6 +1,7 @@
 const knex = require('../knex');
 const each = require('promise-each');
 
+
 const isEmpty = async table => {
   const results = await knex(table).count().first();
   return parseInt(results.count, 10) === 0;
