@@ -4,6 +4,8 @@ const tasks = require('./modules/tasks');
 
 
 const jobs = [
+  /* runs once a day */
+  new CronJob('0 0 * * *', tasks.updateBeerstyles),
   /* runs at every 30th minute */
   new CronJob('*/30 * * * *', tasks.updateBeerRatings),
   /* runs at every 15th minute */
