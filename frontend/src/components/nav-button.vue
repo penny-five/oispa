@@ -1,9 +1,7 @@
 <template>
-  <div class="nav-button">
-    <router-link :to="to">
-      <i :class="`fa fa-${icon}`" aria-hidden="true"></i>
-      <span class="nav-button__label">{{ label }}</span>
-    </router-link>
+  <div :class="classes" @click="onClick">
+    <i :class="`fa fa-${icon}`" aria-hidden="true"></i>
+    <span class="nav-button__label">{{ label }}</span>
   </div>
 </template>
 
@@ -19,9 +17,24 @@ export default {
       type: String,
       required: true
     },
-    to: {
-      type: String,
-      required: true
+    active: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    classes() {
+      return {
+        'nav-button': true,
+        'nav-button--active': this.active
+      };
+    }
+  },
+  methods: {
+    onClick() {
+      if (!this.active) {
+        this.$emit('click');
+      }
     }
   }
 };
@@ -39,7 +52,8 @@ export default {
 
   text-align: center;
 
-  a:hover {
+  &:hover {
+    cursor: pointer;
     text-decoration: none;
     .nav-button__label {
       text-decoration: underline;
@@ -53,7 +67,13 @@ export default {
     color: $color-inactive;
   }
 
-  .router-link-active {
+  &.nav-button--active {
+    &:hover {
+      cursor: default;
+      .nav-button__label {
+        text-decoration: none;
+      }
+    }
     .nav-button__label {
       font-size: $font-size-medium;
       font-weight: $font-weight-semibold;

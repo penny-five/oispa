@@ -7,46 +7,60 @@
       :placeholder="i18n('venues.dropdown_placeholder')"
       track-by="id"
       label="name"
-      @input="onSelectVenue"/>
-    <template v-if="selectedRecommendations != null">
-      <span class="separator"></span>
-      <div>
-        <ul v-if="selectedRecommendations.length > 0">
-          <span class="venues__beer-last-seen">{{ i18n('last-seen') }}</span>
-          <beer-item v-for="beer in selectedRecommendations" :key="beer.id" :beer="beer" />
-        </ul>
-        <h2 v-else>{{ i18n('results_not_found') }}</h2>
-      </div>
-    </template>
+      @input="onVenueSelected"/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 import Dropdown from './dropdown';
-import BeerItem from './beer-item';
 
 
 export default {
   name: 'venues',
   components: {
-    Dropdown,
-    BeerItem
+    Dropdown
   },
   computed: {
-    ...mapState({
-      venues: state => state.venues,
-      selected: state => state.selectedVenue,
-      selectedRecommendations: state => state.selectedVenueRecommendations
-    })
+    ...mapGetters([
+      'venues'
+    ]),
+    venueId() {
+      return parseInt(this.$route.params.venue, 10);
+    },
+    selected() {
+      if (this.venues == null) return null;
+      return this.venues.find(venue => venue.id === this.venueId);
+    }
   },
   methods: {
     ...mapActions([
+      'fetchVenues',
       'setSelectedVenue'
     ]),
-    onSelectVenue(venue) {
-      this.setSelectedVenue(venue);
+    onVenueSelected(venue) {
+      if (venue == null) {
+        this.$router.push({
+          name: 'venues'
+        });
+      } else {
+        this.$router.push({
+          name: 'venue',
+          params: {
+            venue: venue.id
+          }
+        });
+      }
+    }
+  },
+  created() {
+    this.fetchVenues();
+  },
+  watch: {
+    $route() {
+      this.fetchVenues();
     }
   }
 };

@@ -4,7 +4,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 
 module.exports = {
-  devtool: '#eval-source-map',
+  devtool: '#source-map',
   devServer: {
     contentBase: path.resolve(__dirname, '..', 'dist'),
     historyApiFallback: true,

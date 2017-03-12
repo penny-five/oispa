@@ -7,88 +7,81 @@ import api from './api';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+  strict: process.env.NODE_ENV !== 'production',
   state: {
     areas: null,
-    selectedArea: null,
-    beerStyleCategories: null,
-    selectedCategory: null,
-    selectedCategoryRecommendations: null,
+    categories: null,
     venues: null,
-    selectedVenue: null,
-    selectedVenueRecommendations: null
+    categoryRecommendations: {},
+    venueRecommendations: {}
+  },
+  getters: {
+    currentArea: state => state.route.params.area,
+    venues: state => state.venues,
+    categoryRecommendations: state => category => {
+      const id = typeof category === 'object' ? category.id : category;
+      return state.categoryRecommendations[id];
+    },
+    venueRecommendations: state => venue => {
+      const id = typeof venue === 'object' ? venue.id : venue;
+      return state.venueRecommendations[id];
+    }
   },
   mutations: {
-    setBeerStyleCategories(state, categories) {
-      state.beerStyleCategories = categories;
+    clear(state) {
+      state.venues = null;
+      state.categoryRecommendations = {};
+      state.venueRecommendations = {};
+    },
+    setCategories(state, categories) {
+      state.categories = categories;
     },
     setAreas(state, areas) {
       state.areas = areas;
     },
-    setSelectedArea(state, area) {
-      state.selectedArea = area;
-      state.venues = null;
-      state.selectedVenue = null;
-      state.selectedVenueRecommendations = null;
-      state.selectedCategory = null;
-      state.selectedCategoryRecommendations = null;
-    },
-    setSelectedCategory(state, category) {
-      state.selectedCategory = category;
-      state.selectedCategoryRecommendations = null;
-    },
-    setSelectedCagoryRecommendations(state, recommendations) {
-      state.selectedCategoryRecommendations = recommendations;
-    },
     setVenues(state, venues) {
       state.venues = venues;
-      state.selectedVenue = null;
-      state.selectedVenueRecommendations = null;
     },
-    setSelectedVenue(state, venue) {
-      state.selectedVenue = venue;
-      state.selectedVenueRecommendations = null;
+    addCategoryRecommendations(state, { id, recommendations }) {
+      Vue.set(state.categoryRecommendations, id, recommendations);
     },
-    setSelectedVenueRecommendations(state, recommendations) {
-      state.selectedVenueRecommendations = recommendations;
+    addVenueRecommendations(state, { id, recommendations }) {
+      Vue.set(state.venueRecommendations, id, recommendations);
     }
   },
   actions: {
-    init({ dispatch }) {
-      dispatch('updateAreas');
-      dispatch('updateBeerStyleCategories');
-    },
-    updateSelectedArea({ commit, dispatch }, area) {
-      commit('setSelectedArea', area);
-      dispatch('updateVenues');
-    },
-    async updateAreas({ commit, dispatch }) {
-      const areas = await api.areas.getAll();
-      commit('setAreas', areas);
-      dispatch('updateSelectedArea', areas[0]);
-    },
-    async updateBeerStyleCategories({ commit }) {
-      const categories = await api.beerStyleCategories.getAll();
-      commit('setBeerStyleCategories', categories);
-    },
-    async setSelectedCategory({ state, commit }, category) {
-      commit('setSelectedCategory', category);
-      if (category != null) {
-        const recommendations = await api.areas.getRecommendations(state.selectedArea.id, {
-          category
-        });
-        commit('setSelectedCagoryRecommendations', recommendations);
+    async fetchAreas({ state, commit }) {
+      if (state.areas == null) {
+        const areas = await api.areas.getAll();
+        commit('setAreas', areas);
       }
     },
-    async updateVenues({ state, commit }) {
-      commit('setVenues', null);
-      const venues = await api.areas.getVenues(state.selectedArea.id);
-      commit('setVenues', venues);
+    async fetchCategories({ state, commit }) {
+      if (state.categories == null) {
+        const categories = await api.beerStyleCategories.getAll();
+        commit('setCategories', categories);
+      }
     },
-    async setSelectedVenue({ state, commit }, venue) {
-      commit('setSelectedVenue', venue);
-      if (venue != null) {
-        const recommendations = await api.venues.getRecommendations(venue.id);
-        commit('setSelectedVenueRecommendations', recommendations);
+    async fetchVenues({ state, getters, commit }) {
+      if (state.venues == null) {
+        const venues = await api.areas.getVenues(getters.currentArea);
+        commit('setVenues', venues);
+      }
+    },
+    async fetchCategoryRecommendations({ state, getters, commit }, category) {
+      const id = typeof category === 'object' ? category.id : category;
+      if (id != null && getters.categoryRecommendations(id) == null) {
+        const recommendations = await api.areas.getRecommendations(getters.currentArea, {
+          category: id
+        });
+        commit('addCategoryRecommendations', { id, recommendations });
+      }
+    },
+    async fetchVenueRecommendations({ state, getters, commit }, venue) {
+      const id = typeof venue === 'object' ? venue.id : venue;
+      if (id != null && getters.venueRecommendations(id) == null) {
+        const recommendations = await api.venues.getRecommendations(id);
+        commit('addVenueRecommendations', { id, recommendations });
       }
     }
   }

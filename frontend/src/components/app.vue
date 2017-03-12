@@ -9,8 +9,8 @@
     </header-bar>
     <template v-if="hasFetchedAreas">
       <nav>
-        <nav-button to="kaljat" icon="beer" label="Kaljat"/>
-        <nav-button to="ravintelit" icon="cutlery" label="Ravintelit"/>
+        <nav-button icon="beer" label="Kaljat" :active="isRecommendations" @click="onSelectRecommendations" />
+        <nav-button icon="cutlery" label="Ravintelit" :active="isVenues" @click="onSelectVenues" />
       </nav>
       <div class="content-wrapper">
         <router-view></router-view>
@@ -36,15 +36,32 @@ export default {
   },
   computed: mapState({
     areas: state => state.areas,
-    selectedArea: state => state.selectedArea,
-    hasFetchedAreas: state => state.areas != null
+    selectedArea: state => state.route.params.area,
+    hasFetchedAreas: state => state.areas != null,
+    isVenues: state => state.route.meta.type === 'venues',
+    isRecommendations: state => state.route.meta.type === 'recommendations'
   }),
   methods: {
     ...mapActions([
       'updateSelectedArea'
     ]),
     onSelectArea(area) {
-      this.updateSelectedArea(area);
+      this.$router.push({
+        name: 'recommendations',
+        params: {
+          area: area.id
+        }
+      });
+    },
+    onSelectRecommendations() {
+      this.$router.push({
+        name: 'recommendations'
+      });
+    },
+    onSelectVenues() {
+      this.$router.push({
+        name: 'venues'
+      });
     }
   }
 };

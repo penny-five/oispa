@@ -8,17 +8,7 @@
       track-by="id"
       label="name"
       @input="onItemSelected"/>
-    <template v-if="recommendations != null">
-      <span class="separator"></span>
-      <ul v-if="recommendations.length > 0">
-        <venue-item
-          v-for="recommendation in recommendations"
-          :key="recommendation.venue.id"
-          :venue="recommendation.venue"
-          :beers="recommendation.beers" />
-      </ul>
-      <h2 v-else>{{ i18n('results_not_found') }}</h2>
-    </template>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -27,42 +17,60 @@ import _ from 'lodash';
 import { mapActions, mapState } from 'vuex';
 
 import Dropdown from './dropdown';
-import VenueItem from './venue-item';
 
+
+const sort = category => {
+  if (category.id === 'all') return 1;
+  if (category.id === 'exotic') return null;
+  return category.name;
+};
 
 export default {
   name: 'recommendations',
   components: {
-    Dropdown,
-    VenueItem
+    Dropdown
   },
   computed: {
     ...mapState({
-      categories({ beerStyleCategories }) {
-        if (beerStyleCategories == null) return null;
+      categories({ categories }) {
+        if (categories == null) return null;
 
-        return _.chain(beerStyleCategories).map(category => ({
+        return _.chain(categories).map(category => ({
           id: category,
           name: this.i18n(`category.${category}`) || category
-        })).sortBy(category => {
-          if (category.id === 'all') return 1;
-          if (category.id === 'exotic') return null;
-          return category.name;
-        }).value();
+        })).sortBy(sort).value();
       },
-      selected({ selectedCategory }) {
-        if (selectedCategory == null) return null;
-        return this.categories.find(item => item.id === selectedCategory);
-      },
-      recommendations: state => state.selectedCategoryRecommendations
+      selected({ categories }) {
+        if (categories == null) return null;
+        return this.categories.find(item => item.id === this.$route.params.category);
+      }
     })
   },
   methods: {
     ...mapActions([
-      'setSelectedCategory'
+      'fetchCategories'
     ]),
     onItemSelected(item) {
-      this.setSelectedCategory(item != null ? item.id : null);
+      if (item == null) {
+        this.$router.push({
+          name: 'recommendations'
+        });
+      } else {
+        this.$router.push({
+          name: 'categories',
+          params: {
+            category: item != null ? item.id : null
+          }
+        });
+      }
+    }
+  },
+  created() {
+    this.fetchCategories();
+  },
+  watch: {
+    $route() {
+      this.fetchCategories();
     }
   }
 };

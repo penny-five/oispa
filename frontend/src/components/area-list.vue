@@ -15,7 +15,7 @@ export default {
       required: true
     },
     selectedArea: {
-      type: Object,
+      type: String,
       required: true
     }
   },
@@ -23,11 +23,11 @@ export default {
     itemClasses(area) {
       return {
         'area-item': true,
-        'area-item--selected': this.selectedArea.id === area.id
+        'area-item--selected': this.selectedArea === area.id
       };
     },
     onSelect(area) {
-      if (area !== this.selectedArea) this.$emit('select', area);
+      if (area.id !== this.selectedArea) this.$emit('select', area);
     }
   }
 };

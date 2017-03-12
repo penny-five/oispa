@@ -26,7 +26,7 @@ export default {
     }
   },
   mounted() {
-    const el = this;
+    const vm = this;
     this.bar = new ProgressBar.Circle(this.$el, {
       trailColor: '#e8e8e8',
       strokeWidth: 6,
@@ -42,7 +42,7 @@ export default {
       step(state, circle) {
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
-        const value = ((circle.value() / el.scaledRating) * el.rating).toFixed(2);
+        const value = ((circle.value() / vm.scaledRating) * vm.rating).toFixed(2);
         if (value === 0) {
           circle.setText('');
         } else {
