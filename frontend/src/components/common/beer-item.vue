@@ -19,7 +19,7 @@ import moment from 'moment';
 
 import RatingBar from './rating-bar';
 import LinkWrapper from './link-wrapper';
-import { formatPastDate } from '../utils/date';
+import { formatPastDate } from '../../utils/date';
 
 
 export default {

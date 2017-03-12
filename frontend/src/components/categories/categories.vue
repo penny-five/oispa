@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2>{{ i18n('recommendations.instructions') }}</h2>
+    <h2>{{ i18n('categories.instructions') }}</h2>
     <dropdown
       :items="categories"
       :value="selected"
-      :placeholder="i18n('recommendations.dropdown_placeholder')"
+      :placeholder="i18n('categories.dropdown_placeholder')"
       track-by="id"
       label="name"
       @input="onItemSelected"/>
@@ -16,7 +16,7 @@
 import _ from 'lodash';
 import { mapActions, mapState } from 'vuex';
 
-import Dropdown from './dropdown';
+import Dropdown from '../common/dropdown';
 
 
 const sort = category => {
@@ -26,7 +26,7 @@ const sort = category => {
 };
 
 export default {
-  name: 'recommendations',
+  name: 'categories',
   components: {
     Dropdown
   },
@@ -53,11 +53,11 @@ export default {
     onItemSelected(item) {
       if (item == null) {
         this.$router.push({
-          name: 'recommendations'
+          name: 'categories'
         });
       } else {
         this.$router.push({
-          name: 'categories',
+          name: 'category',
           params: {
             category: item != null ? item.id : null
           }

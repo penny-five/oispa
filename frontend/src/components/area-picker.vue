@@ -1,5 +1,5 @@
 <template>
-  <ul class="area-list">
+  <ul class="area-picker">
     <li v-for="area in areas" :class="itemClasses(area)">
       <span @click="onSelect(area)">{{ area.abbr }}</span>
     </li>
@@ -37,7 +37,7 @@ export default {
 <style lang="scss" scoped>
 @import "assets/constants";
 
-.area-list {
+.area-picker {
   display: inline-block;
   margin: 4px 8px;
 }

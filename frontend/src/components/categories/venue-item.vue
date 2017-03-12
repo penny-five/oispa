@@ -20,8 +20,8 @@
 <script>
 import _ from 'lodash';
 
-import BeerItem from './common/beer-item';
-import LinkWrapper from './common/link-wrapper';
+import BeerItem from '../common/beer-item';
+import LinkWrapper from '../common/link-wrapper';
 
 
 export default {

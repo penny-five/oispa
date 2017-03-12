@@ -7,7 +7,7 @@
 export default {
   mounted() {
     this.$router.replace({
-      name: 'recommendations',
+      name: 'categories',
       params: {
         area: this.$store.state.areas[0].id
       }

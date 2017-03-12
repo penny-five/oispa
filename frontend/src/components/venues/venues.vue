@@ -15,7 +15,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-import Dropdown from './dropdown';
+import Dropdown from '../common/dropdown';
 
 
 export default {

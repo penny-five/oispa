@@ -1,48 +1,48 @@
 <template>
   <div>
-    <header-bar>
-      <area-list
+    <app-header>
+      <area-picker
       v-if="hasFetchedAreas"
       :areas="areas"
       :selected-area="selectedArea"
       @select="onSelectArea" />
-    </header-bar>
+    </app-header>
     <main>
       <nav class="clearfix">
-        <nav-button icon="beer" :label="i18n('nav.beers')" :active="isRecommendations" @click="onSelectRecommendations" />
+        <nav-button icon="beer" :label="i18n('nav.categories')" :active="isCategories" @click="onSelectCategories" />
         <nav-button icon="cutlery" :label="i18n('nav.venues')" :active="isVenues" @click="onSelectVenues" />
       </nav>
       <div class="content-wrapper">
         <router-view></router-view>
       </div>
     </main>
-    <footer-bar></footer-bar>
+    <app-footer></app-footer>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 
-import HeaderBar from './header-bar';
-import AreaList from './area-list';
+import AppHeader from './app-header';
+import AreaPicker from './area-picker';
 import NavButton from './nav-button';
-import FooterBar from './footer-bar.vue';
+import AppFooter from './app-footer';
 
 
 export default {
   name: 'App',
   components: {
-    HeaderBar,
-    AreaList,
+    AppHeader,
+    AreaPicker,
     NavButton,
-    FooterBar
+    AppFooter
   },
   computed: mapState({
     areas: state => state.areas,
     selectedArea: state => state.route.params.area,
     hasFetchedAreas: state => state.areas != null,
     isVenues: state => state.route.meta.type === 'venues',
-    isRecommendations: state => state.route.meta.type === 'recommendations'
+    isCategories: state => state.route.meta.type === 'categories'
   }),
   methods: {
     ...mapActions([
@@ -50,15 +50,15 @@ export default {
     ]),
     onSelectArea(area) {
       this.$router.push({
-        name: 'recommendations',
+        name: 'categories',
         params: {
           area: area.id
         }
       });
     },
-    onSelectRecommendations() {
+    onSelectCategories() {
       this.$router.push({
-        name: 'recommendations'
+        name: 'categories'
       });
     },
     onSelectVenues() {

@@ -2,10 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Index from './components/index';
-import Recommendations from './components/recommendations';
-import RecommendationsList from './components/recommendations-list';
-import VenuesList from './components/venues-list';
-import Venues from './components/venues';
+import Categories from './components/categories/categories';
+import CategoriesList from './components/categories/categories-list';
+import VenuesList from './components/venues/venues-list';
+import Venues from './components/venues/venues';
 
 
 Vue.use(VueRouter);
@@ -13,19 +13,19 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/:area/beers',
-    name: 'recommendations',
-    component: Recommendations,
+    name: 'categories',
+    component: Categories,
     meta: {
-      type: 'recommendations'
+      type: 'categories'
     },
     children: [
       {
         path: ':category',
-        name: 'categories',
-        component: RecommendationsList,
+        name: 'category',
+        component: CategoriesList,
         props: true,
         meta: {
-          type: 'recommendations'
+          type: 'categories'
         }
       }
     ]

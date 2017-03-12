@@ -1,14 +1,16 @@
 <template>
   <div>
     <span class="separator"></span>
-    <ul v-if="recommendations && recommendations.length > 0">
-      <venue-item
-        v-for="recommendation in recommendations"
-        :key="recommendation.venue.id"
-        :venue="recommendation.venue"
-        :beers="recommendation.beers"/>
-    </ul>
-    <h2 v-else>{{ i18n('results_not_found') }}</h2>
+    <template v-if="recommendations">
+      <ul v-if="recommendations.length > 0">
+        <venue-item
+          v-for="recommendation in recommendations"
+          :key="recommendation.venue.id"
+          :venue="recommendation.venue"
+          :beers="recommendation.beers"/>
+      </ul>
+      <h2 v-else>{{ i18n('results_not_found') }}</h2>
+    </template>
   </div>
 </template>
 
@@ -19,7 +21,7 @@ import VenueItem from './venue-item';
 
 
 export default {
-  name: 'recommendations-list',
+  name: 'categories-list',
   components: {
     VenueItem
   },
