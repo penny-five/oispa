@@ -3,7 +3,7 @@
   "version": "1.2.4",
   "description": "Frontend client for Oispa",
   "private": true,
-  "main": "handler.js",
+  "main": "src/index.js",
   "scripts": {
     "eslint": "eslint . --ignore-path .gitignore --ext js,vue",
     "analyze": "cross-env NODE_ENV=production webpack --config webpack.config.analyze.js --progress --hide-modules",
@@ -30,6 +30,7 @@
     "babel-preset-es2017": "6.22.0",
     "babili-webpack-plugin": "0.0.11",
     "bezier-easing": "2.0.3",
+    "breakpoint-sass": "2.7.1",
     "clean-webpack-plugin": "0.1.15",
     "cross-env": "3.2.3",
     "css-loader": "0.26.2",

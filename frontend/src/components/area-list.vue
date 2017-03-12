@@ -44,7 +44,9 @@ export default {
 
 .area-item {
   display: inline-block;
-  font-size: $font-size-small;
+  font-size: $font-size-tiny;
+  font-weight: $font-weight-regular;
+  color: $color-text-light;
 
   &:hover {
     cursor: pointer;
@@ -66,7 +68,7 @@ export default {
     margin: 0 8px;
 
     font-weight: $font-weight-regular;
-    color: #b1b1b1;
+    color: #777777;
   }
 }
 </style>

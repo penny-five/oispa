@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const HtmlPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 
+const pkg = require('../package.json');
+
 
 module.exports = {
   entry: './src/index.js',
@@ -50,7 +52,9 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
+      'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
+      'process.env.APP_VERSION': `"${pkg.version}"`,
+      'process.env.APP_HOMEPAGE': `"${pkg.homepage}"`
     }),
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(fi)$/),
     new HtmlPlugin({

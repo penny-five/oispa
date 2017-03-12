@@ -49,7 +49,7 @@ export default {
 
   .beer__last-seen {
     float: right;
-    font-size: $font-size-small;
+    font-size: $font-size-tiny;
     font-weight: $font-weight-regular;
     line-height: $font-size-medium;
   }
@@ -71,19 +71,19 @@ export default {
 
   .beer__abv {
     margin-right: 1ch;
-    font-size: $font-size-small;
+    font-size: $font-size-tiny;
     font-weight: $font-weight-semibold;
   }
 
   .beer__brewery {
     display: block;
-    font-size: $font-size-small;
+    font-size: $font-size-tiny;
     font-weight: $font-weight-regular;
   }
 
   .beer__style {
     display: block;
-    font-size: $font-size-small;
+    font-size: $font-size-tiny;
     font-weight: $font-weight-regular;
   }
 

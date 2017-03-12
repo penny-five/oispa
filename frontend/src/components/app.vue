@@ -7,15 +7,16 @@
       :selected-area="selectedArea"
       @select="onSelectArea" />
     </header-bar>
-    <template v-if="hasFetchedAreas">
-      <nav>
-        <nav-button icon="beer" label="Kaljat" :active="isRecommendations" @click="onSelectRecommendations" />
-        <nav-button icon="cutlery" label="Ravintelit" :active="isVenues" @click="onSelectVenues" />
+    <main>
+      <nav class="clearfix">
+        <nav-button icon="beer" :label="i18n('nav.beers')" :active="isRecommendations" @click="onSelectRecommendations" />
+        <nav-button icon="cutlery" :label="i18n('nav.venues')" :active="isVenues" @click="onSelectVenues" />
       </nav>
       <div class="content-wrapper">
         <router-view></router-view>
       </div>
-    </template>
+    </main>
+    <footer-bar></footer-bar>
   </div>
 </template>
 
@@ -25,6 +26,7 @@ import { mapActions, mapState } from 'vuex';
 import HeaderBar from './header-bar';
 import AreaList from './area-list';
 import NavButton from './nav-button';
+import FooterBar from './footer-bar.vue';
 
 
 export default {
@@ -32,7 +34,8 @@ export default {
   components: {
     HeaderBar,
     AreaList,
-    NavButton
+    NavButton,
+    FooterBar
   },
   computed: mapState({
     areas: state => state.areas,
@@ -71,15 +74,35 @@ export default {
 <style lang="scss">
 @import "assets/styles";
 @import "assets/constants";
+@import "assets/mixins";
 
 nav {
   max-width: $content-max-width;
   margin: auto;
+  background-color: $color-body-background;
+}
+
+main {
+  margin: 0 auto;
+  min-height: calc(100vh - #{$header-height} - #{$footer-height});
+
+  max-width: $content-max-width;
+
+  background-color: white;
+
+  @include breakpoint($breakpoint-desktop) {
+    margin: $header-height + 2*$baseline auto 0 auto;
+    min-height: calc(100vh - #{$header-height} - #{$footer-height} - #{2*$baseline});
+  }
 }
 
 .content-wrapper {
   max-width: $content-max-width;
   margin: auto;
   padding: $baseline;
+
+  @include breakpoint($breakpoint-desktop) {
+    padding: 2*$baseline;
+  }
 }
 </style>

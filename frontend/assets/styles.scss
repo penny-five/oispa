@@ -7,6 +7,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import "~vue-multiselect/dist/vue-multiselect.min.css";
 
 @import "./constants";
+@import "./mixins";
 
 html {
   box-sizing: border-box;
@@ -19,12 +20,12 @@ html {
 }
 
 body {
-  padding-bottom: 2*$baseline;
-
   overflow-y: scroll;
   font-size: $font-size-medium;
   font-weight: $font-weight-regular;
   -webkit-font-smoothing: antialiased !important;
+
+  background-color: $color-body-background;
 }
 
 h2 {

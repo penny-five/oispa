@@ -12,11 +12,16 @@
 
 <style lang="scss" scoped>
 @import "assets/constants";
+@import "assets/mixins";
 
 header {
+  position: relative;
   width: 100%;
+  height: $header-height;
 
-  background-color: $color-background-light;
+  z-index: 100;
+
+  background-color: $color-background-dark;
 
   .wrapper {
     position: relative;
@@ -37,13 +42,13 @@ header {
     vertical-align: top;
 
     font-size: 2.8rem;
-    font-weight: $font-weight-regular;
+    font-weight: $font-weight-bold;
     letter-spacing: 6px;
     line-height: $logo-height;
 
     text-transform: uppercase;
 
-    color: $color-text-dark;
+    color: $color-text-light;
   }
 
   .logo {
@@ -55,6 +60,13 @@ header {
   .slot {
     position: absolute;
     top: 0; right: 0;
+  }
+
+  @include breakpoint($breakpoint-desktop) {
+    position: fixed;
+    top: 0;
+
+    box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.16);
   }
 }
 

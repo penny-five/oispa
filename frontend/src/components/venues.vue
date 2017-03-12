@@ -66,14 +66,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss" scoped>
-@import "assets/constants";
-
-.venues__beer-last-seen {
-  display: block;
-  text-align: right;
-  font-size: $font-size-small;
-  font-weight: $font-weight-semibold;
-}
-</style>

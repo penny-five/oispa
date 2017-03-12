@@ -61,7 +61,7 @@ export default {
   .venue__info {
     padding-right: $baseline;
 
-    font-size: $font-size-small;
+    font-size: $font-size-tiny;
     font-weight: $font-weight-regular;
   }
 
@@ -76,7 +76,7 @@ export default {
 
   .venue__beer-last-seen {
     float: right;
-    font-size: $font-size-small;
+    font-size: $font-size-tiny;
     font-weight: $font-weight-semibold;
   }
 

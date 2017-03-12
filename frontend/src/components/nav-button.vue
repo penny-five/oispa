@@ -45,10 +45,10 @@ export default {
 @import "assets/constants";
 
 .nav-button {
-  display: inline-block;
+  float: left;
   position: relative;
-  padding: 2*$baseline $baseline $baseline;
-  width: 49%;
+  padding: 2*$baseline $baseline;
+  width: 50%;
 
   text-align: center;
 
@@ -68,6 +68,8 @@ export default {
   }
 
   &.nav-button--active {
+    background-color: white;
+
     &:hover {
       cursor: default;
       .nav-button__label {
@@ -81,14 +83,6 @@ export default {
     .fa {
       color: black;
     }
-  }
-
-  +.nav-button::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0; bottom: 0; left: 0;
-    border-left: 2px solid $color-separator-light;
   }
 }
 </style>
