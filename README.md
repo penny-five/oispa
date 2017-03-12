@@ -1,4 +1,4 @@
-![oispa](gh_image.png)
+![oispa](gh_logo.png)
 
 Local beer recommendations for Helsinki, Tampere and Jyväskylä. Uses [Untappd](https://untappd.com) for data.
 
