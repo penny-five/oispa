@@ -1,8 +1,8 @@
 <template>
-  <div :class="classes" @click="onClick">
+  <button class="nav-button" @click="onClick" :disabled="active">
     <i :class="`fa fa-${icon}`" aria-hidden="true"></i>
-    <span class="nav-button__label">{{ label }}</span>
-  </div>
+    <span class="label">{{ label }}</span>
+  </button>
 </template>
 
 <script>
@@ -22,14 +22,6 @@ export default {
       default: false
     }
   },
-  computed: {
-    classes() {
-      return {
-        'nav-button': true,
-        'nav-button--active': this.active
-      };
-    }
-  },
   methods: {
     onClick() {
       if (!this.active) {
@@ -45,43 +37,54 @@ export default {
 @import "assets/constants";
 
 .nav-button {
-  float: left;
-  position: relative;
-  padding: 2*$baseline $baseline;
-  width: 50%;
+  display: inline-block;
 
+  float: left;
+
+  position: relative;
+  padding: $baseline 2*$baseline;
+
+  color: white;
   text-align: center;
 
+  background-color: transparent;
+
+  border: none;
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+
   &:hover {
-    cursor: pointer;
     text-decoration: none;
-    .nav-button__label {
+    .label {
       text-decoration: underline;
     }
   }
 
-  .fa {
-    display: block;
-    margin-bottom: $baseline;
-    font-size: 20px;
-    color: $color-inactive;
+  .label {
+    font-size: $font-size-small;
+    font-weight: $font-weight-semibold;
   }
 
-  &.nav-button--active {
-    background-color: white;
+  .fa {
+    margin-right: 5px;
+    font-size: 15px;
+    color: rgba(black, 0.5);
+  }
+
+  &:hover, &:active, &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: darken($color-brand-primary, 5%);
+    border-right: 1px solid darken($color-brand-primary, 15%);
+    border-left: 1px solid darken($color-brand-primary, 15%);
 
     &:hover {
       cursor: default;
-      .nav-button__label {
+      .label {
         text-decoration: none;
       }
-    }
-    .nav-button__label {
-      font-size: $font-size-medium;
-      font-weight: $font-weight-semibold;
-    }
-    .fa {
-      color: black;
     }
   }
 }

@@ -19,8 +19,6 @@ header {
   width: 100%;
   height: $header-height;
 
-  z-index: 100;
-
   background-color: $color-background-dark;
 
   .wrapper {
@@ -60,13 +58,6 @@ header {
   .slot {
     position: absolute;
     top: 0; right: 0;
-  }
-
-  @include breakpoint($breakpoint-desktop) {
-    position: fixed;
-    top: 0;
-
-    box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.16);
   }
 }
 

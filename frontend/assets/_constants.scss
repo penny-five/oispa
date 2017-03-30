@@ -5,8 +5,12 @@ $breakpoint-desktop: 800px;
 $content-max-width: 800px;
 $logo-height: 50px;
 
+$area-nav-height: 40px;
 $header-height: $logo-height + 2*$baseline;
-$footer-height: 50px;
+$main-nav-height: 40px;
+$footer-height: 100px;
+
+$content-margin-top: $area-nav-height + $header-height + $main-nav-height;
 
 $font-weight-regular: 400;
 $font-weight-semibold: 600;
@@ -18,11 +22,13 @@ $font-size-medium: 1.6rem;
 $font-size-small: 1.5rem;
 $font-size-tiny: 1.4rem;
 
+$color-brand-primary: #41b883;
+
 $color-body-background: #f9f9f9;
 $color-background-light: #f7f7f7;
-$color-background-dark: #2c2930;
+$color-background-dark: #222;
 
-$color-text-dark: black;
+$color-text-dark: #222;
 $color-text-light: white;
 
 $color-inactive: #c5c5c5;

@@ -1,7 +1,9 @@
 <template>
   <footer>
-    <span class="disclaimer" v-html="i18n('untappd_disclaimer')"></span>
-    <span class="info">v. {{ version }} <span class="divider">|</span> <a :href="homepage">github</a></span>
+    <div class="footer-wrapper">
+      <span class="disclaimer" v-html="i18n('untappd_disclaimer')"></span>
+      <span class="info">v. {{ version }} <span class="divider">|</span> <a :href="homepage">github</a></span>
+    </div>
   </footer>
 </template>
 
@@ -16,27 +18,34 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "assets/constants";
 @import "assets/mixins";
 
 footer {
   display: block;
 
-  margin: auto;
   padding: 0 $baseline;
 
-  height: $footer-height;
-  max-width: $content-max-width;
-
+  color: $color-text-light;
   font-size: $font-size-small;
   font-weight: $font-weight-regular;
-  line-height: $footer-height;
+  line-height: $footer-height; 
 
-  background-color: white;
+  background-color: $color-background-dark;
+
+  .footer-wrapper {
+    margin: auto;
+    height: $footer-height;
+    max-width: $content-max-width;
+  }
 
   .disclaimer {
     display: inline-block;
+
+    a {
+      color: white;
+    }
   }
 
   .divider {
@@ -46,6 +55,10 @@ footer {
   .info {
     display: inline-block;
     float: right;
+
+    a {
+      color: white;
+    }
   }
 
   &:before {
@@ -57,7 +70,6 @@ footer {
 
   @include breakpoint($breakpoint-desktop) {
     padding: 0;
-    background-color: $color-body-background;
 
     &:before {
       content: none;

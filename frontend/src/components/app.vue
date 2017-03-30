@@ -1,40 +1,34 @@
 <template>
   <div>
-    <app-header>
-      <area-picker
-      v-if="hasFetchedAreas"
-      :areas="areas"
-      :selected-area="selectedArea"
-      @select="onSelectArea" />
-    </app-header>
+    <header>
+      <area-nav :areas="areas" :selected-area="selectedArea" @select="onSelectArea"/>
+      <logo-bar/>
+      <main-nav/>
+    </header>
     <main>
-      <nav class="clearfix">
-        <nav-button icon="beer" :label="i18n('nav.categories')" :active="isCategories" @click="onSelectCategories" />
-        <nav-button icon="cutlery" :label="i18n('nav.venues')" :active="isVenues" @click="onSelectVenues" />
-      </nav>
       <div class="content-wrapper">
-        <router-view></router-view>
+        <router-view/>
       </div>
     </main>
-    <app-footer></app-footer>
+    <app-footer/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 
-import AppHeader from './app-header';
-import AreaPicker from './area-picker';
-import NavButton from './nav-button';
+import AreaNav from './area-nav';
+import LogoBar from './logo-bar';
+import MainNav from './main-nav';
 import AppFooter from './app-footer';
 
 
 export default {
   name: 'App',
   components: {
-    AppHeader,
-    AreaPicker,
-    NavButton,
+    AreaNav,
+    LogoBar,
+    MainNav,
     AppFooter
   },
   computed: mapState({
@@ -76,10 +70,14 @@ export default {
 @import "assets/constants";
 @import "assets/mixins";
 
-nav {
-  max-width: $content-max-width;
-  margin: auto;
-  background-color: $color-body-background;
+header {
+  width: 100%;
+  z-index: 100;
+
+  @include breakpoint($breakpoint-desktop) {
+    position: fixed;
+    top: 0;
+  }
 }
 
 main {
@@ -91,7 +89,7 @@ main {
   background-color: white;
 
   @include breakpoint($breakpoint-desktop) {
-    margin: $header-height + 2*$baseline auto 0 auto;
+    margin: $content-margin-top auto 0 auto;
     min-height: calc(100vh - #{$header-height} - #{$footer-height} - #{2*$baseline});
   }
 }
