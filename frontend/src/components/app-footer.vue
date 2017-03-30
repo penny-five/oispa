@@ -19,9 +19,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/constants";
-@import "assets/mixins";
-
 footer {
   display: block;
 
@@ -30,7 +27,7 @@ footer {
   color: $color-text-light;
   font-size: $font-size-small;
   font-weight: $font-weight-regular;
-  line-height: $footer-height; 
+  line-height: $footer-height;
 
   background-color: $color-background-dark;
 

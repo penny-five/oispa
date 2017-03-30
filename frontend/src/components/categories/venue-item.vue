@@ -53,8 +53,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/constants";
-
 .venue {
   padding: 0 0 2*$baseline;
 

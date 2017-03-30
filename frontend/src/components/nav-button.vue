@@ -34,8 +34,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/constants";
-
 .nav-button {
   display: inline-block;
 

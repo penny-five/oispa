@@ -54,8 +54,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/constants";
-
 .oispa-multiselect {
   &.multiselect--disabled .multiselect__select {
     background: none;

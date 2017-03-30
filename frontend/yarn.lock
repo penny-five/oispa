@@ -185,7 +185,7 @@ async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.1.2, async@^2.1.5:
+async@^2.1.2, async@^2.1.4, async@^2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/async/-/async-2.1.5.tgz#e587c68580994ac67fc56ff86d3ac56bdbe810bc"
   dependencies:
@@ -2361,7 +2361,7 @@ glob-parent@^2.0.0:
   dependencies:
     is-glob "^2.0.0"
 
-glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@~7.1.1:
+glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@~7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
   dependencies:
@@ -4424,6 +4424,15 @@ sass-loader@6.0.3:
     loader-utils "^1.0.1"
     lodash.tail "^4.1.1"
     pify "^2.3.0"
+
+sass-resources-loader@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/sass-resources-loader/-/sass-resources-loader-1.2.0.tgz#8e39eab1d7446d898160e21fcf8fb92611c65d08"
+  dependencies:
+    async "^2.1.4"
+    chalk "^1.1.3"
+    glob "^7.1.1"
+    loader-utils "^0.2.16"
 
 sax@~1.2.1:
   version "1.2.2"

@@ -11,9 +11,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "assets/constants";
-@import "assets/mixins";
-
 header {
   position: relative;
   width: 100%;

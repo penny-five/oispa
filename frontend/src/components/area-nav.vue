@@ -31,10 +31,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/styles";
-@import "assets/constants";
-@import "assets/mixins";
-
 .areas {
   height: $area-nav-height;
   text-align: center;

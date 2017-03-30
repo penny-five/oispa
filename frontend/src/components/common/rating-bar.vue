@@ -72,8 +72,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/constants";
-
 $rating-bar-size: 50px;
 
 .rating-bar {

@@ -67,8 +67,6 @@ export default {
 
 <style lang="scss">
 @import "assets/styles";
-@import "assets/constants";
-@import "assets/mixins";
 
 header {
   width: 100%;

@@ -2,6 +2,9 @@ const webpack = require('webpack');
 const BabiliPlugin = require('babili-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const loaders = require('./loaders');
+
+
 module.exports = {
   devtool: false,
   module: {
@@ -13,7 +16,7 @@ module.exports = {
           loaders: {
             scss: ExtractTextPlugin.extract({
               fallback: 'vue-style-loader',
-              use: 'css-loader!sass-loader'
+              use: loaders.scss
             })
           }
         }

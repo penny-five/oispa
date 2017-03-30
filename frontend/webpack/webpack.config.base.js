@@ -4,6 +4,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 
 const pkg = require('../package.json');
+const loaders = require('./loaders');
 
 
 module.exports = {
@@ -31,13 +32,9 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            scss: 'vue-style-loader!css-loader!sass-loader'
+            scss: ['vue-style-loader', ...loaders.scss]
           }
         }
-      },
-      {
-        test: /\.scss$/,
-        loader: 'css-loader!sass-loader'
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

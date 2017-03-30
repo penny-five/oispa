@@ -41,10 +41,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/styles";
-@import "assets/constants";
-@import "assets/mixins";
-
 .nav-bar {
   display: block;
 

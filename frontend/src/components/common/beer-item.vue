@@ -42,8 +42,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/constants";
-
 .beer {
   margin: 2*$baseline 0;
 
