@@ -2,7 +2,7 @@ const _ = require('lodash');
 const Joi = require('joi');
 
 const config = require('../../config');
-const Areas = require('./model');
+const Areas = require('../../models/areas');
 
 
 const getAllAreas = {

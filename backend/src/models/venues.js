@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-const knex = require('../../knex');
+const knex = require('../knex');
 
 
 const populateBeer = async checkin => {

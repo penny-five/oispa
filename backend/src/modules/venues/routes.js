@@ -1,4 +1,4 @@
-const Venues = require('./model');
+const Venues = require('../../models/venues');
 
 
 const getVenueRecommendations = {

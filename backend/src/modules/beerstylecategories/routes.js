@@ -1,4 +1,4 @@
-const BeerStyleCategories = require('./model');
+const Categories = require('../../models/categories');
 
 
 const getAll = {
@@ -8,7 +8,7 @@ const getAll = {
     description: 'Retrieves all beer style categories'
   },
   async handler(request, reply) {
-    const categories = await BeerStyleCategories.getAll();
+    const categories = await Categories.getAll();
     reply(['all', ...categories]);
   }
 };

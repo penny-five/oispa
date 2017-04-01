@@ -1,8 +1,8 @@
 const _ = require('lodash');
 const moment = require('moment');
 
-const knex = require('../../knex');
-const config = require('../../config');
+const knex = require('../knex');
+const config = require('../config');
 
 
 const populateBeer = async checkin => {
