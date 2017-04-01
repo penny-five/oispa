@@ -3,7 +3,7 @@ const Categories = require('../../models/categories');
 
 const getAll = {
   method: 'GET',
-  path: '/api/beerstyles/categories',
+  path: '/api/categories',
   config: {
     description: 'Retrieves all beer style categories'
   },
