@@ -107,6 +107,8 @@ const CATEGORIES = Object.freeze({
 
 const getAllCategories = () => Object.keys(CATEGORIES);
 
+const getAllNonAlcoholicCategories = () => ['non_alcoholic'];
+
 const findCategoryForBeerStyle = beerStyle => {
   return Object.keys(CATEGORIES).find(category => {
     return CATEGORIES[category]({ id: parseInt(beerStyle.id, 10), name: beerStyle.name });
@@ -119,5 +121,6 @@ module.exports = {
   AREAS,
   CATEGORIES,
   getAllCategories,
+  getAllNonAlcoholicCategories,
   findCategoryForBeerStyle
 };
