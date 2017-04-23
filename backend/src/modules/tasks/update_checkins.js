@@ -89,9 +89,9 @@ const updateAreaCheckins = logger => async area => {
   let data;
   let max;
 
+  let queryCount = 0;
   if (min == null) {
     logger.info(`No previous checkins found for ${area.id}. Fetching up to 100 latest checkins`);
-    let queryCount = 0;
     do {
       const results = await fetchCheckins(area, min, max); // eslint-disable-line no-await-in-loop
       data = combineResultsData(data, results.data);
@@ -100,11 +100,12 @@ const updateAreaCheckins = logger => async area => {
     } while (queryCount < 4);
   } else {
     do {
+      queryCount += 1;
       const results = await fetchCheckins(area, min, max); // eslint-disable-line no-await-in-loop
       data = combineResultsData(data, results.data);
       max = results.max;
       if (results.numUpdates < CHECKIN_QUERY_COUNT) break;
-    } while (max > min);
+    } while (max > min && queryCount < 10); // Safety measure. Bail out if there are more than 10 pages of checkins
   }
 
   if (data.checkins.length === 0) {
