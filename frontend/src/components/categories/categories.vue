@@ -3,14 +3,16 @@
     <page-instructions
       :text="i18n('categories.instructions')"
       :illustration="illustration"/>
-    <ul v-if="categories != null">
-      <list-item
-        v-for="category in categories"
-        :title="category.name"
-        :subtitle="category.examples"
-        key="category.id"
-        @click="onSelectCategory(category)"/>
-    </ul>
+    <loading-wrapper>
+      <ul v-if="categories != null">
+        <list-item
+          v-for="category in categories"
+          :title="category.name"
+          :subtitle="category.examples"
+          key="category.id"
+          @click="onSelectCategory(category)"/>
+      </ul>
+    </loading-wrapper>
   </div>
 </template>
 
@@ -20,6 +22,7 @@ import { mapActions, mapState } from 'vuex';
 
 import PageInstructions from '../common/page-instructions';
 import ListItem from '../common/list-item';
+import LoadingWrapper from '../common/loading-wrapper';
 import illustration from '../../../assets/illustration_categories.png';
 
 
@@ -33,6 +36,7 @@ export default {
   name: 'categories',
   components: {
     ListItem,
+    LoadingWrapper,
     PageInstructions
   },
   data: () => ({

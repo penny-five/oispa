@@ -3,18 +3,20 @@
     <page-instructions
       :text="i18n('venues.instructions')"
       :illustration="illustration"/>
-    <template v-if="venues != null">
-      <searchbox :placeholder="i18n('venues.searchbox_placeholder')" v-model="venuesFilter" />
-      <ul>
-        <list-item
-          v-for="venue in filteredVenues"
-          :title="venue.name"
-          :subtitle="formatVenueExamples(venue)"
-          :highlight="venuesFilter"
-          key="venue.id"
-          @click="onSelectVenue(venue)"/>
-      </ul>
-    </template>
+    <loading-wrapper>
+      <div v-if="venues != null">
+        <searchbox :placeholder="i18n('venues.searchbox_placeholder')" v-model="venuesFilter" />
+        <ul>
+          <list-item
+            v-for="venue in filteredVenues"
+            :title="venue.name"
+            :subtitle="formatVenueExamples(venue)"
+            :highlight="venuesFilter"
+            key="venue.id"
+            @click="onSelectVenue(venue)"/>
+        </ul>
+      </div>
+    </loading-wrapper>
   </div>
 </template>
 
@@ -22,6 +24,7 @@
 import { mapActions, mapGetters } from 'vuex';
 
 import PageInstructions from '../common/page-instructions';
+import LoadingWrapper from '../common/loading-wrapper';
 import Searchbox from '../common/searchbox';
 import ListItem from '../common/list-item';
 import illustration from '../../../assets/illustration_venues.png';
@@ -31,6 +34,7 @@ export default {
   name: 'venues',
   components: {
     PageInstructions,
+    LoadingWrapper,
     Searchbox,
     ListItem
   },

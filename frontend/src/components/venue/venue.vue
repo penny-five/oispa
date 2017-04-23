@@ -1,37 +1,41 @@
 <template>
-  <div v-if="venue">
-    <div class="venue-information">
-      <h1 class="venue-information__name">{{ venue.name }}</h1>
-      <span class="venue-information__website" v-if="hasWebsiteUrl">
-        <a :href="venue.website_url" target="_blank">{{ venue.website_url }}</a>
-      </span>
-      <span class="venue-information__address" v-if="hasAddress">
-        <a :href="googleMapsLink" target="_blank">
-          <i class="fa fa-map-marker" aria-hidden="true"/>{{ venue.address }}
-        </a>
-      </span>
-    </div>
-    <template v-if="recommendations">
-      <div>
-        <ul v-if="recommendations.length > 0">
-          <span class="venues__beer-last-seen">{{ i18n('last-seen') }}</span>
-          <beer-item v-for="beer in recommendations" :key="beer.id" :beer="beer" />
-        </ul>
-        <h2 v-else>{{ i18n('results_not_found') }}</h2>
+  <loading-wrapper>
+    <div v-if="venue">
+      <div class="venue-information">
+        <h1 class="venue-information__name">{{ venue.name }}</h1>
+        <span class="venue-information__website" v-if="hasWebsiteUrl">
+          <a :href="venue.website_url" target="_blank">{{ venue.website_url }}</a>
+        </span>
+        <span class="venue-information__address" v-if="hasAddress">
+          <a :href="googleMapsLink" target="_blank">
+            <i class="fa fa-map-marker" aria-hidden="true"/>{{ venue.address }}
+          </a>
+        </span>
       </div>
-    </template>
-  </div>
+      <template v-if="recommendations">
+        <div>
+          <ul v-if="recommendations.length > 0">
+            <span class="venues__beer-last-seen">{{ i18n('last-seen') }}</span>
+            <beer-item v-for="beer in recommendations" :key="beer.id" :beer="beer" />
+          </ul>
+          <h2 v-else>{{ i18n('results_not_found') }}</h2>
+        </div>
+      </template>
+    </div>
+  </loading-wrapper>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
+import LoadingWrapper from '../common/loading-wrapper';
 import BeerItem from '../common/beer-item';
 
 
 export default {
   name: 'venue',
   components: {
+    LoadingWrapper,
     BeerItem
   },
   props: ['venueId'],
