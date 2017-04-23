@@ -14,7 +14,7 @@ const store = new Vuex.Store({
     categories: null,
     venues: null,
     categoryRecommendations: {},
-    venueRecommendations: {}
+    venueDetails: {}
   },
   getters: {
     currentArea: state => state.route.params.area,
@@ -23,16 +23,17 @@ const store = new Vuex.Store({
       const id = typeof category === 'object' ? category.id : category;
       return state.categoryRecommendations[id];
     },
-    venueRecommendations: state => venue => {
+    venueDetails: state => venue => {
       const id = typeof venue === 'object' ? venue.id : venue;
-      return state.venueRecommendations[id];
+      return state.venueDetails[id];
     }
   },
   mutations: {
     clear(state) {
       state.venues = null;
+      state.categories = null;
       state.categoryRecommendations = {};
-      state.venueRecommendations = {};
+      state.venueDetails = {};
     },
     setCategories(state, categories) {
       state.categories = categories;
@@ -46,8 +47,8 @@ const store = new Vuex.Store({
     addCategoryRecommendations(state, { id, recommendations }) {
       Vue.set(state.categoryRecommendations, id, recommendations);
     },
-    addVenueRecommendations(state, { id, recommendations }) {
-      Vue.set(state.venueRecommendations, id, recommendations);
+    addVenueDetails(state, { id, details }) {
+      Vue.set(state.venueDetails, id, details);
     }
   },
   actions: {
@@ -57,9 +58,9 @@ const store = new Vuex.Store({
         commit('setAreas', areas);
       }
     },
-    async fetchCategories({ state, commit }) {
+    async fetchCategories({ state, getters, commit }) {
       if (state.categories == null) {
-        const categories = await api.beerStyleCategories.getAll();
+        const categories = await api.categories.getAll(getters.currentArea);
         commit('setCategories', categories);
       }
     },
@@ -78,11 +79,10 @@ const store = new Vuex.Store({
         commit('addCategoryRecommendations', { id, recommendations });
       }
     },
-    async fetchVenueRecommendations({ state, getters, commit }, venue) {
-      const id = typeof venue === 'object' ? venue.id : venue;
-      if (id != null && getters.venueRecommendations(id) == null) {
-        const recommendations = await api.venues.getRecommendations(id);
-        commit('addVenueRecommendations', { id, recommendations });
+    async fetchVenueDetails({ state, getters, commit }, id) {
+      if (id != null && getters.venueDetails(id) == null) {
+        const details = await api.venues.get(id);
+        commit('addVenueDetails', { id, details });
       }
     }
   }

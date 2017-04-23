@@ -37,13 +37,16 @@ export default {
 .nav-button {
   display: inline-block;
 
-  float: left;
-
   position: relative;
   padding: $baseline 2*$baseline;
 
+  height: $main-nav-height;
+
   color: white;
   text-align: center;
+
+  font-size: $font-size-large;
+  font-weight: $font-weight-bold;
 
   background-color: transparent;
 
@@ -56,11 +59,6 @@ export default {
     .label {
       text-decoration: underline;
     }
-  }
-
-  .label {
-    font-size: $font-size-small;
-    font-weight: $font-weight-semibold;
   }
 
   .fa {

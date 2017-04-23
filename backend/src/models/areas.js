@@ -3,6 +3,7 @@ const moment = require('moment');
 
 const knex = require('../knex');
 const config = require('../config');
+const getVenueRecommendations = require('./venues').getVenueRecommendations;
 
 
 const populateBeer = async checkin => {
@@ -68,7 +69,13 @@ const getAreaRecommendations = async ({ areaId, category }) => {
   return sort(await Promise.all(venues));
 };
 
-const getAreaVenues = async areaId => knex('checkins')
+const populateExamples = async venue => {
+  const examples = await getVenueRecommendations({ id: venue.id, count: 5 });
+  return Object.assign(venue, { examples });
+};
+
+const getAreaVenues = async areaId => {
+  const venues = await knex('checkins')
     .distinct('venues.id', 'venues.name', 'venues.address', 'venues.city')
     .leftJoin('venues', 'checkins.venue_id', 'venues.id')
     .leftJoin('beers', 'checkins.beer_id', 'beers.id')
@@ -77,6 +84,9 @@ const getAreaVenues = async areaId => knex('checkins')
     .andWhere('checkins.checkin_time', '>=', moment().subtract(2, 'weeks'))
     .andWhere('checkins.oispa_area', areaId)
     .orderBy('venues.name');
+
+  return Promise.all(venues.map(populateExamples));
+};
 
 module.exports = {
   getAreaVenues,

@@ -95,7 +95,7 @@ main {
 .content-wrapper {
   max-width: $content-max-width;
   margin: auto;
-  padding: $baseline;
+  padding: $baseline $baseline 3*$baseline;
 
   @include breakpoint($breakpoint-desktop) {
     padding: 2*$baseline;

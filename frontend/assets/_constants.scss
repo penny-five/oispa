@@ -6,29 +6,37 @@ $content-max-width: 800px;
 $logo-height: 50px;
 
 $area-nav-height: 40px;
-$header-height: $logo-height + 2*$baseline;
+$logo-bar-height: $logo-height + 2*$baseline;
 $main-nav-height: 40px;
+$header-height: $area-nav-height + $logo-bar-height + $main-nav-height;
 $footer-height: 100px;
 
-$content-margin-top: $area-nav-height + $header-height + $main-nav-height;
+$content-margin-top: $header-height;
 
 $font-weight-regular: 400;
-$font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-black: 900;
 
-$font-size-large: 1.8rem;
-$font-size-medium: 1.6rem;
-$font-size-small: 1.5rem;
-$font-size-tiny: 1.4rem;
+$font-family-default: 'Lato', sans-serif;
+$font-family-logo: 'Montserrat', sans-serif;
+$font-family-cursive: 'Oleo Script', cursive;
+
+$font-size-giant: 3.6rem;
+$font-size-giant-mobile: 2.6rem;
+$font-size-huge: 2.4rem;
+$font-size-large: 1.5rem;
+$font-size-medium: 1.4rem;
+$font-size-small: 1.3rem;
 
 $color-brand-primary: #41b883;
+$color-brand-secondary: #f3d539;
 
 $color-body-background: #f9f9f9;
 $color-background-light: #f7f7f7;
 $color-background-dark: #222;
 
 $color-text-dark: #222;
+$color-text-semidark: #979797;
 $color-text-light: white;
 
 $color-inactive: #c5c5c5;

@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700,900');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Oleo+Script');
 @import "~normalize-scss/sass/normalize/import-now";
 
 $fa-font-path: "~font-awesome/fonts";
@@ -11,7 +13,7 @@ $fa-font-path: "~font-awesome/fonts";
 
 html {
   box-sizing: border-box;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: $font-family-default;
   font-size: 62.5%;
 }
 
@@ -23,19 +25,42 @@ body {
   overflow-y: scroll;
   font-size: $font-size-medium;
   font-weight: $font-weight-regular;
-  -webkit-font-smoothing: antialiased !important;
+
+  letter-spacing: 0;
+  font-weight: $font-weight-regular;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: $color-text-dark;
+  font-size: 18px;
+  line-height: 1.4;
 
   background-color: $color-body-background;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: $font-family-default;
+}
+
+h1 {
+  font-size: $font-size-giant-mobile;
+  font-weight: $font-weight-black;
+
+  @include breakpoint($breakpoint-desktop) {
+    font-size: $font-size-giant;
+  }
 }
 
 h2 {
   margin: 2*$baseline 2*$baseline 3*$baseline;
 
-  text-transform: uppercase;
   text-align: center;
 
-  font-size: 1.9rem;
-  font-weight: $font-weight-semibold;
+  font-size: $font-size-huge;
+  font-weight: $font-weight-regular;
+  font-family: $font-family-cursive;
 }
 
 ol, ul {

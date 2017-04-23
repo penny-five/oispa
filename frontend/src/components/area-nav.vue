@@ -40,6 +40,9 @@ export default {
   .area {
     display: inline-block;
     margin: $baseline 0.5*$baseline;
+
+    font-weight: $font-weight-bold;
+    font-size: $font-size-small;
     color: grey;
 
     transition: color 0.3s ease-in-out;

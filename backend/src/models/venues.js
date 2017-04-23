@@ -3,6 +3,16 @@ const moment = require('moment');
 const knex = require('../knex');
 
 
+const getVenueInformation = async id => knex('venues').select([
+  'name',
+  'address',
+  'city',
+  'category',
+  'lat',
+  'lng',
+  'website_url'
+]).where({ id }).first();
+
 const populateBeer = async checkin => {
   const beer = await knex('beers').where('id', checkin.beer_id).first();
   const beerstyle = await knex.select('name').from('beerstyles').where('id', beer.beerstyle_id).first();
@@ -14,7 +24,7 @@ const populateBeer = async checkin => {
   }, beer);
 };
 
-const getVenueRecommendations = async venueId => {
+const getVenueRecommendations = async ({ id, count = 5 }) => {
   const results = await knex('checkins')
     .select('beer_id', 'venue_id')
     .count('checkins.id as sightings')
@@ -22,15 +32,16 @@ const getVenueRecommendations = async venueId => {
     .leftJoin('beers', 'checkins.beer_id', 'beers.id')
     .leftJoin('venues', 'checkins.venue_id', 'venues.id')
     .where('beers.avg_rating', '>', 0)
-    .andWhere('checkins.venue_id', venueId)
+    .andWhere('checkins.venue_id', id)
     .andWhere('checkin_time', '>=', moment().subtract(2, 'weeks'))
     .orderBy('beers.avg_rating', 'desc')
     .groupBy('beer_id', 'venue_id', 'beers.avg_rating')
-    .limit(50);
+    .limit(count);
 
   return Promise.all(results.map(await populateBeer));
 };
 
 module.exports = {
+  getVenueInformation,
   getVenueRecommendations
 };

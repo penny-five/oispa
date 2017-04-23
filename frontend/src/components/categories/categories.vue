@@ -1,14 +1,16 @@
 <template>
   <div>
-    <h2>{{ i18n('categories.instructions') }}</h2>
-    <dropdown
-      :items="categories"
-      :value="selected"
-      :placeholder="i18n('categories.dropdown_placeholder')"
-      track-by="id"
-      label="name"
-      @input="onItemSelected"/>
-    <router-view></router-view>
+    <page-instructions
+      :text="i18n('categories.instructions')"
+      :illustration="illustration"/>
+    <ul v-if="categories != null">
+      <list-item
+        v-for="category in categories"
+        :title="category.name"
+        :subtitle="category.examples"
+        key="category.id"
+        @click="onSelectCategory(category)"/>
+    </ul>
   </div>
 </template>
 
@@ -16,7 +18,9 @@
 import _ from 'lodash';
 import { mapActions, mapState } from 'vuex';
 
-import Dropdown from '../common/dropdown';
+import PageInstructions from '../common/page-instructions';
+import ListItem from '../common/list-item';
+import illustration from '../../../assets/illustration_categories.png';
 
 
 const sort = category => {
@@ -28,16 +32,21 @@ const sort = category => {
 export default {
   name: 'categories',
   components: {
-    Dropdown
+    ListItem,
+    PageInstructions
   },
+  data: () => ({
+    illustration
+  }),
   computed: {
     ...mapState({
       categories({ categories }) {
         if (categories == null) return null;
 
         return _.chain(categories).map(category => ({
-          id: category,
-          name: this.i18n(`category.${category}`) || category
+          id: category.id,
+          name: this.i18n(`category.${category.id}`) || category.id,
+          examples: category.examples.map(example => example.name).join(', ')
         })).sortBy(sort).value();
       },
       selected({ categories }) {
@@ -50,19 +59,13 @@ export default {
     ...mapActions([
       'fetchCategories'
     ]),
-    onItemSelected(item) {
-      if (item == null) {
-        this.$router.push({
-          name: 'categories'
-        });
-      } else {
-        this.$router.push({
-          name: 'category',
-          params: {
-            category: item != null ? item.id : null
-          }
-        });
-      }
+    onSelectCategory({ id }) {
+      this.$router.push({
+        name: 'category',
+        params: {
+          category: id
+        }
+      });
     }
   },
   created() {

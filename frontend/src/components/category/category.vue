@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="separator"></span>
+    <h1 class="category-name">{{ categoryName }}</h1>
     <template v-if="recommendations">
       <ul v-if="recommendations.length > 0">
         <venue-item
@@ -21,7 +21,7 @@ import VenueItem from './venue-item';
 
 
 export default {
-  name: 'categories-list',
+  name: 'category',
   components: {
     VenueItem
   },
@@ -30,7 +30,13 @@ export default {
       recommendations(state) {
         return state.categoryRecommendations[this.$route.params.category];
       }
-    })
+    }),
+    category() {
+      return this.$route.params.category;
+    },
+    categoryName() {
+      return this.i18n(`category.${this.category}`) || this.category;
+    }
   },
   methods: {
     ...mapActions([
@@ -48,3 +54,10 @@ export default {
 };
 
 </script>
+
+<style lang="scss" scoped>
+.category-name {
+  padding: 0 0 3*$baseline;
+  border-bottom: 1px solid $color-separator-light;
+}
+</style>

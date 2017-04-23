@@ -14,7 +14,7 @@
 header {
   position: relative;
   width: 100%;
-  height: $header-height;
+  height: $logo-bar-height;
 
   background-color: $color-background-dark;
 
@@ -38,6 +38,7 @@ header {
 
     font-size: 2.8rem;
     font-weight: $font-weight-bold;
+    font-family: $font-family-logo;
     letter-spacing: 6px;
     line-height: $logo-height;
 

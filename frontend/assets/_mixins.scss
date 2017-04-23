@@ -1,1 +1,19 @@
 @import "~breakpoint-sass/stylesheets/breakpoint";
+
+@mixin truncate {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}

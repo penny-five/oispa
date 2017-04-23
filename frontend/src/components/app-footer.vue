@@ -2,7 +2,7 @@
   <footer>
     <div class="footer-wrapper">
       <span class="disclaimer" v-html="i18n('untappd_disclaimer')"></span>
-      <span class="info">v. {{ version }} <span class="divider">|</span> <a :href="homepage">github</a></span>
+      <span class="info">v. {{ version }}<span class="divider">|</span><a :href="homepage">github</a></span>
     </div>
   </footer>
 </template>
@@ -40,29 +40,27 @@ footer {
   .disclaimer {
     display: inline-block;
 
+    font-weight: $font-weight-bold;
+
     a {
-      color: white;
+      color: $color-brand-secondary;
     }
   }
 
   .divider {
-    color: $color-separator-light;
+    margin: 0 0.8rem;
+    color: transparentize($color-separator-light, 0.8);
   }
 
   .info {
     display: inline-block;
     float: right;
 
-    a {
-      color: white;
-    }
-  }
+    font-weight: $font-weight-bold;
 
-  &:before {
-    content: "";
-    position: absolute;
-    left: $baseline; right: $baseline;
-    border-top: 1px solid $color-separator-light;
+    a {
+      color: $color-brand-secondary;
+    }
   }
 
   @include breakpoint($breakpoint-desktop) {

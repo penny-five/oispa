@@ -3,9 +3,9 @@ import VueRouter from 'vue-router';
 
 import Index from './components/index';
 import Categories from './components/categories/categories';
-import CategoriesList from './components/categories/categories-list';
-import VenuesList from './components/venues/venues-list';
+import Category from './components/category/category';
 import Venues from './components/venues/venues';
+import Venue from './components/venue/venue';
 
 
 Vue.use(VueRouter);
@@ -17,18 +17,16 @@ const routes = [
     component: Categories,
     meta: {
       type: 'categories'
-    },
-    children: [
-      {
-        path: ':category',
-        name: 'category',
-        component: CategoriesList,
-        props: true,
-        meta: {
-          type: 'categories'
-        }
-      }
-    ]
+    }
+  },
+  {
+    path: '/:area/beers/:category',
+    name: 'category',
+    component: Category,
+    props: true,
+    meta: {
+      type: 'categories'
+    }
   },
   {
     path: '/:area/venues',
@@ -36,18 +34,16 @@ const routes = [
     component: Venues,
     meta: {
       type: 'venues'
-    },
-    children: [
-      {
-        path: ':venue',
-        name: 'venue',
-        component: VenuesList,
-        props: true,
-        meta: {
-          type: 'venues'
-        }
-      }
-    ]
+    }
+  },
+  {
+    path: '/:area/venues/:venueId',
+    name: 'venue',
+    component: Venue,
+    props: true,
+    meta: {
+      type: 'venues'
+    }
   },
   {
     path: '/:area',

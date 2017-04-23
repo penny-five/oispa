@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="separator"></span>
+    <h1 class="venue-name" v-if="venue">{{ venue.name }}</h1>
     <template v-if="recommendations">
       <div>
         <ul v-if="recommendations.length > 0">
@@ -20,27 +20,32 @@ import BeerItem from '../common/beer-item';
 
 
 export default {
-  name: 'venues-list',
+  name: 'venue',
   components: {
     BeerItem
   },
-  props: ['venue'],
+  props: ['venueId'],
   computed: {
+    venue() {
+      const details = this.$store.getters.venueDetails(this.venueId);
+      return details != null ? details.venue : null;
+    },
     recommendations() {
-      return this.$store.getters.venueRecommendations(this.venue);
+      const details = this.$store.getters.venueDetails(this.venueId);
+      return details != null ? details.recommendations : null;
     }
   },
   methods: {
     ...mapActions([
-      'fetchVenueRecommendations'
+      'fetchVenueDetails'
     ])
   },
   created() {
-    this.fetchVenueRecommendations(this.venue);
+    this.fetchVenueDetails(this.venueId);
   },
   watch: {
     $route() {
-      this.fetchVenueRecommendations(this.venue);
+      this.fetchVenueDetails(this.venueId);
     }
   }
 };
@@ -48,6 +53,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.venue-name {
+  padding: 0 0 3*$baseline;
+  border-bottom: 1px solid $color-separator-light;
+}
+
 .venues__beer-last-seen {
   display: block;
   text-align: right;

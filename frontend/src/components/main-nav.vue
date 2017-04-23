@@ -45,7 +45,6 @@ export default {
   display: block;
 
   width: 100%;
-  height: $main-nav-height;
 
   background-color: $color-brand-primary;
   border-bottom: 1px solid darken($color-brand-primary, 15%);

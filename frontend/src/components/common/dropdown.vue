@@ -60,7 +60,7 @@ export default {
   }
   .multiselect__input, .multiselect__single, .multiselect__option {
     font-size: $font-size-large;
-    font-weight: $font-weight-semibold;
+    font-weight: $font-weight-bold;
   }
 }
 </style>

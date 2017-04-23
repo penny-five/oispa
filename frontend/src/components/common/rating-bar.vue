@@ -78,7 +78,7 @@ $rating-bar-size: 50px;
   position: relative;
   width: $rating-bar-size;
   height: $rating-bar-size;
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-bold;
 
   .rating-bar__text {
     position: absolute;
@@ -87,7 +87,7 @@ $rating-bar-size: 50px;
     padding: 0;
     margin: 0;
 
-    font-size: 1.7rem;
+    font-size: $font-size-large;
     color: $color-text-dark;
 
     transform: translateX(-50%) translateY(-50%);

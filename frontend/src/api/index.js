@@ -6,11 +6,11 @@ export default {
     getVenues: id => get(`/areas/${id}/venues`),
     getRecommendations: (id, params) => get(`/areas/${id}/recommendations`, params)
   },
-  beerStyleCategories: {
-    getAll: () => get('/beerstyles/categories')
+  categories: {
+    getAll: area => get(`/categories?includeExamples=true&area=${area}`)
   },
   venues: {
-    getAll: () => get('/venues'),
-    getRecommendations: id => get(`/venues/${id}/recommendations`)
+    get: id => get(`/venues/${id}`),
+    getAll: () => get('/venues')
   }
 };

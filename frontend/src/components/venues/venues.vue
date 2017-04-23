@@ -1,28 +1,36 @@
 <template>
   <div>
-    <h2>{{ i18n('venues.instructions') }}</h2>
-    <dropdown
-      :items="venues"
-      :value="selected"
-      :placeholder="i18n('venues.dropdown_placeholder')"
-      track-by="id"
-      label="name"
-      @input="onVenueSelected"/>
-    <router-view></router-view>
+    <page-instructions
+      :text="i18n('venues.instructions')"
+      :illustration="illustration"/>
+    <ul v-if="venues != null">
+      <list-item
+        v-for="venue in venues"
+        :title="venue.name"
+        :subtitle="formatVenueExamples(venue)"
+        key="venue.id"
+        @click="onSelectVenue(venue)"/>
+    </ul>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-import Dropdown from '../common/dropdown';
+import PageInstructions from '../common/page-instructions';
+import ListItem from '../common/list-item';
+import illustration from '../../../assets/illustration_venues.png';
 
 
 export default {
   name: 'venues',
   components: {
-    Dropdown
+    PageInstructions,
+    ListItem
   },
+  data: () => ({
+    illustration
+  }),
   computed: {
     ...mapGetters([
       'venues'
@@ -40,19 +48,16 @@ export default {
       'fetchVenues',
       'setSelectedVenue'
     ]),
-    onVenueSelected(venue) {
-      if (venue == null) {
-        this.$router.push({
-          name: 'venues'
-        });
-      } else {
-        this.$router.push({
-          name: 'venue',
-          params: {
-            venue: venue.id
-          }
-        });
-      }
+    formatVenueExamples(venue) {
+      return venue.examples.map(example => example.name).join(', ');
+    },
+    onSelectVenue(venue) {
+      this.$router.push({
+        name: 'venue',
+        params: {
+          venueId: venue.id
+        }
+      });
     }
   },
   created() {
