@@ -1,7 +1,11 @@
 <template>
   <li class="venue clearfix">
     <span class="venue__beer-last-seen">{{ i18n('last-seen') }}</span>
-    <span class="venue__name">{{ venue.name }}</span>
+    <span class="venue__name">
+      <router-link :to="{ name: 'venue', params: { venueId: venue.id } }">
+        {{ venue.name }}
+      </router-link>
+    </span>
     <ul>
       <beer-item v-for="beer in beers" :key="beer.id" :beer="beer"/>
     </ul>

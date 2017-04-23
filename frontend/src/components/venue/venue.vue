@@ -1,6 +1,6 @@
 <template>
   <loading-wrapper>
-    <div v-if="venue">
+    <div class="venue" v-if="venue">
       <div class="venue-information">
         <h1 class="venue-information__name">{{ venue.name }}</h1>
         <span class="venue-information__website" v-if="hasWebsiteUrl">
@@ -8,7 +8,7 @@
         </span>
         <span class="venue-information__address" v-if="hasAddress">
           <a :href="googleMapsLink" target="_blank">
-            <i class="fa fa-map-marker" aria-hidden="true"/>{{ venue.address }}
+            <i class="fa fa-map-marker" aria-hidden="true"/>{{ venue.address }}, {{ venue.city }}
           </a>
         </span>
       </div>
@@ -77,6 +77,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.venue {
+  margin-bottom: 2*$baseline;
+}
+
 .venue-information {
   padding: 0 0 3*$baseline;
   margin-bottom: 2*$baseline;

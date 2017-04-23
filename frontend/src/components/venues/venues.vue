@@ -8,7 +8,7 @@
     <loading-wrapper>
       <div v-if="venues != null">
         <searchbox :placeholder="i18n('venues.searchbox_placeholder')" v-model="venuesFilter" />
-        <ul>
+        <ul v-if="filteredVenues.length > 0">
           <list-item
             v-for="venue in filteredVenues"
             :title="venue.name"
@@ -17,6 +17,7 @@
             key="venue.id"
             @click="onSelectVenue(venue)"/>
         </ul>
+        <h2 v-else>{{ i18n('results_not_found') }}</h2>
       </div>
     </loading-wrapper>
   </div>

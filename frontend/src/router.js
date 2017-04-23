@@ -35,7 +35,7 @@ const routes = [
   },
   {
     path: '/:area',
-    redirect: { name: 'recommendations' }
+    redirect: { name: 'categories' }
   },
   {
     path: '/',

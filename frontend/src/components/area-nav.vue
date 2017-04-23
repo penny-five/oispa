@@ -55,7 +55,8 @@ export default {
       font-size: 10px;
       color: white;
 
-      transition: opacity 0.2s ease-in-out;
+      transform: scale(0);
+      transition: opacity 0.2s ease-in-out, transform 0.5s ease-in-out;
 
       &:before {
         display: inline-block;
@@ -78,6 +79,7 @@ export default {
 
       > .fa {
         opacity: 1;
+        transform: scale(1);
       }
     }
   }
