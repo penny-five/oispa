@@ -2,6 +2,7 @@
   "app_title": "Oispa",
   "venues.instructions": "Mihinkäs herra on tänään matkalla?",
   "venues.dropdown_placeholder": "Valitse ravinteli",
+  "venues.searchbox_placeholder": "Etsi ravinteli...",
   "categories.instructions": "Millaista kaljaa saisi herralle olla?",
   "categories.dropdown_placeholder": "Valitse kaljalaatu",
   "results_not_found": "No nyt ei kyllä löytynyt mitään",

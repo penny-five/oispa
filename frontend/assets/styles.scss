@@ -80,6 +80,12 @@ a {
   }
 }
 
+mark {
+  color: $color-brand-primary;
+  font-weight: $font-weight-bold;
+  background-color: transparent;
+}
+
 .clearfix:before,
 .clearfix:after {
   content: " ";

@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     areas: null,
     categories: null,
     venues: null,
+    venuesFilter: null,
     categoryRecommendations: {},
     venueDetails: {}
   },
@@ -31,6 +32,7 @@ const store = new Vuex.Store({
   mutations: {
     clear(state) {
       state.venues = null;
+      state.venuesFilter = null;
       state.categories = null;
       state.categoryRecommendations = {};
       state.venueDetails = {};
@@ -43,6 +45,9 @@ const store = new Vuex.Store({
     },
     setVenues(state, venues) {
       state.venues = venues;
+    },
+    setVenuesFilter(state, filter) {
+      state.venuesFilter = filter;
     },
     addCategoryRecommendations(state, { id, recommendations }) {
       Vue.set(state.categoryRecommendations, id, recommendations);

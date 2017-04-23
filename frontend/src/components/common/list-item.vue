@@ -1,6 +1,6 @@
 <template>
   <li class="item" @click="onClick">
-    <span class="item__title">{{ title }}</span>
+    <span class="item__title" v-html="highlightedTitle"/>
     <span class="item__subtitle" v-if="subtitle != null">{{ subtitle }}</span>
   </li>
 </template>
@@ -13,9 +13,24 @@ export default {
       type: String,
       required: true
     },
+    highlight: {
+      type: String,
+      required: false
+    },
     subtitle: {
       type: String,
       required: false
+    }
+  },
+  computed: {
+    highlightedTitle() {
+      if (!this.highlight) return this.title;
+      const highlightStartIndex = this.title.toLowerCase().indexOf(this.highlight.toLowerCase());
+      const highlighEndIndex = highlightStartIndex + this.highlight.length;
+      const preHighlightedText = this.title.substr(0, highlightStartIndex);
+      const highlightedText = this.title.substr(highlightStartIndex, this.highlight.length);
+      const postHighlightedText = this.title.substr(highlighEndIndex);
+      return `${preHighlightedText}<mark>${highlightedText}</mark>${postHighlightedText}`;
     }
   },
   methods: {
