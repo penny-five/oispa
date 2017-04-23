@@ -6,6 +6,9 @@ const loaders = require('./loaders');
 
 
 module.exports = {
+  output: {
+    filename: 'bundle.[hash].js'
+  },
   devtool: false,
   module: {
     rules: [
@@ -28,6 +31,6 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.[contenthash].css')
   ]
 };
