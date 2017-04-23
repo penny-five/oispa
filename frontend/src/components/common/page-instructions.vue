@@ -1,6 +1,11 @@
 <template>
   <div class="page-instructions">
-    <img class="illustration" height="100px" :src="illustration" v-if="illustration"/>
+    <img
+      class="illustration"
+      :height="`${illustrationHeight}px`"
+      :width="`${illustrationWidth}px`"
+      :src="illustration"
+      v-if="illustration"/>
     <h2 class="text">{{ text }}</h2>
   </div>
 </template>
@@ -10,6 +15,8 @@
 export default {
   props: {
     illustration: String,
+    illustrationWidth: Number,
+    illustrationHeight: Number,
     text: {
       type: String,
       required: true

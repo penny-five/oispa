@@ -2,7 +2,9 @@
   <div>
     <page-instructions
       :text="i18n('categories.instructions')"
-      :illustration="illustration"/>
+      :illustration="illustration"
+      :illustrationHeight="100"
+      :illustrationWidth="95"/>
     <loading-wrapper>
       <ul v-if="categories != null">
         <list-item

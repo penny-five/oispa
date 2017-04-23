@@ -2,7 +2,9 @@
   <div>
     <page-instructions
       :text="i18n('venues.instructions')"
-      :illustration="illustration"/>
+      :illustration="illustration"
+      :illustrationHeight="100"
+      :illustrationWidth="105"/>
     <loading-wrapper>
       <div v-if="venues != null">
         <searchbox :placeholder="i18n('venues.searchbox_placeholder')" v-model="venuesFilter" />
