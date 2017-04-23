@@ -25,7 +25,7 @@ header {
     padding: $baseline;
 
     width: 100%;
-    max-width: $content-max-width;
+    max-width: $desktop-content-max-width;
 
     text-align: center;
   }

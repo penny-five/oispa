@@ -35,7 +35,7 @@ export default {
     margin: $baseline 0;
   }
 
-  @include breakpoint($breakpoint-desktop) {
+  @include breakpoint($breakpoint-tablet) {
     .illustration {
       vertical-align: middle;
     }

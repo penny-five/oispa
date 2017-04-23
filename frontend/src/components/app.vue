@@ -72,7 +72,7 @@ header {
   width: 100%;
   z-index: 100;
 
-  @include breakpoint($breakpoint-desktop) {
+  @include breakpoint($breakpoint-tablet) {
     position: fixed;
     top: 0;
   }
@@ -82,23 +82,29 @@ main {
   margin: 0 auto;
   min-height: calc(100vh - #{$header-height} - #{$footer-height});
 
-  max-width: $content-max-width;
-
   background-color: white;
 
-  @include breakpoint($breakpoint-desktop) {
+  @include breakpoint($breakpoint-tablet) {
     margin: $content-margin-top auto 0 auto;
     min-height: calc(100vh - #{$header-height} - #{$footer-height} - #{2*$baseline});
+  }
+
+  @include breakpoint($breakpoint-desktop) {
+    max-width: $desktop-content-max-width;
   }
 }
 
 .content-wrapper {
-  max-width: $content-max-width;
   margin: auto;
-  padding: $baseline $baseline 3*$baseline;
+  padding: $baseline $content-horizontal-padding-mobile 3*$baseline;
+
+  @include breakpoint($breakpoint-tablet) {
+    padding: 2*$baseline $content-horizontal-padding-tablet;
+  }
 
   @include breakpoint($breakpoint-desktop) {
-    padding: 2*$baseline;
+    max-width: $desktop-content-max-width;
+    padding: 2*$baseline $content-horizontal-padding-desktop;
   }
 }
 </style>

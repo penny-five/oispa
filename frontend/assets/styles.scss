@@ -46,7 +46,7 @@ h1 {
   font-size: $font-size-giant-mobile;
   font-weight: $font-weight-black;
 
-  @include breakpoint($breakpoint-desktop) {
+  @include breakpoint($breakpoint-tablet) {
     font-size: $font-size-giant;
   }
 }

@@ -1,8 +1,14 @@
 $baseline: 10px;
 
-$breakpoint-desktop: 800px;
+$breakpoint-tablet: 600px;
+$breakpoint-desktop: 920px;
 
-$content-max-width: 800px;
+$desktop-content-max-width: 860px;
+
+$content-horizontal-padding-mobile: $baseline;
+$content-horizontal-padding-tablet: 4*$baseline;
+$content-horizontal-padding-desktop: 6*$baseline;
+
 $logo-height: 50px;
 
 $area-nav-height: 40px;

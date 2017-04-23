@@ -22,7 +22,7 @@ export default {
 footer {
   display: block;
 
-  padding: 0 $baseline;
+  padding: 0 $content-horizontal-padding-mobile;
 
   color: $color-text-light;
   font-size: $font-size-small;
@@ -34,7 +34,7 @@ footer {
   .footer-wrapper {
     margin: auto;
     height: $footer-height;
-    max-width: $content-max-width;
+    max-width: $desktop-content-max-width;
   }
 
   .disclaimer {
@@ -61,6 +61,10 @@ footer {
     a {
       color: $color-brand-secondary;
     }
+  }
+
+  @include breakpoint($breakpoint-tablet) {
+    padding: 0 $content-horizontal-padding-tablet;
   }
 
   @include breakpoint($breakpoint-desktop) {

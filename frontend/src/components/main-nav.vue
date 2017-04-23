@@ -51,7 +51,10 @@ export default {
 
   > .wrapper {
     margin: auto;
-    max-width: $content-max-width;
+
+    @include breakpoint($breakpoint-desktop) {
+      max-width: $desktop-content-max-width;
+    }
   }
 }
 </style>
