@@ -49,12 +49,13 @@ export default {
     float: right;
     font-size: $font-size-small;
     font-weight: $font-weight-regular;
-    line-height: $font-size-medium;
+    line-height: 2.2rem;
   }
 
   .beer__rating {
     float: left;
     margin-right: $baseline;
+    margin-top: 5px;
   }
 
   .beer__info {

@@ -1,6 +1,16 @@
 <template>
-  <div>
-    <h1 class="venue-name" v-if="venue">{{ venue.name }}</h1>
+  <div v-if="venue">
+    <div class="venue-information">
+      <h1 class="venue-information__name">{{ venue.name }}</h1>
+      <span class="venue-information__website" v-if="hasWebsiteUrl">
+        <a :href="venue.website_url" target="_blank">{{ venue.website_url }}</a>
+      </span>
+      <span class="venue-information__address" v-if="hasAddress">
+        <a :href="googleMapsLink" target="_blank">
+          <i class="fa fa-map-marker" aria-hidden="true"/>{{ venue.address }}
+        </a>
+      </span>
+    </div>
     <template v-if="recommendations">
       <div>
         <ul v-if="recommendations.length > 0">
@@ -33,6 +43,16 @@ export default {
     recommendations() {
       const details = this.$store.getters.venueDetails(this.venueId);
       return details != null ? details.recommendations : null;
+    },
+    hasAddress() {
+      return this.venue != null && this.venue.address != null;
+    },
+    hasWebsiteUrl() {
+      return this.venue != null && this.venue.website_url != null;
+    },
+    googleMapsLink() {
+      const encodedAddress = encodeURI(`${this.venue.address}, ${this.venue.city}, Finland`);
+      return (`https://www.google.com/maps/place/${encodedAddress}`);
     }
   },
   methods: {
@@ -53,9 +73,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.venue-name {
+.venue-information {
   padding: 0 0 3*$baseline;
+  margin-bottom: 2*$baseline;
   border-bottom: 1px solid $color-separator-light;
+
+  .venue-information__name {
+    margin-bottom: 0;
+  }
+
+  .venue-information__website {
+    display: block;
+    font-size: $font-size-medium;
+    font-weight: $font-weight-bold;
+    line-height: 2;
+  }
+
+  .venue-information__address {
+    display: block;
+    font-size: $font-size-medium;
+    line-height: 1.5;
+
+    .fa {
+      margin-right: 0.6rem;
+    }
+  }
 }
 
 .venues__beer-last-seen {
