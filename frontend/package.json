@@ -53,7 +53,6 @@
     "url-loader": "0.5.8",
     "vue": "2.2.6",
     "vue-loader": "11.3.4",
-    "vue-multiselect": "2.0.0-beta.14",
     "vue-router": "2.3.1",
     "vue-template-compiler": "2.2.6",
     "vuex": "2.2.1",
