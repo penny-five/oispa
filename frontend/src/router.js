@@ -14,36 +14,24 @@ const routes = [
   {
     path: '/:area/beers',
     name: 'categories',
-    component: Categories,
-    meta: {
-      type: 'categories'
-    }
+    component: Categories
   },
   {
     path: '/:area/beers/:category',
     name: 'category',
     component: Category,
-    props: true,
-    meta: {
-      type: 'categories'
-    }
+    props: true
   },
   {
     path: '/:area/venues',
     name: 'venues',
-    component: Venues,
-    meta: {
-      type: 'venues'
-    }
+    component: Venues
   },
   {
     path: '/:area/venues/:venueId',
     name: 'venue',
     component: Venue,
-    props: true,
-    meta: {
-      type: 'venues'
-    }
+    props: true
   },
   {
     path: '/:area',

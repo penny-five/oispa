@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 import NavButton from './nav-button';
 
@@ -21,8 +21,8 @@ export default {
     areas: state => state.areas,
     selectedArea: state => state.route.params.area,
     hasFetchedAreas: state => state.areas != null,
-    isVenues: state => state.route.meta.type === 'venues',
-    isCategories: state => state.route.meta.type === 'categories'
+    isVenues: state => state.route.name === 'venues',
+    isCategories: state => state.route.name === 'categories'
   }),
   methods: {
     onSelectCategories() {
