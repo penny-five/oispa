@@ -35,15 +35,15 @@ export default {
   height: $area-nav-height;
   text-align: center;
 
-  background-color: black;
+  background-color: #000;
 
   .area {
     display: inline-block;
-    margin: $baseline 0.5*$baseline;
+    margin: $baseline 0.5 * $baseline;
 
     font-weight: $font-weight-bold;
     font-size: $font-size-small;
-    color: grey;
+    color: #808080;
 
     transition: color 0.3s ease-in-out;
 
@@ -53,12 +53,12 @@ export default {
       opacity: 0;
 
       font-size: 10px;
-      color: white;
+      color: #fff;
 
       transform: scale(0);
       transition: opacity 0.2s ease-in-out, transform 0.5s ease-in-out;
 
-      &:before {
+      &::before {
         display: inline-block;
         height: $font-size-small;
         vertical-align: middle;
@@ -75,7 +75,7 @@ export default {
     }
 
     &.area--selected {
-      color: white;
+      color: #fff;
 
       > .fa {
         opacity: 1;

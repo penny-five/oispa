@@ -78,12 +78,12 @@ export default {
 
 <style lang="scss" scoped>
 .venue {
-  margin-bottom: 2*$baseline;
+  margin-bottom: 2 * $baseline;
 }
 
 .venue-information {
-  padding: 0 0 3*$baseline;
-  margin-bottom: 2*$baseline;
+  padding: 0 0 3 * $baseline;
+  margin-bottom: 2 * $baseline;
   border-bottom: 1px solid $color-separator-light;
 
   .venue-information__name {

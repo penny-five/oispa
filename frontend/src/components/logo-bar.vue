@@ -50,12 +50,13 @@ header {
   .logo {
     display: inline-block;
     max-height: $logo-height;
-    margin-right: 2*$baseline;
+    margin-right: 2 * $baseline;
   }
 
   .slot {
     position: absolute;
-    top: 0; right: 0;
+    top: 0;
+    right: 0;
   }
 }
 

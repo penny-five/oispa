@@ -57,7 +57,7 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(fi)$/),
     new HtmlPlugin({
       title: 'Oispa',
-      template: 'assets/index.ejs',
+      template: path.resolve(__dirname, '../assets/index.ejs'),
       hash: false
     }),
     new CleanPlugin(['*.js'], {

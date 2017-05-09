@@ -44,7 +44,7 @@ export default {
 .searchbox__input {
   display: block;
   padding: $baseline 40px $baseline $baseline;
-  margin: 4*$baseline 0 $baseline;
+  margin: 4 * $baseline 0 $baseline;
   width: 100%;
   height: 40px;
 
@@ -62,7 +62,9 @@ export default {
 
 .searchbox__clear {
   position: absolute;
-  top: 0; right: 0; bottom: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   width: 40px;
   line-height: 40px;
 

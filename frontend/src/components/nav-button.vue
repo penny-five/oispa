@@ -38,11 +38,11 @@ export default {
   display: inline-block;
 
   position: relative;
-  padding: $baseline 2*$baseline;
+  padding: $baseline 2 * $baseline;
 
   height: $main-nav-height;
 
-  color: white;
+  color: #fff;
   text-align: center;
 
   font-size: $font-size-large;
@@ -50,12 +50,13 @@ export default {
 
   background-color: transparent;
 
-  border: none;
+  border: 0 transparent;
   border-right: 1px solid transparent;
   border-left: 1px solid transparent;
 
   &:hover {
     text-decoration: none;
+
     .label {
       text-decoration: underline;
     }
@@ -64,10 +65,12 @@ export default {
   .fa {
     margin-right: 5px;
     font-size: 15px;
-    color: rgba(black, 0.5);
+    color: rgba(#000, 0.5);
   }
 
-  &:hover, &:active, &:focus {
+  &:hover,
+  &:active,
+  &:focus {
     outline: none;
   }
 
@@ -78,6 +81,7 @@ export default {
 
     &:hover {
       cursor: default;
+
       .label {
         text-decoration: none;
       }

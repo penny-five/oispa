@@ -6,13 +6,13 @@ $breakpoint-desktop: 920px;
 $desktop-content-max-width: 860px;
 
 $content-horizontal-padding-mobile: $baseline;
-$content-horizontal-padding-tablet: 4*$baseline;
-$content-horizontal-padding-desktop: 6*$baseline;
+$content-horizontal-padding-tablet: 4 * $baseline;
+$content-horizontal-padding-desktop: 6 * $baseline;
 
 $logo-height: 50px;
 
 $area-nav-height: 40px;
-$logo-bar-height: $logo-height + 2*$baseline;
+$logo-bar-height: $logo-height + 2 *$baseline;
 $main-nav-height: 40px;
 $header-height: $area-nav-height + $logo-bar-height + $main-nav-height;
 $footer-height: 100px;
@@ -23,9 +23,9 @@ $font-weight-regular: 400;
 $font-weight-bold: 700;
 $font-weight-black: 900;
 
-$font-family-default: 'Lato', sans-serif;
-$font-family-logo: 'Montserrat', sans-serif;
-$font-family-cursive: 'Oleo Script', cursive;
+$font-family-default: "Lato", sans-serif;
+$font-family-logo: "Montserrat", sans-serif;
+$font-family-cursive: "Oleo Script", cursive;
 
 $font-size-giant: 3.6rem;
 $font-size-giant-mobile: 2.6rem;
@@ -43,11 +43,11 @@ $color-background-dark: #222;
 
 $color-text-dark: #222;
 $color-text-semidark: #979797;
-$color-text-light: white;
+$color-text-light: #fff;
 
 $color-inactive: #c5c5c5;
 
 $color-separator-light: #e8e8e8;
 
-$color-rating-negative: #ff3333;
+$color-rating-negative: #f33;
 $color-rating-positive: #16e086;

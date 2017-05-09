@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 .page-instructions {
-  margin: 2*$baseline;
+  margin: 2 * $baseline;
   text-align: center;
 
   .text {
@@ -39,6 +39,7 @@ export default {
     .illustration {
       vertical-align: middle;
     }
+
     .text {
       display: inline;
       margin: 0 0 0 $baseline;

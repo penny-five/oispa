@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss" scoped>
 .venue {
-  padding: 0 0 2*$baseline;
+  padding: 0 0 2 * $baseline;
 
   .venue__name {
     @include truncate;
@@ -55,7 +55,7 @@ export default {
   }
 
   + .venue {
-    padding: 2*$baseline 0;
+    padding: 2 * $baseline 0;
     border-top: 1px solid $color-separator-light;
   }
 }

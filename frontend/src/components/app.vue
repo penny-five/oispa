@@ -82,7 +82,7 @@ main {
   margin: 0 auto;
   min-height: calc(100vh - #{$header-height} - #{$footer-height});
 
-  background-color: white;
+  background-color: #fff;
 
   @include breakpoint($breakpoint-tablet) {
     margin: $content-margin-top auto 0 auto;
@@ -96,15 +96,15 @@ main {
 
 .content-wrapper {
   margin: auto;
-  padding: $baseline $content-horizontal-padding-mobile 3*$baseline;
+  padding: $baseline $content-horizontal-padding-mobile 3 * $baseline;
 
   @include breakpoint($breakpoint-tablet) {
-    padding: 2*$baseline $content-horizontal-padding-tablet;
+    padding: 2 * $baseline $content-horizontal-padding-tablet;
   }
 
   @include breakpoint($breakpoint-desktop) {
     max-width: $desktop-content-max-width;
-    padding: 2*$baseline $content-horizontal-padding-desktop;
+    padding: 2 * $baseline $content-horizontal-padding-desktop;
   }
 }
 </style>

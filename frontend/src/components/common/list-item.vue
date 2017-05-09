@@ -44,11 +44,11 @@ export default {
 
 <style lang="scss" scoped>
 .item {
-  padding: 1.5*$baseline $baseline;
+  padding: 1.5 * $baseline $baseline;
 
   cursor: pointer;
 
-  transition: background-color .2s ease-out;
+  transition: background-color 0.2s ease-out;
 
   .item__title {
     @include truncate;
@@ -56,6 +56,7 @@ export default {
     font-weight: $font-weight-bold;
     color: $color-text-dark;
   }
+
   .item__subtitle {
     @include truncate;
     font-size: $font-size-small;

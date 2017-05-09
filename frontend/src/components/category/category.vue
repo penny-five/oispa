@@ -61,7 +61,7 @@ export default {
 
 <style lang="scss" scoped>
 .category-name {
-  padding: 0 0 3*$baseline;
+  padding: 0 0 3 * $baseline;
   border-bottom: 1px solid $color-separator-light;
 }
 </style>

@@ -6,6 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "eslint": "eslint . --ignore-path .gitignore --ext js,vue",
+    "stylelint": "stylelint \"src/components/**/*.vue\" \"assets/**/*.scss\"",
+    "lint": "yarn run eslint && yarn run stylelint",
     "analyze": "cross-env NODE_ENV=production webpack --config webpack.config.analyze.js --progress --hide-modules",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --port 8082",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
@@ -61,12 +63,16 @@
     "webpack-merge": "4.1.0"
   },
   "devDependencies": {
+    "@mapbox/stylelint-processor-arbitrary-tags": "0.1.1",
     "eslint": "3.18.0",
     "eslint-config-airbnb-base": "11.1.2",
     "eslint-import-resolver-webpack": "0.8.1",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-vue": "2.0.1",
     "friendly-errors-webpack-plugin": "1.6.1",
+    "stylelint": "7.10.1",
+    "stylelint-config-primer": "1.4.0",
+    "stylelint-scss": "1.4.4",
     "webpack-bundle-analyzer": "2.3.1",
     "webpack-dev-server": "2.4.2"
   }

@@ -24,10 +24,10 @@ footer {
 
   padding: 0 $content-horizontal-padding-mobile;
 
-  color: $color-text-light;
   font-size: $font-size-small;
   font-weight: $font-weight-regular;
   line-height: $footer-height;
+  color: $color-text-light;
 
   background-color: $color-background-dark;
 
@@ -70,9 +70,9 @@ footer {
   @include breakpoint($breakpoint-desktop) {
     padding: 0;
 
-    &:before {
+    &::before {
       content: none;
     }
-  };
+  }
 }
 </style>

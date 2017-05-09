@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900');
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
-@import url('https://fonts.googleapis.com/css?family=Oleo+Script');
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900");
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Oleo+Script");
 @import "~normalize-scss/sass/normalize/import-now";
 
 $fa-font-path: "~font-awesome/fonts";
-@import "~font-awesome/scss/font-awesome";
 
+@import "~font-awesome/scss/font-awesome";
 @import "./constants";
 @import "./mixins";
 
@@ -15,30 +15,30 @@ html {
   font-size: 62.5%;
 }
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
 body {
   overflow-y: scroll;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   font-size: $font-size-medium;
   font-weight: $font-weight-regular;
-
-  letter-spacing: 0;
-  font-weight: $font-weight-regular;
-
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  color: $color-text-dark;
-  font-size: 18px;
   line-height: 1.4;
-
+  color: $color-text-dark;
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
   background-color: $color-body-background;
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   font-family: $font-family-default;
 }
 
@@ -52,18 +52,17 @@ h1 {
 }
 
 h2 {
-  margin: 2*$baseline 2*$baseline 3*$baseline;
-
-  text-align: center;
-
+  margin: 2 * $baseline 2 * $baseline 3 * $baseline;
+  font-family: $font-family-cursive;
   font-size: $font-size-huge;
   font-weight: $font-weight-regular;
-  font-family: $font-family-cursive;
+  text-align: center;
 }
 
-ol, ul {
-  margin: 0;
+ol,
+ul {
   padding-left: 0;
+  margin: 0;
 }
 
 li {
@@ -73,41 +72,39 @@ li {
 a {
   color: $color-text-dark;
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
   }
 }
 
 mark {
-  color: $color-brand-primary;
   font-weight: $font-weight-bold;
+  color: $color-brand-primary;
   background-color: transparent;
 }
 
-.clearfix:before,
-.clearfix:after {
-  content: " ";
+.clearfix::before,
+.clearfix::after {
   display: table;
+  content: " ";
 }
 
-.clearfix:after {
+.clearfix::after {
   clear: both;
 }
 
 .truncate {
   display: block;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .separator {
   display: block;
-
-  margin: 4*$baseline;
-  padding: 0 2*$baseline;
-
   min-height: 5px;
-
+  padding: 0 2 * $baseline;
+  margin: 4 * $baseline;
   border-top: 1px solid $color-separator-light;
 }

@@ -12,7 +12,7 @@
 
 <style lang="scss">
 .loading-wrapper__placeholder {
-  padding: 4*$baseline;
+  padding: 4 * $baseline;
   text-align: center;
 
   > .fa {
@@ -26,10 +26,11 @@
 }
 
 .loading-wrapper-fade-leave-active {
-  transition: opacity .2s;
+  transition: opacity 0.2s;
 }
 
-.loading-wrapper-fade-enter, .loading-wrapper-fade-leave-to {
+.loading-wrapper-fade-enter,
+.loading-wrapper-fade-leave-to {
   opacity: 0;
 }
 </style>

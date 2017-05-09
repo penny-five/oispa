@@ -2,18 +2,19 @@
 
 @mixin truncate {
   display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @mixin clearfix {
-  &:before,
-  &:after {
-    content: " ";
+  &::before,
+  &::after {
     display: table;
+    content: " ";
   }
-  &:after {
+
+  &::after {
     clear: both;
   }
 }

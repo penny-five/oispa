@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 .beer {
-  margin: 2*$baseline 0;
+  margin: 2 * $baseline 0;
 
   .beer__last-seen {
     float: right;
